@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+      "target": "esnext",
+      "lib": [ "es2022" ],
+      "experimentalDecorators": true,
+      "module": "nodenext",
+      "allowJs": false,
+      "noEmit": false,
+      "esModuleInterop": false,
+      "moduleResolution": "nodenext",
+      "strict": false,
+      "sourceMap": true,
+      "noImplicitAny": true
+    },
+    "files": [ "logger.ts" ]
+}
