@@ -57,8 +57,8 @@ if(ENABLE_FIRST_PERSON)
     {
         this.method(".ctor").overload("Sekai.Core.CharacterModel[]", "Sekai.Core.CharacterInfo[]").invoke(characterList, characterInfos)
 
-        // Log index and model of characters in live
-        console.log("Character models of this live:")
+        // Log index and model of characters in MV
+        console.log("Character models of this MV:")
         for(let i = 0; i < characterList.length; i++)
         {
             const character = MasterDataManagerInstace.method<Il2Cpp.Object>("GetMasterGameCharacter")
