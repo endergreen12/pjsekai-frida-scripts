@@ -8,9 +8,23 @@ Also log the loading of AssetBundle
 ![image](https://github.com/user-attachments/assets/86d89e18-2615-42e5-99f4-35a75a77600d)
 
 ### mv-fixed-camera.ts
-As the file name says, fix the camera on the music video
+#### Fixed Camera
 
 ![Screenshot_2025 03 25_04 07 30 921](https://github.com/user-attachments/assets/e34d21c3-00f4-458e-abc0-852615ea54e4)
+
+#### First Person
+
+![image](https://github.com/user-attachments/assets/563a1c3b-7bb2-46fe-93f9-c27b35aa7daa)
+
+---
+
+First person is enabled by default
+
+The first person target can be specified by targetCharIndex in the script
+
+The index is logged at the start of the live with the name of the corresponding character
+
+![image](https://github.com/user-attachments/assets/4b9e779c-2828-4e06-b2b1-0e273e0ec0a4)
 
 ### misc.ts
 There are some features:
