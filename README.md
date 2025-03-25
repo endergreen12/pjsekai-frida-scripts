@@ -14,7 +14,7 @@ As the file name says, fix the camera on the music video
 
 ### misc.ts
 There are some features:
-- Force retire on exit to avoid sending invalid data to the server
+- Force retire at the end of the live to avoid sending invalid data to the server
 
   ![out](https://github.com/user-attachments/assets/712aa0b6-f172-4413-b464-b5ae287e0d6b)
   
@@ -25,8 +25,8 @@ There are some features:
 ## How to use
 ### Requirements
 - Node.js
-- Python
 - Frida
+- Basic knowledge of how to use frida
 
 1. Clone this repo and run this command:
 ```
