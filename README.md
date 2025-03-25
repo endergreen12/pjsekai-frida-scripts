@@ -22,9 +22,9 @@ First person is enabled by default
 
 The first person target can be specified by targetCharIndex in the script
 
-The index is logged at the start of the live with the name of the corresponding character
+The index is logged at the start of the MV with the name of the corresponding character
 
-![image](https://github.com/user-attachments/assets/4b9e779c-2828-4e06-b2b1-0e273e0ec0a4)
+![image](https://github.com/user-attachments/assets/233784ce-43dd-4aff-ac3a-64a4786c3ada)
 
 ### misc.ts
 There are some features:
