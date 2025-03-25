@@ -69,6 +69,12 @@ if(ENABLE_FIRST_PERSON)
             console.log(`Index: ${i} | Character Name: (JP: ${characterName} ENG: ${characterNameEng})`)
         }
 
+        if(targetCharIndex > characterList.length - 1)
+        {
+            console.log(`The specified index "${targetCharIndex}" exceeds the size of the character list, returning`)
+            return
+        }
+        
         const cameraModelTransform = CameraModelInstance.field<Il2Cpp.Object>("MainCameraModel").value
                                         .field<Il2Cpp.Object>("MainCamera").value
                                         .method<Il2Cpp.Object>("get_transform").invoke()
