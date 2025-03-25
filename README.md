@@ -34,7 +34,7 @@ npm install
 ```
 2. After finished, Run this command:
 ```
-frida -U -l .\misc.ts "プロセカ"
+frida -U -l [The file name of the script you want to use] "プロセカ"
 ```
 
 ## Notes
