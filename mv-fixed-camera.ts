@@ -10,9 +10,12 @@ AssemblyImage.class("Sekai.Core.MVDataLoader").method<Il2Cpp.Object>("LoadTimeli
         const arrayCopy = trackObjects.method<Il2Cpp.Array<Il2Cpp.Object>>("ToArray").invoke()
         for(let i = arrayCopy.length - 1; i >= 0; i--)
         {
-            if(arrayCopy.get(i).method<Il2Cpp.String>("get_name").invoke().toString() == '"MainCamera"')
+            if(!arrayCopy.get(i).isNull())
             {
-                trackObjects.method("RemoveAt").invoke(i)
+                if(arrayCopy.get(i).method<Il2Cpp.String>("get_name").invoke().toString() == '"MainCamera"')
+                {
+                    trackObjects.method("RemoveAt").invoke(i)
+                }
             }
         }
     }
