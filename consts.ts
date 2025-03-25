@@ -6,6 +6,7 @@ export const CoreModule = Il2Cpp.domain.assembly("UnityEngine.CoreModule")
 export const CoreModuleImage = CoreModule.image
 export const DebugClass = CoreModuleImage.class("UnityEngine.Debug")
 export const Vector3 = CoreModuleImage.class("UnityEngine.Vector3")
+export const MasterDataManagerInstace = Il2Cpp.gc.choose(AssemblyImage.class("Sekai.MasterDataManager"))[0]
 
 // C# enums //
     // GooglePlayGames.BasicApi.SignInInteractivity
