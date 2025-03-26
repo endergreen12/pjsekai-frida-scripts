@@ -1,6 +1,6 @@
 # PJSekai-frida-scripts
 ## Disclaimer
-If you use this script for a video, please give credit
+If you use these scripts for a video, please give credit
 
 You are not allowed to adapt the code of these scripts to other scripts or publish them as your own scripts
 
