@@ -16,7 +16,7 @@ export function ChangeImpl_RemoveMainCamAnimAndDofFromTimeline()
                 if(!scriptableObj.isNull())
                 {
                     const name = scriptableObj.method<Il2Cpp.String>("get_name").invoke().toString()
-                    if(name == '"MainCamera"' || name == '"Sekai Dof Track"')
+                    if(name == '"MainCamera"' || name == '"Sekai Dof Track"' || name == '"effect Group"' || name == '"Effect Group"')
                     {
                         trackObjects.method("RemoveAt").invoke(i)
                     }
