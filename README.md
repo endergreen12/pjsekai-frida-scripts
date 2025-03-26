@@ -12,30 +12,41 @@ Also log the loading of AssetBundle
 
 ![image](https://github.com/user-attachments/assets/86d89e18-2615-42e5-99f4-35a75a77600d)
 
+---
+
 ### mv-fixed-camera.ts
-#### Fixed Camera
 
 ![Screenshot_2025 03 25_04 07 30 921](https://github.com/user-attachments/assets/e34d21c3-00f4-458e-abc0-852615ea54e4)
 
-#### First Person
+---
+
+### mv-first-person.ts
 
 ![image](https://github.com/user-attachments/assets/563a1c3b-7bb2-46fe-93f9-c27b35aa7daa)
 
 ---
 
-First person is enabled by default
+The first person target can be switched by using the back button on Android while playing the music video
 
-The first person target can be specified by targetCharIndex in the script
+![out](https://github.com/user-attachments/assets/66471411-f640-4995-885a-356bc5f8e399)
+
+Or you can specify the index of target character with targetCharIndex in script
+
+---
 
 The index is logged at the start of the MV with the name of the corresponding character
 
 ![image](https://github.com/user-attachments/assets/233784ce-43dd-4aff-ac3a-64a4786c3ada)
+
+---
 
 ### misc.ts
 There are some features:
 - Force retire at the end of the live to avoid sending invalid data to the server
 
   ![out](https://github.com/user-attachments/assets/712aa0b6-f172-4413-b464-b5ae287e0d6b)
+
+---
   
 - Supress Google Play Games authentication prompt
 
