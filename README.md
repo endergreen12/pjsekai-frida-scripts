@@ -1,4 +1,9 @@
 # PJSekai-frida-scripts
+## Disclaimer
+If you use this script for a video, please give credit
+
+You are not allowed to adapt the code of this script to other scripts or publish it as your own script
+
 ## Scripts
 ### logger.ts
 Hook Unity Log functions and display logs to console
