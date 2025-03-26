@@ -77,8 +77,6 @@ export function ChangeImpl_SetupCameraInstanceStoring()
 //
 
 // For first person //
-export const deactivateTargetArray = ["Face", "Hair"]
-
 export function CharList_LogIndexAndCharName(characterList: Il2Cpp.Array<Il2Cpp.Object>)
 {
     if(MasterDataManagerInstace.isNull())
@@ -117,7 +115,8 @@ export function AttachCamToCharHead(camTransform: Il2Cpp.Object, character: Il2C
         .invoke(character.method<Il2Cpp.Object>("get_HeadTransform").invoke(), false)
 }
 
-export function SetActiveOfDeactivateTarget(character: Il2Cpp.Object, value: boolean)
+export const deactivateTargetArray = ["Face", "Hair"]
+export function SetActiveOfDeactivateTargets(character: Il2Cpp.Object, value: boolean)
 {
     deactivateTargetArray.forEach(deactivateTarget => {
         character.method<Il2Cpp.Object>(`get_${deactivateTarget}`).invoke().method("SetActive").invoke(value)

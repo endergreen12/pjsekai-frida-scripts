@@ -1,5 +1,5 @@
 import { ChangeImpl_RemoveAllTracksExceptSubCamFromCamTimeline, ChangeImpl_SetupCameraInstanceStoring, CharList_LogIndexAndCharName, 
-    AttachCamToCharHead, GetMainCamTransformFromCameraModel, SetActiveOfDeactivateTarget, ChangeImpl_ForceDisableCameraDecoration} from "./lib/mv-utils.js";
+    AttachCamToCharHead, GetMainCamTransformFromCameraModel, SetActiveOfDeactivateTargets, ChangeImpl_ForceDisableCameraDecoration} from "./lib/mv-utils.js";
 import { AssemblyImage, Vector3 } from "./lib/consts.js";
 let targetCharIndex = 0
 let CharacterModelArray: Il2Cpp.Array<Il2Cpp.Object> = null
@@ -39,7 +39,7 @@ AssemblyImage.class("Sekai.Live.Model.MusicVideoCharacterModel").method(".ctor")
         camTransform.method("set_localPosition").invoke(newLocalPos.unbox())
 
     // Deactivate some elements of target character
-    SetActiveOfDeactivateTarget(character, false)
+    SetActiveOfDeactivateTargets(character, false)
 
     CharacterModelArray = characterList
 }
@@ -53,7 +53,7 @@ AssemblyImage.class("Sekai.Core.Live.MusicVideoController").method("OnBackKey").
     }
 
     // Reactivate the elements of character deactivated before
-    SetActiveOfDeactivateTarget(CharacterModelArray.get(targetCharIndex), true)
+    SetActiveOfDeactivateTargets(CharacterModelArray.get(targetCharIndex), true)
 
     // Increment targetCharIndex, set to 0 if it exceeds the range of CharacterModelArray
     targetCharIndex = targetCharIndex == CharacterModelArray.length - 1 ? 0 : targetCharIndex + 1
@@ -62,7 +62,7 @@ AssemblyImage.class("Sekai.Core.Live.MusicVideoController").method("OnBackKey").
     
     AttachCamToCharHead(GetMainCamTransformFromCameraModel(true), newTargetCharacter)
 
-    SetActiveOfDeactivateTarget(newTargetCharacter, false)
+    SetActiveOfDeactivateTargets(newTargetCharacter, false)
 }
 
 AssemblyImage.class("Sekai.Live.Background3DView").method("Unload").implementation = function()
