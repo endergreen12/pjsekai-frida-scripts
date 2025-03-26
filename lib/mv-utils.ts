@@ -98,11 +98,11 @@ export function CharList_LogIndexAndCharName(characterList: Il2Cpp.Array<Il2Cpp.
     }
 }
 
-export function AttachCamToCharHead(camTransform: Il2Cpp.Object, character: Il2Cpp.Object)
+export function AttachCamToTransfrom(camTransform: Il2Cpp.Object, targetTransform: Il2Cpp.Object)
 {
-    if(character.isNull())
+    if(targetTransform.isNull())
     {
-        console.log("character is null, returning")
+        console.log("targetTransform is null, returning")
         return
     }
 
@@ -112,15 +112,14 @@ export function AttachCamToCharHead(camTransform: Il2Cpp.Object, character: Il2C
         return
     }
 
-    camTransform.method("SetParent").overload("UnityEngine.Transform", "System.Boolean")
-        .invoke(character.method<Il2Cpp.Object>("get_HeadTransform").invoke(), false)
+    camTransform.method("SetParent").overload("UnityEngine.Transform", "System.Boolean").invoke(targetTransform, false)
 }
 
 const deactivateTargetArray = ["Face", "Hair"]
-export function SetActiveOfDeactivateTargets(character: Il2Cpp.Object, value: boolean)
+export function SetActiveOfDeactivateTargets(characterModel: Il2Cpp.Object, value: boolean)
 {
     deactivateTargetArray.forEach(deactivateTarget => {
-        character.method<Il2Cpp.Object>(`get_${deactivateTarget}`).invoke().method("SetActive").invoke(value)
+        characterModel.method<Il2Cpp.Object>(`get_${deactivateTarget}`).invoke().method("SetActive").invoke(value)
     })
 }
 //
