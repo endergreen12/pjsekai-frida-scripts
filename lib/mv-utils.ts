@@ -115,7 +115,7 @@ export function AttachCamToCharHead(camTransform: Il2Cpp.Object, character: Il2C
         .invoke(character.method<Il2Cpp.Object>("get_HeadTransform").invoke(), false)
 }
 
-export const deactivateTargetArray = ["Face", "Hair"]
+const deactivateTargetArray = ["Face", "Hair"]
 export function SetActiveOfDeactivateTargets(character: Il2Cpp.Object, value: boolean)
 {
     deactivateTargetArray.forEach(deactivateTarget => {
