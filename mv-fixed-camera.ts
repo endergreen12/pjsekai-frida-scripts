@@ -95,6 +95,11 @@ if(ENABLE_FIRST_PERSON)
         newAngles.method(".ctor").invoke(0.0, 0.0, 0.0)
         cameraModelTransform.method("set_eulerAngles").invoke(newAngles.unbox())
 
+        // Raise the camera height slightly to avoid arm transparency
+        const newLocalPos = Vector3.alloc()
+        newLocalPos.method(".ctor").invoke(-0.06, 0.0, 0.0)
+        cameraModelTransform.method("set_localPosition").invoke(newLocalPos.unbox())
+
         // Deactivate some elements of target character
         const deactivateTargetArray = ["Face", "Hair"]
         deactivateTargetArray.forEach(deactivateTarget => {
