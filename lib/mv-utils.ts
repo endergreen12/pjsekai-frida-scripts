@@ -91,7 +91,7 @@ export function CharList_LogIndexAndCharName(characterList: Il2Cpp.Array<Il2Cpp.
     }
 }
 
-export function AttachCamToChar(camTransform: Il2Cpp.Object, character: Il2Cpp.Object)
+export function AttachCamToCharHead(camTransform: Il2Cpp.Object, character: Il2Cpp.Object)
 {
     if(character.isNull())
     {
@@ -106,21 +106,13 @@ export function AttachCamToChar(camTransform: Il2Cpp.Object, character: Il2Cpp.O
     }
 
     camTransform.method("SetParent").overload("UnityEngine.Transform", "System.Boolean")
-            .invoke(character.method<Il2Cpp.Object>("get_HeadTransform").invoke(), false)
-    
-    // Changing parent makes eulerAngles (0.00, 0.00, 270.00) so set them all to 0.0, not sure why eulerAngles is changed
-    const newAngles = Vector3.alloc()
-    newAngles.method(".ctor").invoke(0.0, 0.0, 0.0)
-    camTransform.method("set_eulerAngles").invoke(newAngles.unbox())
+        .invoke(character.method<Il2Cpp.Object>("get_HeadTransform").invoke(), false)
+}
 
-    // Raise the camera height slightly to avoid arm transparency
-    const newLocalPos = Vector3.alloc()
-    newLocalPos.method(".ctor").invoke(-0.06, 0.0, 0.0)
-    camTransform.method("set_localPosition").invoke(newLocalPos.unbox())
-
-    // Deactivate some elements of target character
+export function SetActiveOfDeactivateTarget(character: Il2Cpp.Object, value: boolean)
+{
     deactivateTargetArray.forEach(deactivateTarget => {
-        character.method<Il2Cpp.Object>(`get_${deactivateTarget}`).invoke().method("SetActive").invoke(false)
+        character.method<Il2Cpp.Object>(`get_${deactivateTarget}`).invoke().method("SetActive").invoke(value)
     })
 }
 //
