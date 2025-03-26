@@ -1,5 +1,5 @@
 import { ChangeImpl_RemoveMainCamAnimAndDofFromTimeline, ChangeImpl_SetupCameraInstanceStoring, CharList_LogIndexAndCharName, 
-    AttachCamToCharHead, GetMainCamTransformFromCameraModel, deactivateTargetArray, SetActiveOfDeactivateTarget } from "./lib/mv-utils.js";
+    AttachCamToCharHead, GetMainCamTransformFromCameraModel, SetActiveOfDeactivateTarget } from "./lib/mv-utils.js";
 import { AssemblyImage, Vector3 } from "./lib/consts.js";
 let targetCharIndex = 0
 let CharacterModelArray: Il2Cpp.Array<Il2Cpp.Object> = null
