@@ -1,7 +1,8 @@
 import { AssemblyImage, MasterDataManagerInstace } from "./consts.js"
 
 // Shared //
-export function ChangeImpl_RemoveAllTracksExceptSubCamFromCamTimeline()
+const excludeFromRemovingTargets = ['"SubCamera"', '"Fade Out Track"']
+export function ChangeImpl_RemoveUnneededTracksFromCamTimeline()
 {
     AssemblyImage.class("Sekai.Core.MVDataLoader").method<Il2Cpp.Object>("LoadTimelineAsset").implementation = function(timelineName: Il2Cpp.String, mvId: number)
     {
@@ -16,7 +17,7 @@ export function ChangeImpl_RemoveAllTracksExceptSubCamFromCamTimeline()
                 if(!track.isNull())
                 {
                     const name = track.method<Il2Cpp.String>("get_name").invoke().toString()
-                    if(name != '"SubCamera"')
+                    if(!excludeFromRemovingTargets.includes(name))
                     {
                         trackObjects.method("RemoveAt").invoke(i)
                     }

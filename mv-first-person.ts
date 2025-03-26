@@ -1,10 +1,10 @@
-import { ChangeImpl_RemoveAllTracksExceptSubCamFromCamTimeline, ChangeImpl_SetupCameraInstanceStoring, CharList_LogIndexAndCharName, 
+import { ChangeImpl_RemoveUnneededTracksFromCamTimeline, ChangeImpl_SetupCameraInstanceStoring, CharList_LogIndexAndCharName, 
     AttachCamToCharHead, GetMainCamTransformFromCameraModel, SetActiveOfDeactivateTargets, ChangeImpl_ForceDisableCameraDecoration} from "./lib/mv-utils.js";
 import { AssemblyImage, Vector3 } from "./lib/consts.js";
 let targetCharIndex = 0
 let CharacterModelArray: Il2Cpp.Array<Il2Cpp.Object> = null
 
-ChangeImpl_RemoveAllTracksExceptSubCamFromCamTimeline()
+ChangeImpl_RemoveUnneededTracksFromCamTimeline()
 ChangeImpl_ForceDisableCameraDecoration()
 ChangeImpl_SetupCameraInstanceStoring()
 

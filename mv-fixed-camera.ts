@@ -1,7 +1,7 @@
 import { AssemblyImage, Vector3 } from "./lib/consts.js";
-import { ChangeImpl_RemoveAllTracksExceptSubCamFromCamTimeline, GetMainCamTransformFromCameraModel, ChangeImpl_ForceDisableCameraDecoration } from "./lib/mv-utils.js";
+import { ChangeImpl_RemoveUnneededTracksFromCamTimeline, GetMainCamTransformFromCameraModel, ChangeImpl_ForceDisableCameraDecoration } from "./lib/mv-utils.js";
 
-ChangeImpl_RemoveAllTracksExceptSubCamFromCamTimeline()
+ChangeImpl_RemoveUnneededTracksFromCamTimeline()
 ChangeImpl_ForceDisableCameraDecoration()
 
 // Set camera position and angles
