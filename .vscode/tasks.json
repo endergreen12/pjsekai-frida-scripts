@@ -9,7 +9,7 @@
             "command": "frida -U -l ${input:scriptName}.ts ${input:additionalArg} \"プロセカ\"",
             "promptOnClose": true,
             "runOptions": {
-                "instanceLimit": 5
+                "instanceLimit": 10
             },
             "problemMatcher": []
         },
@@ -29,6 +29,7 @@
             "options": [
                 "logger",
                 "misc",
+                "mv-first-person",
                 "mv-fixed-camera"
             ]
         },
