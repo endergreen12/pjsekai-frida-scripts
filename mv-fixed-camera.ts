@@ -12,9 +12,10 @@ AssemblyImage.class("Sekai.Core.MVDataLoader").method<Il2Cpp.Object>("LoadTimeli
         const arrayCopy = trackObjects.method<Il2Cpp.Array<Il2Cpp.Object>>("ToArray").invoke()
         for(let i = arrayCopy.length - 1; i >= 0; i--)
         {
-            if(!arrayCopy.get(i).isNull())
+            const scriptableObj = arrayCopy.get(i)
+            if(!scriptableObj.isNull())
             {
-                const name = arrayCopy.get(i).method<Il2Cpp.String>("get_name").invoke().toString()
+                const name = scriptableObj.method<Il2Cpp.String>("get_name").invoke().toString()
                 if(name == '"MainCamera"' || name == '"Sekai Dof Track"')
                 {
                     trackObjects.method("RemoveAt").invoke(i)
@@ -88,9 +89,11 @@ if(ENABLE_FIRST_PERSON)
         newAngles.method(".ctor").invoke(0.0, 0.0, 0.0)
         cameraModelTransform.method("set_eulerAngles").invoke(newAngles.unbox())
 
-        // Deactivate the head of target character
-        characterModel.method<Il2Cpp.Object>("get_Face").invoke().method("SetActive").invoke(false)
-        characterModel.method<Il2Cpp.Object>("get_Hair").invoke().method("SetActive").invoke(false)
+        // Deactivate some elements of target character
+        const deactivateTargetArray = ["Face", "Hair"]
+        deactivateTargetArray.forEach(deactivateTarget => {
+            characterModel.method<Il2Cpp.Object>(`get_${deactivateTarget}`).invoke().method("SetActive").invoke(false)
+        })
     }
 
     // Stop storing MusicVideoCameraModel instance
