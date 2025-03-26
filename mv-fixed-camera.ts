@@ -76,6 +76,12 @@ if(ENABLE_FIRST_PERSON)
             return
         }
         
+        if(CameraModelInstance == null)
+        {
+            console.log("CameraModelInstance is null, returning")
+            return
+        }
+        
         const cameraModelTransform = CameraModelInstance.field<Il2Cpp.Object>("MainCameraModel").value
                                         .field<Il2Cpp.Object>("MainCamera").value
                                         .method<Il2Cpp.Object>("get_transform").invoke()
