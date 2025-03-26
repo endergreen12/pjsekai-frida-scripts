@@ -1,7 +1,7 @@
-import { AssemblyImage, MasterDataManagerInstace, Vector3 } from "./consts.js"
+import { AssemblyImage, MasterDataManagerInstace } from "./consts.js"
 
 // Shared //
-export function ChangeImpl_RemoveMainCamAnimAndDofFromTimeline()
+export function ChangeImpl_RemoveAllTracksExceptSubCamFromCamTimeline()
 {
     AssemblyImage.class("Sekai.Core.MVDataLoader").method<Il2Cpp.Object>("LoadTimelineAsset").implementation = function(timelineName: Il2Cpp.String, mvId: number)
     {
@@ -16,7 +16,7 @@ export function ChangeImpl_RemoveMainCamAnimAndDofFromTimeline()
                 if(!scriptableObj.isNull())
                 {
                     const name = scriptableObj.method<Il2Cpp.String>("get_name").invoke().toString()
-                    if(name == '"MainCamera"' || name == '"Sekai Dof Track"' || name == '"effect Group"' || name == '"Effect Group"')
+                    if(name != '"SubCamera"')
                     {
                         trackObjects.method("RemoveAt").invoke(i)
                     }
@@ -24,6 +24,14 @@ export function ChangeImpl_RemoveMainCamAnimAndDofFromTimeline()
             }
         }
         return asset
+    }
+}
+
+export function ChangeImpl_ForceDisableCameraDecoration()
+{
+    AssemblyImage.class("Sekai.AssetBundleNames").method<Il2Cpp.String>("GetLiveCameraDecorationModelName").implementation = function(id: number, isCutIn: boolean)
+    {
+        return Il2Cpp.string("")
     }
 }
 //

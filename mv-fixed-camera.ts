@@ -1,7 +1,8 @@
 import { AssemblyImage, Vector3 } from "./lib/consts.js";
-import { ChangeImpl_RemoveMainCamAnimAndDofFromTimeline, GetMainCamTransformFromCameraModel } from "./lib/mv-utils.js";
+import { ChangeImpl_RemoveAllTracksExceptSubCamFromCamTimeline, GetMainCamTransformFromCameraModel, ChangeImpl_ForceDisableCameraDecoration } from "./lib/mv-utils.js";
 
-ChangeImpl_RemoveMainCamAnimAndDofFromTimeline()
+ChangeImpl_RemoveAllTracksExceptSubCamFromCamTimeline()
+ChangeImpl_ForceDisableCameraDecoration()
 
 // Set camera position and angles
 AssemblyImage.class("Sekai.Live.Model.MusicVideoModel").method("RegisterMainCameraModel").implementation = function(cameraModel: Il2Cpp.Object)
