@@ -56,5 +56,15 @@ npm install
 frida -U -l [The file name of the script you want to use] "プロセカ"
 ```
 
+---
+
+Alternatively, you can use tasks of vscode to run script or frida server
+
+![image](https://github.com/user-attachments/assets/693db1dc-afd5-41b8-9fc7-a453de7ddf6e)
+
+If frida is installed on venv, you need to install the Python extension to vscode and select venv as interpreter
+
+See this: https://code.visualstudio.com/docs/python/environments#_select-and-activate-an-environment
+
 ## Notes
 I have not tested these scripts in the English version, but they will probably work
