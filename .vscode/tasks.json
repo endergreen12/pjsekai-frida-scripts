@@ -1,0 +1,45 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run script",
+            "type": "shell",
+            "command": "frida -U -l ${input:scriptName}.ts ${input:additionalArg} \"プロセカ\"",
+            "promptOnClose": true,
+            "runOptions": {
+                "instanceLimit": 5
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Run frida server",
+            "type": "shell",
+            "command": "adb shell \"su -c /data/local/tmp/frida-server\"",
+            "promptOnClose": true,
+            "problemMatcher": []
+        }
+    ],
+    "inputs": [
+        {
+            "id": "scriptName",
+            "type": "pickString",
+            "description": "Select the script you wish to run",
+            "options": [
+                "logger",
+                "misc",
+                "mv-fixed-camera"
+            ]
+        },
+        {
+            "id": "additionalArg",
+            "type": "pickString",
+            "description": "Select the additional arguments you wish to add, blank choices add nothing",
+            "options": [
+                "",
+                "--realm=emulated"
+            ]
+        }
+    ]
+}
