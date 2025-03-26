@@ -1,7 +1,9 @@
 import { AssemblyImage, MasterDataManagerInstace } from "./consts.js"
 
 // Shared //
-const excludeFromRemovingTargets = ['"SubCamera"', '"Fade Out Track"']
+// Effect Group is excluded because it contains fade-outs in some MV
+// However, this track also contains blur, so if you want to disable the blur, please remove it from the exclusion list
+const excludeFromRemovingTargets = ['"SubCamera"', '"Fade Out Track"', '"Effect Group"', '"effect Group"']
 export function ChangeImpl_RemoveUnneededTracksFromCamTimeline()
 {
     AssemblyImage.class("Sekai.Core.MVDataLoader").method<Il2Cpp.Object>("LoadTimelineAsset").implementation = function(timelineName: Il2Cpp.String, mvId: number)
