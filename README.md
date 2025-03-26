@@ -5,30 +5,36 @@ If you use this script for a video, please give credit
 You are not allowed to adapt the code of this script to other scripts or publish it as your own script
 
 ## Scripts
-### logger.ts
+logger.ts
+---
+
 Hook Unity Log functions and display logs to console
 
 Also log the loading of AssetBundle
 
 ![image](https://github.com/user-attachments/assets/86d89e18-2615-42e5-99f4-35a75a77600d)
 
+mv-fixed-camera.ts
 ---
-
-### mv-fixed-camera.ts
 
 ![Screenshot_2025 03 25_04 07 30 921](https://github.com/user-attachments/assets/e34d21c3-00f4-458e-abc0-852615ea54e4)
 
+mv-character-camera.ts
 ---
 
-### mv-first-person.ts
+- First person
 
 ![image](https://github.com/user-attachments/assets/563a1c3b-7bb2-46fe-93f9-c27b35aa7daa)
 
+- Third person
+
+![output](https://github.com/user-attachments/assets/160091c4-6dfb-46f5-973d-0a68eea85099)
+
 ---
 
-The first person target can be switched by using the back button on Android while playing the music video
+Third person is disabled by default and can be enabled by setting ENABLE_THIRD_PERSON to true in the script
 
-![out](https://github.com/user-attachments/assets/66471411-f640-4995-885a-356bc5f8e399)
+The target can be switched by using the back button on Android while playing the music video
 
 Or you can specify the index of target character with targetCharIndex in script
 
@@ -40,13 +46,12 @@ The index is logged at the start of the MV with the name of the corresponding ch
 
 ---
 
-### misc.ts
+misc.ts
+---
 There are some features:
 - Force retire at the end of the live to avoid sending invalid data to the server
 
   ![out](https://github.com/user-attachments/assets/712aa0b6-f172-4413-b464-b5ae287e0d6b)
-
----
   
 - Supress Google Play Games authentication prompt
 
