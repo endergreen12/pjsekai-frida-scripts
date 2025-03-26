@@ -12,10 +12,10 @@ export function ChangeImpl_RemoveAllTracksExceptSubCamFromCamTimeline()
             const arrayCopy = trackObjects.method<Il2Cpp.Array<Il2Cpp.Object>>("ToArray").invoke()
             for(let i = arrayCopy.length - 1; i >= 0; i--)
             {
-                const scriptableObj = arrayCopy.get(i)
-                if(!scriptableObj.isNull())
+                const track = arrayCopy.get(i)
+                if(!track.isNull())
                 {
-                    const name = scriptableObj.method<Il2Cpp.String>("get_name").invoke().toString()
+                    const name = track.method<Il2Cpp.String>("get_name").invoke().toString()
                     if(name != '"SubCamera"')
                     {
                         trackObjects.method("RemoveAt").invoke(i)
