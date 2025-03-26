@@ -2,7 +2,7 @@
 ## Disclaimer
 If you use this script for a video, please give credit
 
-You are not allowed to adapt the code of this script to other scripts or publish it as your own script
+You are not allowed to adapt the code of these scripts to other scripts or publish them as your own scripts
 
 ## Scripts
 logger.ts
