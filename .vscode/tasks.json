@@ -29,7 +29,7 @@
             "options": [
                 "logger",
                 "misc",
-                "mv-first-person",
+                "mv-character-camera",
                 "mv-fixed-camera"
             ]
         },
