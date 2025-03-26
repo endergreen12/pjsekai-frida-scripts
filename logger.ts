@@ -1,4 +1,4 @@
-import { AssemblyImage, DebugClass } from './consts.js'
+import { AssemblyImage, DebugClass } from './lib/consts.js'
 
 // Enable logging
 DebugClass.method<boolean>("IsLoggingEnabled").implementation = function()
