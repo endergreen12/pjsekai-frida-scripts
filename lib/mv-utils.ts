@@ -30,7 +30,7 @@ export function ChangeImpl_RemoveUnneededTracksFromCamTimeline()
     }
 }
 
-export function ChangeImpl_ForceDisableCameraDecoration()
+export function ChangeImpl_ForceDisableCameraDecoration() // TODO: find a better way
 {
     AssemblyImage.class("Sekai.AssetBundleNames").method<Il2Cpp.String>("GetLiveCameraDecorationModelName").implementation = function(id: number, isCutIn: boolean)
     {
