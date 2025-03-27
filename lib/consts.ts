@@ -1,12 +1,12 @@
 import "frida-il2cpp-bridge"
 
-export const Assembly = Il2Cpp.domain.assembly("Assembly-CSharp")
-export const AssemblyImage = Assembly.image
-export const CoreModule = Il2Cpp.domain.assembly("UnityEngine.CoreModule")
-export const CoreModuleImage = CoreModule.image
-export const DebugClass = CoreModuleImage.class("UnityEngine.Debug")
-export const Vector3 = CoreModuleImage.class("UnityEngine.Vector3")
-export const MasterDataManagerInstace = Il2Cpp.gc.choose(AssemblyImage.class("Sekai.MasterDataManager"))[0]
+export let Assembly: Il2Cpp.Assembly = null
+export let AssemblyImage: Il2Cpp.Image = null
+export let CoreModule: Il2Cpp.Assembly = null
+export let CoreModuleImage: Il2Cpp.Image = null
+export let DebugClass: Il2Cpp.Class = null
+export let Vector3: Il2Cpp.Class = null
+export let MasterDataManagerInstace: Il2Cpp.Object = null
 
 // C# enums //
     // GooglePlayGames.BasicApi.SignInInteractivity
@@ -15,3 +15,13 @@ export const MasterDataManagerInstace = Il2Cpp.gc.choose(AssemblyImage.class("Se
         CanPromptAlways: 1,
         CanPromptOnce: 2
     } as const
+
+Il2Cpp.perform(() => {
+    Assembly = Il2Cpp.domain.assembly("Assembly-CSharp")
+    AssemblyImage = Assembly.image
+    CoreModule = Il2Cpp.domain.assembly("UnityEngine.CoreModule")
+    CoreModuleImage = CoreModule.image
+    DebugClass = CoreModuleImage.class("UnityEngine.Debug")
+    Vector3 = CoreModuleImage.class("UnityEngine.Vector3")
+    MasterDataManagerInstace = Il2Cpp.gc.choose(AssemblyImage.class("Sekai.MasterDataManager"))[0]
+})

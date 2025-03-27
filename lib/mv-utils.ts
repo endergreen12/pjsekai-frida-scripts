@@ -1,8 +1,8 @@
 import { AssemblyImage, MasterDataManagerInstace } from "./consts.js"
 
 // Shared //
-// Effect Group is excluded because it contains fade-outs in some MV
-// However, this track also contains blur, so if you want to disable the blur, please remove it from the exclusion list
+// Effect Group is excluded because it contains fades in some MV
+// However, this track also contains blur or dof, so if you want to disable them, please remove it from the exclusion list
 const excludeFromRemovingTargets = ['"SubCamera"', '"Fade Out Track"', '"Effect Group"', '"effect Group"']
 export function ChangeImpl_RemoveUnneededTracksFromCamTimeline()
 {
