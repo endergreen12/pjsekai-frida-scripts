@@ -21,11 +21,11 @@ Also log the loading of AssetBundle
 
 - First person
 
-![image](https://github.com/user-attachments/assets/563a1c3b-7bb2-46fe-93f9-c27b35aa7daa)
+  ![image](https://github.com/user-attachments/assets/563a1c3b-7bb2-46fe-93f9-c27b35aa7daa)
 
 - Third person
 
-![output](https://github.com/user-attachments/assets/160091c4-6dfb-46f5-973d-0a68eea85099)
+  ![output](https://github.com/user-attachments/assets/160091c4-6dfb-46f5-973d-0a68eea85099)
 
 ---
 
@@ -89,3 +89,7 @@ For the fixed and character cameras, all tracks except SubCamera in the Camera T
 Therefore, there is no post-processing or fade at the end of the music video
 
 If you want to keep them, set removeOnlyMainCamTrack to true in lib/mv-utils.ts
+
+However, it also contains blur, which may cause unnatural blurring of vision
+
+Both have their drawbacks
