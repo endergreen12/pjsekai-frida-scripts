@@ -62,11 +62,11 @@ Il2Cpp.perform(() => {
     
         // Increment targetCharIndex, set to 0 if it exceeds the range of CharacterModelArray
         targetCharIndex = targetCharIndex == CharacterModelArray.length - 1 ? 0 : targetCharIndex + 1
+        console.log(`Set targetCharIndex to ${targetCharIndex}`)
     
         const newTargetCharacterModel = CharacterModelArray.get(targetCharIndex)
         
         AttachCamToTransfrom(GetMainCamTransformFromCameraModel(true), GetTargetTransformOfCharModelToAttach(newTargetCharacterModel))
-    
         if(!ENABLE_THIRD_PERSON)
             SetActiveOfDeactivateTargets(newTargetCharacterModel, false)
     }
