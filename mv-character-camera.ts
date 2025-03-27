@@ -1,5 +1,6 @@
 import { ChangeImpl_RemoveUnneededTracksFromCamTimeline, ChangeImpl_SetupCameraInstanceStoring, CharList_LogIndexAndCharName, 
-    AttachCamToTransfrom, GetMainCamTransformFromCameraModel, SetActiveOfDeactivateTargets, ChangeImpl_ForceDisableCameraDecoration} from "./lib/mv-utils.js";
+    AttachCamToTransfrom, GetMainCamTransformFromCameraModel, SetActiveOfDeactivateTargets, ChangeImpl_ForceDisableCameraDecoration,
+    GetCharacterNameFromCharacterModel} from "./lib/mv-utils.js";
 import { AssemblyImage, Vector3 } from "./lib/consts.js";
 let targetCharIndex = 0
 let CharacterModelArray: Il2Cpp.Array<Il2Cpp.Object> = null
@@ -26,6 +27,8 @@ Il2Cpp.perform(() => {
         }
     
         const characterModel = characterList.get(targetCharIndex)
+
+        console.log(`Currently the target index is set to ${targetCharIndex} | ${GetCharacterNameFromCharacterModel(characterModel)}`)
     
         // Setting camera //
             const camTransform = GetMainCamTransformFromCameraModel(true)
@@ -48,6 +51,7 @@ Il2Cpp.perform(() => {
         CharacterModelArray = characterList
     }
     
+    // Implementation of switching target by back button in Android
     AssemblyImage.class("Sekai.Core.Live.MusicVideoController").method("OnBackKey").implementation = function()
     {
         if(CharacterModelArray == null)
@@ -62,9 +66,10 @@ Il2Cpp.perform(() => {
     
         // Increment targetCharIndex, set to 0 if it exceeds the range of CharacterModelArray
         targetCharIndex = targetCharIndex == CharacterModelArray.length - 1 ? 0 : targetCharIndex + 1
-        console.log(`Set targetCharIndex to ${targetCharIndex}`)
     
         const newTargetCharacterModel = CharacterModelArray.get(targetCharIndex)
+
+        console.log(`Set target index to ${targetCharIndex} | ${GetCharacterNameFromCharacterModel(newTargetCharacterModel)}`)
         
         AttachCamToTransfrom(GetMainCamTransformFromCameraModel(true), GetTargetTransformOfCharModelToAttach(newTargetCharacterModel))
         if(!ENABLE_THIRD_PERSON)

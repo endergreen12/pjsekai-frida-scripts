@@ -87,22 +87,25 @@ export function ChangeImpl_SetupCameraInstanceStoring()
 // For first person //
 export function CharList_LogIndexAndCharName(characterList: Il2Cpp.Array<Il2Cpp.Object>)
 {
+    console.log("\nCharacter models of this MV:")
+    for(let i = 0; i < characterList.length; i++)
+    {
+        console.log(`Index: ${i} | ${GetCharacterNameFromCharacterModel(characterList.get(i))}`)
+    }
+}
+
+export function GetCharacterNameFromCharacterModel(characterModel: Il2Cpp.Object): string
+{
     if(MasterDataManagerInstace.isNull())
     {
         console.log("MasterDataManagerInstace is null, returning")
         return
     }
-    
-    console.log("\nCharacter models of this MV:")
-    for(let i = 0; i < characterList.length; i++)
-    {
-        const character = MasterDataManagerInstace.method<Il2Cpp.Object>("GetMasterGameCharacter")
-                            .invoke(characterList.get(i).method<number>("get_CharacterDataId").invoke())
-        const characterName = character.method<Il2Cpp.String>("get_FullName").invoke()
-        const characterNameEng = character.method<Il2Cpp.String>("get_FullNameEnglish").invoke()
 
-        console.log(`Index: ${i} | Character Name: (JP: ${characterName} ENG: ${characterNameEng})`)
-    }
+    const gameCharacter = MasterDataManagerInstace.method<Il2Cpp.Object>("GetMasterGameCharacter")
+                            .invoke(characterModel.method<number>("get_CharacterDataId").invoke())
+
+    return `Character Name: (JP: ${gameCharacter.method<Il2Cpp.String>("get_FullName").invoke()} ENG: ${gameCharacter.method<Il2Cpp.String>("get_FullNameEnglish").invoke()})`
 }
 
 export function AttachCamToTransfrom(camTransform: Il2Cpp.Object, targetTransform: Il2Cpp.Object)
@@ -125,6 +128,12 @@ export function AttachCamToTransfrom(camTransform: Il2Cpp.Object, targetTransfor
 const deactivateTargetArray = ["Face", "Hair"]
 export function SetActiveOfDeactivateTargets(characterModel: Il2Cpp.Object, value: boolean)
 {
+    if(characterModel.isNull())
+    {
+        console.log("characterModel is null, returning")
+        return
+    }
+
     deactivateTargetArray.forEach(deactivateTarget => {
         characterModel.method<Il2Cpp.Object>(`get_${deactivateTarget}`).invoke().method("SetActive").invoke(value)
     })
