@@ -9,22 +9,29 @@ export function ChangeImpl_RemoveUnneededTracksFromCamTimeline()
     AssemblyImage.class("Sekai.Core.MVDataLoader").method<Il2Cpp.Object>("LoadTimelineAsset").implementation = function(timelineName: Il2Cpp.String, mvId: number)
     {
         const asset = this.method<Il2Cpp.Object>("LoadTimelineAsset").invoke(timelineName, mvId)
-        if(timelineName.toString() == '"Camera"')
+
+        try
         {
-            const trackObjects = asset.method<Il2Cpp.Object>("get_trackObjects").invoke()
-            const arrayCopy = trackObjects.method<Il2Cpp.Array<Il2Cpp.Object>>("ToArray").invoke()
-            for(let i = arrayCopy.length - 1; i >= 0; i--)
+            if(timelineName.toString() == '"Camera"')
             {
-                const track = arrayCopy.get(i)
-                if(!track.isNull())
+                const trackObjects = asset.method<Il2Cpp.Object>("get_trackObjects").invoke()
+                const arrayCopy = trackObjects.method<Il2Cpp.Array<Il2Cpp.Object>>("ToArray").invoke()
+                for(let i = arrayCopy.length - 1; i >= 0; i--)
                 {
-                    const name = track.method<Il2Cpp.String>("get_name").invoke().toString()
-                    if(!excludeFromRemovingTargets.includes(name))
+                    const track = arrayCopy.get(i)
+                    if(!track.isNull())
                     {
-                        trackObjects.method("RemoveAt").invoke(i)
+                        const name = track.method<Il2Cpp.String>("get_name").invoke().toString()
+                        if(!excludeFromRemovingTargets.includes(name))
+                        {
+                            trackObjects.method("RemoveAt").invoke(i)
+                        }
                     }
                 }
             }
+        } catch(e)
+        {
+            console.log("An exception occoured while processing TimelineAsset:" + e)
         }
         return asset
     }
