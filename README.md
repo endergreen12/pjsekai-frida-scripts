@@ -84,7 +84,7 @@ See this: https://code.visualstudio.com/docs/python/environments#_select-and-act
 I have not tested these scripts in the English version, but they will probably work
 
 ## Camera post-processing, etc.
-For the fixed and character cameras, all tracks except SubCamera in the Camera Timeline are deleted to remove the MainCamera animation
+For the fixed and character cameras, all tracks except SubCamera and Fadeout track in the Camera Timeline are deleted to remove the MainCamera animation and blurs
 
 Therefore, there is no post-processing or fade at the end of the music video
 
