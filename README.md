@@ -90,6 +90,6 @@ Therefore, there is no post-processing or fade at the end of the music video
 
 If you want to keep them, set removeOnlyMainCamTrack to true in lib/mv-utils.ts
 
-However, it also contains blur, which may cause unnatural blurring of vision
+However, since the blur will no longer be removed, the view may occasionally become blurry and difficult to see
 
 Both have their drawbacks
