@@ -1,12 +1,11 @@
-# PJSekai-frida-scripts
-## Disclaimer
+# Disclaimer
 If you use these scripts for a video, please give credit
 
 You are not allowed to adapt the code of these scripts to other scripts or publish them as your own scripts
 
-## Scripts
-logger.ts
----
+# Scripts
+## logger.ts
+
 
 Hook Unity Log functions and display logs to console
 
@@ -14,13 +13,11 @@ Also log the loading of AssetBundle
 
 ![image](https://github.com/user-attachments/assets/86d89e18-2615-42e5-99f4-35a75a77600d)
 
-mv-fixed-camera.ts
----
+## mv-fixed-camera.ts
 
 ![Screenshot_2025 03 25_04 07 30 921](https://github.com/user-attachments/assets/e34d21c3-00f4-458e-abc0-852615ea54e4)
 
-mv-character-camera.ts
----
+## mv-character-camera.ts
 
 - First person
 
@@ -46,8 +43,7 @@ The index is logged at the start of the MV with the name of the corresponding ch
 
 ---
 
-misc.ts
----
+## misc.ts
 There are some features:
 - Force retire at the end of the live to avoid sending abnormal data to the server
 
@@ -57,11 +53,13 @@ There are some features:
 
   ![Screenshot_2025 03 25_04 21 16 187](https://github.com/user-attachments/assets/05a01dbc-8b8e-45b6-9152-d9f3f767a356)
 
-## How to use
-### Requirements
+# How to use
+## Requirements
 - Node.js
 - Frida
 - Basic knowledge of how to use frida
+
+---
 
 1. Clone this repo and run this command:
 ```
@@ -82,5 +80,12 @@ If frida is installed on venv, you need to install the Python extension to vscod
 
 See this: https://code.visualstudio.com/docs/python/environments#_select-and-activate-an-environment
 
-## Notes
+# Notes
 I have not tested these scripts in the English version, but they will probably work
+
+## Camera post-processing, etc.
+For the fixed and character cameras, all tracks except SubCamera in the Camera Timeline are deleted to remove the MainCamera animation
+
+Therefore, there is no post-processing or fade at the end of the music video
+
+If you want to keep them, set removeOnlyMainCamTrack to true in lib/mv-utils.ts
