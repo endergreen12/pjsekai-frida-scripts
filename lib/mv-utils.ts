@@ -4,6 +4,7 @@ import { AssemblyImage, MasterDataManagerInstace } from "./consts.js"
     // For Camera timeline //
         const excludeFromRemovingTargets = ['"SubCamera"', '"Fade Out Track"']
         const removeOnlyMainCamTrack = false // Set to true if you want to leave fades or post-processing 
+        const disableCharVisibilitySwitching = false
     //
     export function ChangeImpl_RemoveUnneededTracksFromTimeline()
     {
@@ -23,12 +24,15 @@ import { AssemblyImage, MasterDataManagerInstace } from "./consts.js"
 
                     case '"Character"':
                         // Remove timeline for switching character visibility
-                        RemoveTracksFromTimeLine(trackObjects, (name: string): boolean => {return name.includes("MeshOff")})
+                        if(disableCharVisibilitySwitching)
+                        {
+                            RemoveTracksFromTimeLine(trackObjects, (name: string): boolean => {return name.includes("MeshOff")})
+                        }
                         break
                 }
             } catch(e)
             {
-                console.log("An exception occoured while processing TimelineAsset:" + e)
+                console.log("An exception occoured while processing TimelineAsset: " + e)
             }
             return asset
         }
