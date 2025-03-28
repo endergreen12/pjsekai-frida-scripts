@@ -20,6 +20,11 @@ import { AssemblyImage, MasterDataManagerInstace } from "./consts.js"
                     case '"Camera"':
                         RemoveTracksFromTimeLine(trackObjects, (name: string): boolean => {return removeOnlyMainCamTrack ? name == '"MainCamera"' : !excludeFromRemovingTargets.includes(name)})
                         break
+
+                    case '"Character"':
+                        // Remove timeline for switching character visibility
+                        RemoveTracksFromTimeLine(trackObjects, (name: string): boolean => {return name.includes("MeshOff")})
+                        break
                 }
             } catch(e)
             {
