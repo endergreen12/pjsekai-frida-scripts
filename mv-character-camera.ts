@@ -39,9 +39,9 @@ Il2Cpp.perform(() => {
             newAngles.method(".ctor").invoke(0.0, ENABLE_THIRD_PERSON ? 180.0 : 0.0, 0.0)
             camTransform.method("set_eulerAngles").invoke(newAngles.unbox())
     
-            // Raise the camera height slightly to avoid arm transparency
+            // Adjust position to about eye level
             const newLocalPos = Vector3.alloc()
-            newLocalPos.method(".ctor").invoke(-0.06, 0.0, ENABLE_THIRD_PERSON ? 2.0 : 0.0)
+            newLocalPos.method(".ctor").invoke(-0.07, 0.0, ENABLE_THIRD_PERSON ? 2.0 : 0.005)
             camTransform.method("set_localPosition").invoke(newLocalPos.unbox())
     
         // Deactivate some elements of target character
