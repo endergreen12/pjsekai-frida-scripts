@@ -65,7 +65,7 @@ Il2Cpp.perform(() => {
             SetActiveOfDeactivateTargets(CharacterModelArray.get(targetCharIndex), true)
     
         // Increment targetCharIndex, set to 0 if it exceeds the range of CharacterModelArray
-        targetCharIndex = targetCharIndex == CharacterModelArray.length - 1 ? 0 : targetCharIndex + 1
+        targetCharIndex = targetCharIndex >= CharacterModelArray.length - 1 ? 0 : targetCharIndex + 1
     
         const newTargetCharacterModel = CharacterModelArray.get(targetCharIndex)
 
