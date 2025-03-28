@@ -1,8 +1,8 @@
 import { AssemblyImage, Vector3 } from "./lib/consts.js";
-import { ChangeImpl_RemoveUnneededTracksFromCamTimeline, GetMainCamTransformFromCameraModel, ChangeImpl_ForceDisableCameraDecoration } from "./lib/mv-utils.js";
+import { ChangeImpl_RemoveUnneededTracksFromTimeline, GetMainCamTransformFromCameraModel, ChangeImpl_ForceDisableCameraDecoration } from "./lib/mv-utils.js";
 
 Il2Cpp.perform(() => {
-    ChangeImpl_RemoveUnneededTracksFromCamTimeline()
+    ChangeImpl_RemoveUnneededTracksFromTimeline()
     ChangeImpl_ForceDisableCameraDecoration()
     
     // Set camera position and angles

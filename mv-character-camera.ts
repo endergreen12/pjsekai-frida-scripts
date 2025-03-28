@@ -1,4 +1,4 @@
-import { ChangeImpl_RemoveUnneededTracksFromCamTimeline, ChangeImpl_SetupCameraInstanceStoring, CharList_LogIndexAndCharName, 
+import { ChangeImpl_RemoveUnneededTracksFromTimeline, ChangeImpl_SetupCameraInstanceStoring, CharList_LogIndexAndCharName, 
     AttachCamToTransfrom, GetMainCamTransformFromCameraModel, SetActiveOfDeactivateTargets, ChangeImpl_ForceDisableCameraDecoration,
     GetCharacterNameFromCharacterModel} from "./lib/mv-utils.js";
 import { AssemblyImage, Vector3 } from "./lib/consts.js";
@@ -8,7 +8,7 @@ let CharacterModelArray: Il2Cpp.Array<Il2Cpp.Object> = null
 const ENABLE_THIRD_PERSON = false
 
 Il2Cpp.perform(() => {
-    ChangeImpl_RemoveUnneededTracksFromCamTimeline()
+    ChangeImpl_RemoveUnneededTracksFromTimeline()
     ChangeImpl_ForceDisableCameraDecoration()
     ChangeImpl_SetupCameraInstanceStoring()
     
