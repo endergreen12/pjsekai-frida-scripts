@@ -83,13 +83,20 @@ See this: https://code.visualstudio.com/docs/python/environments#_select-and-act
 # Notes
 I have not tested these scripts in the English version, but they will probably work
 
-## Camera post-processing, etc.
-For the fixed and character cameras, all tracks except SubCamera and Fadeout track in the Camera Timeline are deleted to remove the MainCamera animation and blurs
+There are some options in lib/mv-utils.ts:
 
-Therefore, there is no post-processing or fade at the end of the music video
+- removeOnlyMainCamTrack
+   
+  For the fixed and character cameras, all tracks except SubCamera and Fadeout track in the Camera Timeline are deleted to remove the MainCamera animation and blurs
+  
+  Therefore, there is no post-processing or fade at the end of the music video
+  
+  If you want to keep them, set this option to true
+  
+  However, since the blur will no longer be removed, the view may occasionally become blurry and difficult to see
 
-If you want to keep them, set removeOnlyMainCamTrack to true in lib/mv-utils.ts
+  Both have their drawbacks
 
-However, since the blur will no longer be removed, the view may occasionally become blurry and difficult to see
-
-Both have their drawbacks
+- disableCharVisibilitySwitching
+   
+   This option disables character hiding
