@@ -99,7 +99,9 @@ import { AssemblyImage, MasterDataManagerInstace } from "./consts.js"
     }
 //
 
-// For first person //
+// For character camera //
+    export const ENABLE_THIRD_PERSON = false
+
     export function CharList_LogIndexAndCharName(characterList: Il2Cpp.Array<Il2Cpp.Object>)
     {
         console.log("\nCharacter models of this MV:")
@@ -143,6 +145,11 @@ import { AssemblyImage, MasterDataManagerInstace } from "./consts.js"
     const deactivateTargetArray = ["Face", "Hair"]
     export function SetActiveOfDeactivateTargets(characterModel: Il2Cpp.Object, value: boolean)
     {
+        if(ENABLE_THIRD_PERSON)
+        {
+            return
+        }
+
         if(characterModel.isNull())
         {
             console.log("characterModel is null, returning")

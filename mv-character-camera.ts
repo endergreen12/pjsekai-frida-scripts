@@ -1,11 +1,9 @@
 import { ChangeImpl_RemoveUnneededTracksFromTimeline, ChangeImpl_SetupCameraInstanceStoring, CharList_LogIndexAndCharName, 
     AttachCamToTransfrom, GetMainCamTransformFromCameraModel, SetActiveOfDeactivateTargets, ChangeImpl_ForceDisableCameraDecoration,
-    GetCharacterNameFromCharacterModel} from "./lib/mv-utils.js";
+    GetCharacterNameFromCharacterModel, ENABLE_THIRD_PERSON} from "./lib/mv-utils.js";
 import { AssemblyImage, Vector3 } from "./lib/consts.js";
 let targetCharIndex = 0
 let CharacterModelArray: Il2Cpp.Array<Il2Cpp.Object> = null
-
-const ENABLE_THIRD_PERSON = false
 
 Il2Cpp.perform(() => {
     ChangeImpl_RemoveUnneededTracksFromTimeline()
@@ -45,8 +43,7 @@ Il2Cpp.perform(() => {
             camTransform.method("set_localPosition").invoke(newLocalPos.unbox())
     
         // Deactivate some elements of target character
-        if(!ENABLE_THIRD_PERSON)
-            SetActiveOfDeactivateTargets(characterModel, false)
+        SetActiveOfDeactivateTargets(characterModel, false)
     
         CharacterModelArray = characterList
     }
@@ -61,8 +58,7 @@ Il2Cpp.perform(() => {
         }
     
         // Reactivate the elements of character deactivated before
-        if(!ENABLE_THIRD_PERSON)
-            SetActiveOfDeactivateTargets(CharacterModelArray.get(targetCharIndex), true)
+        SetActiveOfDeactivateTargets(CharacterModelArray.get(targetCharIndex), true)
     
         // Increment targetCharIndex, set to 0 if it exceeds the range of CharacterModelArray
         targetCharIndex = targetCharIndex >= CharacterModelArray.length - 1 ? 0 : targetCharIndex + 1
@@ -72,8 +68,7 @@ Il2Cpp.perform(() => {
         console.log(`Set target index to ${targetCharIndex} | ${GetCharacterNameFromCharacterModel(newTargetCharacterModel)}`)
         
         AttachCamToTransfrom(GetMainCamTransformFromCameraModel(true), GetTargetTransformOfCharModelToAttach(newTargetCharacterModel))
-        if(!ENABLE_THIRD_PERSON)
-            SetActiveOfDeactivateTargets(newTargetCharacterModel, false)
+        SetActiveOfDeactivateTargets(newTargetCharacterModel, false)
     }
     
     AssemblyImage.class("Sekai.Live.Background3DView").method("Unload").implementation = function()
