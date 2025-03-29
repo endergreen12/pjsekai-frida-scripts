@@ -36,7 +36,7 @@ There are some options value for users:
 
   For example, if you want to keep post-processing but don't want DOF, set this true and target array to `['"Main Camera"', '"Sekai Dof Track"']`
 
-- disableCharVisibilitySwitching
+- removeMeshOffTrack
 
   In some MV, characters may become disappeared due to staging
 
