@@ -4,8 +4,8 @@ import { AssemblyImage, MasterDataManagerInstace } from "./consts.js"
     // For Camera timeline //
         const targets = ['"SubCamera"'] /* ['"MainCamera"'] */
         const reverseTargetJudge = false // By default, it removes all tracks except for the ones in the targets array, set this to true to remove the tracks in the targets array instead
+    // For Character timeline //
         const removeMeshOffTrack = false
-    //
     export function ChangeImpl_RemoveUnneededTracksFromTimeline()
     {
         AssemblyImage.class("Sekai.Core.MVDataLoader").method<Il2Cpp.Object>("LoadTimelineAsset").implementation = function(timelineName: Il2Cpp.String, mvId: number)
