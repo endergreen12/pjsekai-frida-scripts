@@ -46,7 +46,7 @@ There are some options value for users:
 
   As the name suggests
 
-For reverseTargetJudge and removeMeshOffTrack please note that they might not work because it's not that every mv has same track name
+For reverseTargetJudge and removeMeshOffTrack please note that they might not work because not every track of every MV has the same name
 
 ## misc.ts
 There are some features:
