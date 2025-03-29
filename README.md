@@ -5,8 +5,6 @@ You are not allowed to adapt the code of these scripts to other scripts or publi
 
 # Scripts
 ## logger.ts
-
-
 Hook Unity Log functions and display logs to console
 
 Also log the loading of AssetBundle
@@ -27,21 +25,20 @@ Also log the loading of AssetBundle
 
   ![output](https://github.com/user-attachments/assets/160091c4-6dfb-46f5-973d-0a68eea85099)
 
----
+## lib/mv-utils.ts
+Library used in fixed and character camera
 
-Third person is disabled by default and can be enabled by setting ENABLE_THIRD_PERSON to true in the script
+There are some options value for users:
 
-The target can be switched by using the back button on Android while playing the music video
+- reverseTargetJudge
+  
+  By default, this script removes all tracks except for the ones in the targets array, set this to true to remove the tracks in the targets array instead
 
-Or you can specify the index of target character with targetCharIndex in script
+  For example, if you want to keep post-processing but don't want DOF, set this true and target array to `['"Main Camera"', '"Sekai Dof Track"']`
 
----
+- ENABLE_THIRD_PERSON
 
-The index is logged at the start of the MV with the name of the corresponding character
-
-![image](https://github.com/user-attachments/assets/233784ce-43dd-4aff-ac3a-64a4786c3ada)
-
----
+  As the name suggests
 
 ## misc.ts
 There are some features:
@@ -82,21 +79,3 @@ See this: https://code.visualstudio.com/docs/python/environments#_select-and-act
 
 # Notes
 I have not tested these scripts in the English version, but they will probably work
-
-There are some options in lib/mv-utils.ts:
-
-- removeOnlyMainCamTrack
-   
-  For the fixed and character cameras, all tracks except SubCamera and Fadeout track in the Camera Timeline are deleted to remove the MainCamera animation and blurs
-  
-  Therefore, there is no post-processing or fade at the end of the music video
-  
-  If you want to keep them, set this option to true
-  
-  However, since the blur will no longer be removed, the view may occasionally become blurry and difficult to see
-
-  Both have their drawbacks
-
-- disableCharVisibilitySwitching
-   
-   This option disables character hiding
