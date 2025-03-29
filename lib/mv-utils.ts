@@ -2,8 +2,8 @@ import { AssemblyImage, MasterDataManagerInstace } from "./consts.js"
 
 // Shared //
     // For Camera timeline //
-        const excludeFromRemovingTargets = ['"SubCamera"', '"Fade Out Track"']
-        const removeOnlyMainCamTrack = false // Set to true if you want to leave fades or post-processing 
+        const targets = ['"SubCamera"'] /* ['"MainCamera"'] */
+        const reverseTargetJudge = false // By default, it removes all tracks except for the ones in the targets array, set this to true to remove the tracks in the targets array instead
         const disableCharVisibilitySwitching = false
     //
     export function ChangeImpl_RemoveUnneededTracksFromTimeline()
@@ -19,14 +19,14 @@ import { AssemblyImage, MasterDataManagerInstace } from "./consts.js"
                 switch(timelineNameStr)
                 {
                     case '"Camera"':
-                        RemoveTracksFromTimeLine(trackObjects, (name: string): boolean => {return removeOnlyMainCamTrack ? name == '"MainCamera"' : !excludeFromRemovingTargets.includes(name)})
+                        RemoveTracksFromTimeLine(trackObjects, (name: string): boolean => targets.includes(name) === reverseTargetJudge)
                         break
 
                     case '"Character"':
                         // Remove timeline for switching character visibility
                         if(disableCharVisibilitySwitching)
                         {
-                            RemoveTracksFromTimeLine(trackObjects, (name: string): boolean => {return name.includes("MeshOff")})
+                            RemoveTracksFromTimeLine(trackObjects, (name: string): boolean => name.includes("MeshOff"))
                         }
                         break
                 }
