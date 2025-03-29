@@ -36,6 +36,12 @@ There are some options value for users:
 
   For example, if you want to keep post-processing but don't want DOF, set this true and target array to `['"Main Camera"', '"Sekai Dof Track"']`
 
+- disableCharVisibilitySwitching
+
+  In some MV, characters may become disappeared due to staging
+
+  This option prevents it
+
 - ENABLE_THIRD_PERSON
 
   As the name suggests
