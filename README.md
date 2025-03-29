@@ -34,7 +34,7 @@ There are some options value for users:
   
   By default, this script removes all tracks except for the ones in the targets array, set this to true to remove the tracks in the targets array instead
 
-  For example, if you want to keep post-processing but don't want DOF, set this true and target array to `['"Main Camera"', '"Sekai Dof Track"']`
+  For example, if you want to keep post-processing but don't want DoF, set this true and target array to `['"Main Camera"', '"Sekai Dof Track"']`
 
 - removeMeshOffTrack
 
@@ -45,6 +45,8 @@ There are some options value for users:
 - ENABLE_THIRD_PERSON
 
   As the name suggests
+
+For reverseTargetJudge and removeMeshOffTrack please note that they might not work because it's not that every mv has same track name
 
 ## misc.ts
 There are some features:
