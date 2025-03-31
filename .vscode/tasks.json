@@ -6,7 +6,7 @@
         {
             "label": "Run script",
             "type": "shell",
-            "command": "frida -U -l ${input:scriptName}.ts ${input:additionalArg} \"プロセカ\"",
+            "command": "frida -U -l ${input:scriptName}.ts ${input:additionalArg} -N com.sega.pjsekai",
             "promptOnClose": true,
             "runOptions": {
                 "instanceLimit": 10
