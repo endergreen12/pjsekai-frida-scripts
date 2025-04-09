@@ -1,4 +1,4 @@
-import { AssemblyImage, MasterDataManagerInstace } from "./consts.js"
+import { AssemblyImage, MasterDataManagerInstance } from "./consts.js"
 
 // Shared //
     // For Camera timeline //
@@ -117,13 +117,13 @@ import { AssemblyImage, MasterDataManagerInstace } from "./consts.js"
 
     export function GetCharacterNameFromCharacterModel(characterModel: Il2Cpp.Object): string
     {
-        if(MasterDataManagerInstace.isNull())
+        if(MasterDataManagerInstance.isNull())
         {
             console.log("MasterDataManagerInstace is null, returning")
             return
         }
 
-        const gameCharacter = MasterDataManagerInstace.method<Il2Cpp.Object>("GetMasterGameCharacter")
+        const gameCharacter = MasterDataManagerInstance.method<Il2Cpp.Object>("GetMasterGameCharacter")
                                 .invoke(characterModel.method<number>("get_CharacterDataId").invoke())
 
         return `Character Name: (JP: ${gameCharacter.method<Il2Cpp.String>("get_FullName").invoke()} ENG: ${gameCharacter.method<Il2Cpp.String>("get_FullNameEnglish").invoke()})`
