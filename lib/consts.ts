@@ -6,7 +6,6 @@ export let CoreModule: Il2Cpp.Assembly = null
 export let CoreModuleImage: Il2Cpp.Image = null
 export let DebugClass: Il2Cpp.Class = null
 export let Vector3: Il2Cpp.Class = null
-export let MasterDataManagerInstance: Il2Cpp.Object = null
 
 // C# enums //
     // GooglePlayGames.BasicApi.SignInInteractivity
@@ -23,5 +22,4 @@ Il2Cpp.perform(() => {
     CoreModuleImage = CoreModule.image
     DebugClass = CoreModuleImage.class("UnityEngine.Debug")
     Vector3 = CoreModuleImage.class("UnityEngine.Vector3")
-    MasterDataManagerInstance = Il2Cpp.gc.choose(AssemblyImage.class("Sekai.MasterDataManager"))[0]
 })

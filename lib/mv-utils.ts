@@ -1,4 +1,4 @@
-import { AssemblyImage, MasterDataManagerInstance } from "./consts.js"
+import { AssemblyImage } from "./consts.js"
 
 // Shared //
     // For Camera timeline //
@@ -117,14 +117,8 @@ import { AssemblyImage, MasterDataManagerInstance } from "./consts.js"
 
     export function GetCharacterNameFromCharacterModel(characterModel: Il2Cpp.Object): string
     {
-        if(MasterDataManagerInstance.isNull())
-        {
-            console.log("MasterDataManagerInstace is null, returning")
-            return
-        }
-
-        const gameCharacter = MasterDataManagerInstance.method<Il2Cpp.Object>("GetMasterGameCharacter")
-                                .invoke(characterModel.method<number>("get_CharacterDataId").invoke())
+        const characterId = characterModel.method<number>("get_CharacterDataId").invoke()
+        const gameCharacter = AssemblyImage.class("Sekai.CharacterUtility").method<Il2Cpp.Object>("GetMasterGameCharacter").invoke(characterId)
 
         return `Character Name: (JP: ${gameCharacter.method<Il2Cpp.String>("get_FullName").invoke()} ENG: ${gameCharacter.method<Il2Cpp.String>("get_FullNameEnglish").invoke()})`
     }
