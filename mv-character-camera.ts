@@ -1,12 +1,12 @@
-import { ChangeImpl_RemoveUnneededTracksFromTimeline, ChangeImpl_SetupCameraInstanceStoring, CharList_LogIndexAndCharName, 
+import { ChangeImpl_RemoveTargetTracksFromTimeline, ChangeImpl_SetupCameraInstanceStoring, CharList_LogIndexAndCharName, 
     AttachCamToTransfrom, GetMainCamTransformFromCameraModel, SetActiveOfDeactivateTargets, ChangeImpl_ForceDisableCameraDecoration,
     GetCharacterNameFromCharacterModel, ENABLE_THIRD_PERSON} from "./lib/mv-utils.js";
 import { AssemblyImage, Vector3 } from "./lib/consts.js";
 let targetCharIndex = 0
-let CharacterModelArray: Il2Cpp.Array<Il2Cpp.Object> = null
+let characterModelArray: Il2Cpp.Array<Il2Cpp.Object> = null
 
 Il2Cpp.perform(() => {
-    ChangeImpl_RemoveUnneededTracksFromTimeline()
+    ChangeImpl_RemoveTargetTracksFromTimeline()
     ChangeImpl_ForceDisableCameraDecoration()
     ChangeImpl_SetupCameraInstanceStoring()
     
@@ -45,25 +45,25 @@ Il2Cpp.perform(() => {
         // Deactivate some elements of target character
         SetActiveOfDeactivateTargets(characterModel, false)
     
-        CharacterModelArray = characterList
+        characterModelArray = characterList
     }
     
     // Implementation of switching target by back button in Android
     AssemblyImage.class("Sekai.Core.Live.MusicVideoController").method("OnBackKey").implementation = function()
     {
-        if(CharacterModelArray == null)
+        if(characterModelArray == null)
         {
             console.log("CharacterModelArray is null, returning")
             return
         }
     
         // Reactivate the elements of character deactivated before
-        SetActiveOfDeactivateTargets(CharacterModelArray.get(targetCharIndex), true)
+        SetActiveOfDeactivateTargets(characterModelArray.get(targetCharIndex), true)
     
         // Increment targetCharIndex, set to 0 if it exceeds the range of CharacterModelArray
-        targetCharIndex = targetCharIndex >= CharacterModelArray.length - 1 ? 0 : targetCharIndex + 1
+        targetCharIndex = targetCharIndex >= characterModelArray.length - 1 ? 0 : targetCharIndex + 1
     
-        const newTargetCharacterModel = CharacterModelArray.get(targetCharIndex)
+        const newTargetCharacterModel = characterModelArray.get(targetCharIndex)
 
         console.log(`Set target index to ${targetCharIndex} | ${GetCharacterNameFromCharacterModel(newTargetCharacterModel)}`)
         
@@ -74,8 +74,7 @@ Il2Cpp.perform(() => {
     AssemblyImage.class("Sekai.Live.Background3DView").method("Unload").implementation = function()
     {
         this.method("Unload").invoke()
-        
-        CharacterModelArray = null
+        characterModelArray = null
     }
     
     function GetTargetTransformOfCharModelToAttach(characterModel: Il2Cpp.Object)

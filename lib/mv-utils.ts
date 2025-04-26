@@ -3,37 +3,32 @@ import { AssemblyImage } from "./consts.js"
 // Shared //
     // For Camera timeline //
         const targets = ['"SubCamera"'] /* ['"MainCamera"'] */
-        const reverseTargetJudge = false // By default, it removes all tracks except for the ones in the targets array, set this to true to remove the tracks in the targets array instead
+        const reverseTargetJudge = false
     // For Character timeline //
         const removeMeshOffTrack = false
-    export function ChangeImpl_RemoveUnneededTracksFromTimeline()
+    export function ChangeImpl_RemoveTargetTracksFromTimeline()
     {
         AssemblyImage.class("Sekai.Core.MVDataLoader").method<Il2Cpp.Object>("LoadTimelineAsset").implementation = function(timelineName: Il2Cpp.String, mvId: number)
         {
             const asset = this.method<Il2Cpp.Object>("LoadTimelineAsset").invoke(timelineName, mvId)
 
-            try
+            const timelineNameStr = timelineName.toString()
+            const trackObjects = asset.method<Il2Cpp.Object>("get_trackObjects").invoke()
+            switch(timelineNameStr)
             {
-                const timelineNameStr = timelineName.toString()
-                const trackObjects = asset.method<Il2Cpp.Object>("get_trackObjects").invoke()
-                switch(timelineNameStr)
-                {
-                    case '"Camera"':
-                        RemoveTracksFromTimeLine(trackObjects, (name: string): boolean => targets.includes(name) === reverseTargetJudge)
-                        break
+                case '"Camera"':
+                    RemoveTracksFromTimeLine(trackObjects, (name: string): boolean => targets.includes(name) === reverseTargetJudge)
+                    break
 
-                    case '"Character"':
-                        // Remove timeline for switching character visibility
-                        if(removeMeshOffTrack)
-                        {
-                            RemoveTracksFromTimeLine(trackObjects, (name: string): boolean => name.includes("MeshOff"))
-                        }
-                        break
-                }
-            } catch(e)
-            {
-                console.log("An exception occoured while processing TimelineAsset: " + e)
+                case '"Character"':
+                    // Remove timeline for switching character visibility
+                    if(removeMeshOffTrack)
+                    {
+                        RemoveTracksFromTimeLine(trackObjects, (name: string): boolean => name.includes("MeshOff"))
+                    }
+                    break
             }
+
             return asset
         }
     }
@@ -67,18 +62,6 @@ import { AssemblyImage } from "./consts.js"
     let MVCameraModelInstance: Il2Cpp.Object = null
     export function GetMainCamTransformFromCameraModel(getFromStoredInstance: boolean = false, cameraModel: Il2Cpp.Object = null): Il2Cpp.Object
     {
-        if(getFromStoredInstance && MVCameraModelInstance == null)
-        {
-            console.log("MVCameraModelInstance is null, returning null")
-            return null
-        }
-
-        if(!getFromStoredInstance && cameraModel == null)
-        {
-            console.log("Given cameraModel is null, returning null")
-            return null
-        }
-
         return (getFromStoredInstance ? MVCameraModelInstance : cameraModel).field<Il2Cpp.Object>("MainCameraModel").value
                                                                             .field<Il2Cpp.Object>("MainCamera").value
                                                                             .method<Il2Cpp.Object>("get_transform").invoke()
@@ -90,7 +73,6 @@ import { AssemblyImage } from "./consts.js"
         AssemblyImage.class("Sekai.Live.Model.MusicVideoModel").method("RegisterMainCameraModel").implementation = function(cameraModel: Il2Cpp.Object)
         {
             this.method("RegisterMainCameraModel").invoke(cameraModel)
-        
             MVCameraModelInstance = cameraModel
         }
 
@@ -125,18 +107,6 @@ import { AssemblyImage } from "./consts.js"
 
     export function AttachCamToTransfrom(camTransform: Il2Cpp.Object, targetTransform: Il2Cpp.Object)
     {
-        if(targetTransform.isNull())
-        {
-            console.log("targetTransform is null, returning")
-            return
-        }
-
-        if(camTransform.isNull())
-        {
-            console.log("camTransform is null, returning")
-            return
-        }
-
         camTransform.method("SetParent").overload("UnityEngine.Transform", "System.Boolean").invoke(targetTransform, false)
     }
 
@@ -145,12 +115,6 @@ import { AssemblyImage } from "./consts.js"
     {
         if(ENABLE_THIRD_PERSON)
         {
-            return
-        }
-
-        if(characterModel.isNull())
-        {
-            console.log("characterModel is null, returning")
             return
         }
 
