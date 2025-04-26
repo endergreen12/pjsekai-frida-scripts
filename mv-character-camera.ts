@@ -53,7 +53,7 @@ Il2Cpp.perform(() => {
     {
         if(characterModelArray == null)
         {
-            console.log("CharacterModelArray is null, returning")
+            console.log("characterModelArray is null, returning")
             return
         }
     
