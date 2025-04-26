@@ -2,7 +2,7 @@ import { AssemblyImage } from "./consts.js"
 
 // Shared //
     // For Camera timeline //
-        const targets = ['"SubCamera"'] /* ['"MainCamera"'] */
+        const targets = ['"SubCamera"'] /* ['"MainCamera"', '"Sekai Dof Track"'] */
         const reverseTargetJudge = false
     // For Character timeline //
         const removeMeshOffTrack = false
