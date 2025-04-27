@@ -50,7 +50,7 @@ For reverseTargetJudge and removeMeshOffTrack please note that they might not wo
 
 ## misc.ts
 There are some features:
-- Force retire at the end of the live to avoid sending abnormal data to the server
+- Force retire to avoid sending abnormal data to the server
 
   ![out](https://github.com/user-attachments/assets/712aa0b6-f172-4413-b464-b5ae287e0d6b)
   

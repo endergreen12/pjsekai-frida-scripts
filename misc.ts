@@ -3,12 +3,13 @@ import { AssemblyImage, SignInInteractivity } from "./lib/consts.js";
 Il2Cpp.perform(() => {
     //console.log(`Unity version: ${Il2Cpp.unityVersion}`)
 
-    // Force retire on exit
-    AssemblyImage.class("Sekai.Core.Live.SoloLiveController").method("OnExit").implementation = function()
+    // Forcing retire
+    AssemblyImage.class("Sekai.Core.Live.SoloLiveController").method<number>("GetLiveResultAnimationType").implementation = function()
     {
-        console.log("Live finished. Force retiring...")
-        this.method("OnRetireByMySelf").invoke()
-        this.method("OnExit").invoke()
+        const result = this.method<number>("GetLiveResultAnimationType").invoke()
+        console.log("Setting result to Retire...")
+        this.field("result").value = AssemblyImage.class("Sekai.Core.Live.LiveResult").field("Retire").value
+        return result
     }
 
     // Supress Google Play Games authentication prompt
