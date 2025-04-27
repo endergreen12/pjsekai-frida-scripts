@@ -20,4 +20,13 @@ Il2Cpp.perform(() => {
         return this.method("Authenticate").overload("GooglePlayGames.BasicApi.SignInInteractivity", "System.Action<GooglePlayGames.BasicApi.SignInStatus>")
             .invoke(SignInInteractivity.NoPrompt, callback)
     }
+
+    // Playgrounds
+    // All normal notes are flick and critical
+    AssemblyImage.class("Sekai.SUS.Converter").method("ConvertNormalNote").implementation = function(id, noteInfo: Il2Cpp.Reference<Il2Cpp.Object>, info, laneStart, laneEnd, category: Il2Cpp.Reference)
+    {
+        noteInfo.value.method("set_Type").invoke(1)
+        category.value = AssemblyImage.class("Sekai.Live.NoteCategory").field("Flick").value
+        this.method("ConvertFlickNote").invoke(id, noteInfo, info, laneStart, laneEnd, category)
+    }
 })
