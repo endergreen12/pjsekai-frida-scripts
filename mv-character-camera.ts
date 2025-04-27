@@ -37,14 +37,22 @@ Il2Cpp.perform(() => {
         SetParentOfTransform(mainCamTransform, GetTargetTransformOfCharModelToAttach(targetCharacter))
         SetActiveOfDeactivateTargets(targetCharacter, false)
 
-        // Changing parent makes eulerAngles (0.00, 0.00, 270.00) so set them all to 0.0, not sure why eulerAngles is changed
         const newAngles = Vector3.alloc()
-        newAngles.method(".ctor").invoke(0.0, ENABLE_THIRD_PERSON ? 180.0 : 0.0, 0.0)
-        mainCamTransform.method("set_eulerAngles").invoke(newAngles.unbox())
+        if(ENABLE_THIRD_PERSON)
+        {
+            newAngles.method(".ctor").invoke(180.0, 0.0, 90.0)
+        } else {
+            newAngles.method(".ctor").invoke(0.0, 0.0, 90.0) // Fixing the camera tilt caused when changing the parent. Not sure why it tilts
+        }
+        mainCamTransform.method("set_localEulerAngles").invoke(newAngles.unbox())
 
-        // Adjust position to about eye level
         const newLocalPos = Vector3.alloc()
-        newLocalPos.method(".ctor").invoke(-0.07, 0.0, ENABLE_THIRD_PERSON ? 2.0 : 0.005)
+        if(ENABLE_THIRD_PERSON)
+        {
+            newLocalPos.method(".ctor").invoke(0.0, 0.0, 2.0)
+        } else {
+            newLocalPos.method(".ctor").invoke(-0.07, 0.0, 0.005)
+        }
         mainCamTransform.method("set_localPosition").invoke(newLocalPos.unbox())
     }
     
