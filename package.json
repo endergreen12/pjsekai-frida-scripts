@@ -3,6 +3,7 @@
   "dependencies": {
     "@types/frida-gum": "^18.8.2",
     "@types/node": "^22.13.13",
+    "esbuild": "^0.25.3",
     "frida-compile": "^16.4.1"
   },
   "devDependencies": {
