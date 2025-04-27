@@ -1,5 +1,5 @@
 import { AssemblyImage, Vector3 } from "./lib/consts.js";
-import { ChangeImpl_RemoveTargetTracksFromTimeline, GetMainCamTransformFromCameraModel, ChangeImpl_ForceDisableCameraDecoration } from "./lib/mv-utils.js";
+import { ChangeImpl_RemoveTargetTracksFromTimeline, GetMainCamTransformFromMVCameraModel, ChangeImpl_ForceDisableCameraDecoration } from "./lib/mv-utils.js";
 
 Il2Cpp.perform(() => {
     ChangeImpl_RemoveTargetTracksFromTimeline()
@@ -15,7 +15,7 @@ Il2Cpp.perform(() => {
         const newAngles = Vector3.alloc()
         newAngles.method(".ctor").invoke(0.0, 180.0, 0.0)
     
-        const mainCamTransform = GetMainCamTransformFromCameraModel(false, cameraModel)
+        const mainCamTransform = GetMainCamTransformFromMVCameraModel(cameraModel)
         mainCamTransform.method("set_position").invoke(newPos.unbox())
         mainCamTransform.method("set_eulerAngles").invoke(newAngles.unbox())
     }

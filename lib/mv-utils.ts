@@ -56,39 +56,19 @@ import { AssemblyImage } from "./consts.js"
             return AssemblyImage.class("Sekai.CameraDecoration").new()
         }
     }
-//
 
-// Partially shared //
-    let MVCameraModelInstance: Il2Cpp.Object = null
-    export function GetMainCamTransformFromCameraModel(getFromStoredInstance: boolean = false, cameraModel: Il2Cpp.Object = null): Il2Cpp.Object
+    export function GetMainCamTransformFromMVCameraModel(cameraModel: Il2Cpp.Object): Il2Cpp.Object
     {
-        return (getFromStoredInstance ? MVCameraModelInstance : cameraModel).field<Il2Cpp.Object>("MainCameraModel").value
-                                                                            .field<Il2Cpp.Object>("MainCamera").value
-                                                                            .method<Il2Cpp.Object>("get_transform").invoke()
-    }
-
-    export function ChangeImpl_SetupCameraInstanceStoring()
-    {
-        // Store MVCameraModelInstance
-        AssemblyImage.class("Sekai.Live.Model.MusicVideoModel").method("RegisterMainCameraModel").implementation = function(cameraModel: Il2Cpp.Object)
-        {
-            this.method("RegisterMainCameraModel").invoke(cameraModel)
-            MVCameraModelInstance = cameraModel
-        }
-
-        // Stop storing
-        AssemblyImage.class("Sekai.Live.Background3DPlayer").method("Unload").implementation = function()
-        {
-            this.method("Unload").invoke()
-            MVCameraModelInstance = null
-        }
+        return cameraModel.field<Il2Cpp.Object>("MainCameraModel")
+                .value.field<Il2Cpp.Object>("MainCamera")
+                .value.method<Il2Cpp.Object>("get_transform").invoke()
     }
 //
 
 // For character camera //
     export const ENABLE_THIRD_PERSON = false
 
-    export function CharList_LogIndexAndCharName(characterList: Il2Cpp.Array<Il2Cpp.Object>)
+    export function CharModelList_LogIndexAndCharName(characterList: Il2Cpp.Array<Il2Cpp.Object>)
     {
         console.log("\nCharacter models of this MV:")
         for(let i = 0; i < characterList.length; i++)
@@ -105,9 +85,9 @@ import { AssemblyImage } from "./consts.js"
         return `Character Name: (JP: ${gameCharacter.method<Il2Cpp.String>("get_FullName").invoke()} ENG: ${gameCharacter.method<Il2Cpp.String>("get_FullNameEnglish").invoke()})`
     }
 
-    export function AttachCamToTransfrom(camTransform: Il2Cpp.Object, targetTransform: Il2Cpp.Object)
+    export function SetParentOfTransform(transform: Il2Cpp.Object, targetTransform: Il2Cpp.Object)
     {
-        camTransform.method("SetParent").overload("UnityEngine.Transform", "System.Boolean").invoke(targetTransform, false)
+        transform.method("SetParent").overload("UnityEngine.Transform", "System.Boolean").invoke(targetTransform, false)
     }
 
     const deactivateTargetArray = ["Face", "Hair"]
@@ -121,5 +101,21 @@ import { AssemblyImage } from "./consts.js"
         deactivateTargetArray.forEach(deactivateTarget => {
             characterModel.method<Il2Cpp.Object>(`get_${deactivateTarget}`).invoke().method("SetActive").invoke(value)
         })
+    }
+
+    export function GetTargetTransformOfCharModelToAttach(characterModel: Il2Cpp.Object): Il2Cpp.Object
+    {
+        return ENABLE_THIRD_PERSON ? characterModel.method<Il2Cpp.Object>("get_Hip").invoke().method<Il2Cpp.Object>("get_transform").invoke() : 
+                                    characterModel.method<Il2Cpp.Object>("get_HeadTransform").invoke()
+    }
+
+    export function GetMVModelInstance(): Il2Cpp.Object
+    {
+        return AssemblyImage.class("Sekai.Live.Model.MusicVideoModel").method<Il2Cpp.Object>("get_Instance").invoke()
+    }
+
+    export function GetCharacterModelListFromMVModel(mvModel: Il2Cpp.Object): Il2Cpp.Array<Il2Cpp.Object>
+    {
+        return mvModel.method<Il2Cpp.Object>("get_MainCharacterModel").invoke().method<Il2Cpp.Array<Il2Cpp.Object>>("get_CharacterModelList").invoke()
     }
 //
