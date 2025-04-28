@@ -34,14 +34,22 @@ Il2Cpp.perform(() => {
     AssemblyImage.class("Sekai.ScreenLayerHome").method("OnClickGacha").implementation = function()
     {
         const response = AssemblyImage.class("Sekai.UserGachaResponse").new()
-        response.field("consumedCosts").value = Il2Cpp.array(AssemblyImage.class("Sekai.UserResource"), 0)
+        /* response.field("consumedCosts").value = Il2Cpp.array(AssemblyImage.class("Sekai.UserResource"), 0)
         response.field("obtainGachaBonusItems").value = Il2Cpp.array(AssemblyImage.class("Sekai.UserResource"), 0)
         response.field("obtainGachaCeilItems").value = Il2Cpp.array(AssemblyImage.class("Sekai.UserResource"), 0)
         response.field("obtainGachaExtras").value = Il2Cpp.array(AssemblyImage.class("Sekai.UserResource"), 0)
-        response.field("obtainGachaFreebies").value = Il2Cpp.array(AssemblyImage.class("Sekai.UserGachaFreebie"), 0)
-        response.field("obtainPrizes").value = Il2Cpp.array(AssemblyImage.class("Sekai.UserGachaSpinObtainPrize"), 0)
-        response.field("updatedResources").value = AssemblyImage.class("Sekai.SuiteUser").new()
-        response.field("userGacha").value = AssemblyImage.class("Sekai.UserGacha").new()
+        response.field("obtainGachaFreebies").value = Il2Cpp.array(AssemblyImage.class("Sekai.UserGachaFreebie"), 0) */
+
+        const prize = AssemblyImage.class("Sekai.UserGachaSpinObtainPrize").new()
+        prize.field("card").value = AssemblyImage.class("Sekai.UserResource").new()
+        prize.field<Il2Cpp.Object>("card").value.method(".ctor")
+                .overload("System.Int32", "Sekai.Constants.ResourceType", "System.Int32", "System.Int32").invoke(999, 8, 0, 0)
+        prize.field("newFlg").value = true
+
+        response.field("obtainPrizes").value = Il2Cpp.array(AssemblyImage.class("Sekai.UserGachaSpinObtainPrize"), [prize])
+
+        /* response.field("updatedResources").value = AssemblyImage.class("Sekai.SuiteUser").new()
+        response.field("userGacha").value = AssemblyImage.class("Sekai.UserGacha").new() */
 
         const masterGacha = AssemblyImage.class("Sekai.GachaUtility").method<Il2Cpp.Object>("GetMasterGachaOf").invoke(593)
         const behavior = masterGacha.field<Il2Cpp.Array<Il2Cpp.Object>>("gachaBehaviors").value.get(0)
