@@ -21,6 +21,13 @@ Il2Cpp.perform(() => {
             .invoke(SignInInteractivity.NoPrompt, callback)
     }
 
+    // Skip splash screen
+    AssemblyImage.class("Sekai.SceneManager").method("OnInitialize").implementation = function()
+    {
+        this.method("OnInitialize").invoke()
+        this.method("RequestScene").invoke(0)
+    }
+
     // Playgrounds
     // All notes are flick and critical
         AssemblyImage.class("Sekai.SUS.Converter").method("ConvertNormalNote").implementation = function(id, noteInfo: Il2Cpp.Reference<Il2Cpp.Object>, info, laneStart, laneEnd, category: Il2Cpp.Reference)
@@ -68,5 +75,11 @@ Il2Cpp.perform(() => {
         const behavior = masterGacha.field<Il2Cpp.Array<Il2Cpp.Object>>("gachaBehaviors").value.get(0)
 
         AssemblyImage.class("Sekai.GachaUtility").method("TransitionSpinAnimation").invoke(response, masterGacha, behavior)
+    }
+
+    // use mysekai button to execute whatever
+    AssemblyImage.class("Sekai.ScreenLayerHome").method("OnClickJoinMysekai").implementation = function()
+    {
+        
     }
 })
