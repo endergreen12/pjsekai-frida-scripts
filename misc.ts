@@ -22,13 +22,26 @@ Il2Cpp.perform(() => {
     }
 
     // Playgrounds
-    // All normal notes are flick and critical
-    AssemblyImage.class("Sekai.SUS.Converter").method("ConvertNormalNote").implementation = function(id, noteInfo: Il2Cpp.Reference<Il2Cpp.Object>, info, laneStart, laneEnd, category: Il2Cpp.Reference)
-    {
-        noteInfo.value.method("set_Type").invoke(1)
-        category.value = AssemblyImage.class("Sekai.Live.NoteCategory").field("Flick").value
-        this.method("ConvertFlickNote").invoke(id, noteInfo, info, laneStart, laneEnd, category)
-    }
+    // All notes are flick and critical
+        AssemblyImage.class("Sekai.SUS.Converter").method("ConvertNormalNote").implementation = function(id, noteInfo: Il2Cpp.Reference<Il2Cpp.Object>, info, laneStart, laneEnd, category: Il2Cpp.Reference)
+        {
+            noteInfo.value.method("set_Type").invoke(1)
+            category.value = AssemblyImage.class("Sekai.Live.NoteCategory").field("Flick").value
+            this.method("ConvertFlickNote").invoke(id, noteInfo, info, laneStart, laneEnd, category)
+        }
+
+        AssemblyImage.class("Sekai.SUS.Converter").method("ConvertFlickNote").implementation = function(id, noteInfo: Il2Cpp.Reference<Il2Cpp.Object>, info, laneStart, laneEnd, category: Il2Cpp.Reference)
+        {
+            noteInfo.value.method("set_Type").invoke(1)
+            this.method("ConvertFlickNote").invoke(id, noteInfo, info, laneStart, laneEnd, category)
+        }
+
+        AssemblyImage.class("Sekai.SUS.Converter").method("ConvertFrictionNote").implementation = function(id, noteInfo: Il2Cpp.Reference<Il2Cpp.Object>, info, laneStart, laneEnd, category: Il2Cpp.Reference)
+        {
+            noteInfo.value.method("set_Type").invoke(1)
+            category.value = AssemblyImage.class("Sekai.Live.NoteCategory").field("FrictionFlick").value
+            this.method("ConvertFrictionFlickNote").invoke(id, noteInfo, info, laneStart, laneEnd, category)
+        }
 
     // Fake Gacha
     AssemblyImage.class("Sekai.ScreenLayerHome").method("OnClickGacha").implementation = function()
