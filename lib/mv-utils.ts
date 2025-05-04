@@ -105,7 +105,7 @@ import { AssemblyImage } from "./consts.js"
 
     export function GetTargetTransformOfCharModelToAttach(characterModel: Il2Cpp.Object): Il2Cpp.Object
     {
-        return ENABLE_THIRD_PERSON ? characterModel.method<Il2Cpp.Object>("get_Hip").invoke().method<Il2Cpp.Object>("get_transform").invoke() : 
+        return ENABLE_THIRD_PERSON ? characterModel.method<Il2Cpp.Object>("get_PositionNote").invoke() : 
                                     characterModel.method<Il2Cpp.Object>("get_HeadTransform").invoke()
     }
 

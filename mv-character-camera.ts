@@ -40,7 +40,7 @@ Il2Cpp.perform(() => {
         const newAngles = Vector3.alloc()
         if(ENABLE_THIRD_PERSON)
         {
-            newAngles.method(".ctor").invoke(180.0, 0.0, 90.0)
+            newAngles.method(".ctor").invoke(180.0, 0.0, 180.0)
         } else {
             newAngles.method(".ctor").invoke(0.0, 0.0, 90.0) // Fixing the camera tilt caused when changing the parent. Not sure why it tilts
         }
@@ -49,7 +49,7 @@ Il2Cpp.perform(() => {
         const newLocalPos = Vector3.alloc()
         if(ENABLE_THIRD_PERSON)
         {
-            newLocalPos.method(".ctor").invoke(0.0, 0.0, 2.0)
+            newLocalPos.method(".ctor").invoke(0.0, 0.6, 1.5)
         } else {
             newLocalPos.method(".ctor").invoke(-0.07, 0.0, 0.005)
         }
