@@ -30,7 +30,7 @@ Il2Cpp.perform(() => {
 
     // Playgrounds
         // All notes are flick and critical
-            AssemblyImage.class("Sekai.SUS.Converter").method("ConvertNormalNote").implementation = function(id, noteInfo: Il2Cpp.Reference<Il2Cpp.Object>, info, laneStart, laneEnd, category: Il2Cpp.Reference)
+            /* AssemblyImage.class("Sekai.SUS.Converter").method("ConvertNormalNote").implementation = function(id, noteInfo: Il2Cpp.Reference<Il2Cpp.Object>, info, laneStart, laneEnd, category: Il2Cpp.Reference)
             {
                 noteInfo.value.method("set_Type").invoke(1)
                 category.value = AssemblyImage.class("Sekai.Live.NoteCategory").field("Flick").value
@@ -48,17 +48,12 @@ Il2Cpp.perform(() => {
                 noteInfo.value.method("set_Type").invoke(1)
                 category.value = AssemblyImage.class("Sekai.Live.NoteCategory").field("FrictionFlick").value
                 this.method("ConvertFrictionFlickNote").invoke(id, noteInfo, info, laneStart, laneEnd, category)
-            }
+            } */
 
         // Fake Gacha
-        AssemblyImage.class("Sekai.ScreenLayerHome").method("OnClickGacha").implementation = function()
+        /* AssemblyImage.class("Sekai.ScreenLayerHome").method("OnClickGacha").implementation = function()
         {
             const response = AssemblyImage.class("Sekai.UserGachaResponse").new()
-            /* response.field("consumedCosts").value = Il2Cpp.array(AssemblyImage.class("Sekai.UserResource"), 0)
-            response.field("obtainGachaBonusItems").value = Il2Cpp.array(AssemblyImage.class("Sekai.UserResource"), 0)
-            response.field("obtainGachaCeilItems").value = Il2Cpp.array(AssemblyImage.class("Sekai.UserResource"), 0)
-            response.field("obtainGachaExtras").value = Il2Cpp.array(AssemblyImage.class("Sekai.UserResource"), 0)
-            response.field("obtainGachaFreebies").value = Il2Cpp.array(AssemblyImage.class("Sekai.UserGachaFreebie"), 0) */
 
             const prize = AssemblyImage.class("Sekai.UserGachaSpinObtainPrize").new()
             prize.field("card").value = AssemblyImage.class("Sekai.UserResource").new()
@@ -68,18 +63,15 @@ Il2Cpp.perform(() => {
 
             response.field("obtainPrizes").value = Il2Cpp.array(AssemblyImage.class("Sekai.UserGachaSpinObtainPrize"), [prize])
 
-            /* response.field("updatedResources").value = AssemblyImage.class("Sekai.SuiteUser").new()
-            response.field("userGacha").value = AssemblyImage.class("Sekai.UserGacha").new() */
-
             const masterGacha = AssemblyImage.class("Sekai.GachaUtility").method<Il2Cpp.Object>("GetMasterGachaOf").invoke(593)
             const behavior = masterGacha.field<Il2Cpp.Array<Il2Cpp.Object>>("gachaBehaviors").value.get(0)
 
             AssemblyImage.class("Sekai.GachaUtility").method("TransitionSpinAnimation").invoke(response, masterGacha, behavior)
-        }
+        } */
 
         // use mysekai button to execute whatever
-        AssemblyImage.class("Sekai.ScreenLayerHome").method("OnClickJoinMysekai").implementation = function()
+        /* AssemblyImage.class("Sekai.ScreenLayerHome").method("OnClickJoinMysekai").implementation = function()
         {
             
-        }
+        } */
 })
