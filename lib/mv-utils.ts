@@ -61,11 +61,6 @@ import { AssemblyImage } from "./consts.js"
     {
         return cameraModel.field<Il2Cpp.Object>("MainCameraModel").value.field<Il2Cpp.Object>("MainCamera").value
     }
-
-    export function GetMainCamTransformFromMVCameraModel(cameraModel: Il2Cpp.Object): Il2Cpp.Object
-    {
-        return GetMainCamFromMVCameraModel(cameraModel).method<Il2Cpp.Object>("get_transform").invoke()
-    }
 //
 
 // For character camera //

@@ -1,7 +1,7 @@
 import { ChangeImpl_RemoveTargetTracksFromTimeline, CharModelList_LogIndexAndCharName, 
-    SetParentOfTransform, GetMainCamTransformFromMVCameraModel, SetActiveOfDeactivateTargets, ChangeImpl_ForceDisableCameraDecoration,
+    SetParentOfTransform, SetActiveOfDeactivateTargets, ChangeImpl_ForceDisableCameraDecoration,
     GetCharacterNameFromCharacterModel, ENABLE_THIRD_PERSON, GetCharacterModelListFromMVModel, GetMVModelInstance,
-    GetTargetTransformOfCharModelToAttach} from "./lib/mv-utils.js";
+    GetTargetTransformOfCharModelToAttach, GetMainCamFromMVCameraModel} from "./lib/mv-utils.js";
 import { AssemblyImage, Vector3 } from "./lib/consts.js";
 let targetCharIndex = 0
 
@@ -30,7 +30,8 @@ Il2Cpp.perform(() => {
         this.method("Start").invoke()
 
         const mvModelInstance = GetMVModelInstance()
-        const mainCamTransform = GetMainCamTransformFromMVCameraModel(mvModelInstance.method<Il2Cpp.Object>("get_MainCameraModel").invoke())
+        const mainCam = GetMainCamFromMVCameraModel(mvModelInstance.method<Il2Cpp.Object>("get_MainCameraModel").invoke())
+        const mainCamTransform = mainCam.method<Il2Cpp.Object>("get_transform").invoke()
         const characterModelList = GetCharacterModelListFromMVModel(mvModelInstance)
 
         const targetCharacter = characterModelList.get(targetCharIndex)
@@ -60,7 +61,7 @@ Il2Cpp.perform(() => {
     AssemblyImage.class("Sekai.Core.Live.MusicVideoController").method("OnBackKey").implementation = function()
     {
         const mvModelInstance = GetMVModelInstance()
-        const mainCamTransform = GetMainCamTransformFromMVCameraModel(mvModelInstance.method<Il2Cpp.Object>("get_MainCameraModel").invoke())
+        const mainCamTransform = GetMainCamFromMVCameraModel(mvModelInstance.method<Il2Cpp.Object>("get_MainCameraModel").invoke()).method<Il2Cpp.Object>("get_transform").invoke()
         const characterModelList = GetCharacterModelListFromMVModel(mvModelInstance)
 
         // Reactivate the elements of character deactivated before
