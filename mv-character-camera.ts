@@ -61,7 +61,8 @@ Il2Cpp.perform(() => {
     AssemblyImage.class("Sekai.Core.Live.MusicVideoController").method("OnBackKey").implementation = function()
     {
         const mvModelInstance = GetMVModelInstance()
-        const mainCamTransform = GetMainCamFromMVCameraModel(mvModelInstance.method<Il2Cpp.Object>("get_MainCameraModel").invoke()).method<Il2Cpp.Object>("get_transform").invoke()
+        const mainCam = GetMainCamFromMVCameraModel(mvModelInstance.method<Il2Cpp.Object>("get_MainCameraModel").invoke())
+        const mainCamTransform = mainCam.method<Il2Cpp.Object>("get_transform").invoke()
         const characterModelList = GetCharacterModelListFromMVModel(mvModelInstance)
 
         // Reactivate the elements of character deactivated before
@@ -76,5 +77,11 @@ Il2Cpp.perform(() => {
         
         SetParentOfTransform(mainCamTransform, GetTargetTransformOfCharModelToAttach(newTargetCharacterModel))
         SetActiveOfDeactivateTargets(newTargetCharacterModel, false)
+    }
+
+    // Change FOV, the default is 50. idk why but when the value exceeds around 100, the rendering becomes abnormal, such as thicker outlines
+    AssemblyImage.class("Sekai.Core.SekaiCameraAspect").method<number>("CalculateVerticalFov").implementation = function(currentFov: number)
+    {
+        return 50 // Change here
     }
 })
