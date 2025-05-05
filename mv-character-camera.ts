@@ -79,9 +79,19 @@ Il2Cpp.perform(() => {
         SetActiveOfDeactivateTargets(newTargetCharacterModel, false)
     }
 
-    // Change FOV, idk why but when the value exceeds around 100, the rendering becomes abnormal, such as thicker outlines
-    /* AssemblyImage.class("Sekai.Core.SekaiCameraAspect").method<number>("CalculateVerticalFov").implementation = function(currentFov: number)
+    // idk why but when the value exceeds around 100, the rendering becomes abnormal, such as thicker outlines
+    const changeFOV = false
+    const targetFOV = 90
+    if(changeFOV)
     {
-        return 50 // Change here
-    } */
+        AssemblyImage.class("Sekai.Core.SekaiCameraAspect").method<number>("CalculateVerticalFov").implementation = function(currentFov: number)
+        {
+            return targetFOV
+        }
+
+        AssemblyImage.class("Sekai.Core.SekaiCameraAspect").method<number>("CalculateInvertVerticalFov").implementation = function(currentFov: number)
+        {
+            return targetFOV
+        }
+    }
 })
