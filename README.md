@@ -19,11 +19,17 @@ Also log the loading of AssetBundle
 
 - First person
 
-  ![image](https://github.com/user-attachments/assets/563a1c3b-7bb2-46fe-93f9-c27b35aa7daa)
+  ![Screenshot_2025 05 05_23 46 21 495](https://github.com/user-attachments/assets/15216d7f-bacd-4a0d-a096-4800e38f7cf7)
 
 - Third person
 
-  ![output](https://github.com/user-attachments/assets/160091c4-6dfb-46f5-973d-0a68eea85099)
+  ![out](https://github.com/user-attachments/assets/4b435987-d596-419e-88d2-48367a448349)
+
+Options:
+
+- changeFOV
+
+- targetFOV
 
 ## lib/mv-utils.ts
 Library used in fixed and character camera
@@ -57,6 +63,12 @@ There are some features:
 - Supress Google Play Games authentication prompt
 
   ![Screenshot_2025 03 25_04 21 16 187](https://github.com/user-attachments/assets/05a01dbc-8b8e-45b6-9152-d9f3f767a356)
+
+- Playgrounds
+
+  It's just for fun. For example, there's code that changes all the notes into flicks
+
+  To enable, uncomment them
 
 # How to use
 ## Requirements
