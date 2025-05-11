@@ -61,6 +61,22 @@ import { AssemblyImage } from "./consts.js"
     {
         return cameraModel.field<Il2Cpp.Object>("MainCameraModel").value.field<Il2Cpp.Object>("MainCamera").value
     }
+
+    // idk why but when the value exceeds around 100, the rendering becomes abnormal, such as thicker outlines
+    const changeFOV = false
+    const targetFOV = 70
+    if(changeFOV)
+    {
+        AssemblyImage.class("Sekai.Core.SekaiCameraAspect").method<number>("CalculateVerticalFov").implementation = function(currentFov: number)
+        {
+            return targetFOV
+        }
+
+        AssemblyImage.class("Sekai.Core.SekaiCameraAspect").method<number>("CalculateInvertVerticalFov").implementation = function(currentFov: number)
+        {
+            return targetFOV
+        }
+    }
 //
 
 // For character camera //
