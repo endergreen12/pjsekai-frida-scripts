@@ -3,13 +3,11 @@ import { AssemblyImage, SignInInteractivity } from "./lib/consts.js";
 Il2Cpp.perform(() => {
     //console.log(`Unity version: ${Il2Cpp.unityVersion}`)
 
-    // Forcing retire
-    AssemblyImage.class("Sekai.Core.Live.SoloLiveController").method<number>("GetLiveResultAnimationType").implementation = function()
+    // Force retire
+    AssemblyImage.class("Sekai.Core.Live.SoloLiveController").method("OnExit").implementation = function()
     {
-        const result = this.method<number>("GetLiveResultAnimationType").invoke()
-        console.log("Setting result to Retire...")
+        console.log("Live finished. Setting result to Retire...")
         this.field("result").value = AssemblyImage.class("Sekai.Core.Live.LiveResult").field("Retire").value
-        return result
     }
 
     // Supress Google Play Games authentication prompt
@@ -91,6 +89,12 @@ Il2Cpp.perform(() => {
             this.method("set_IsAuto").invoke(true)
             const musicData = this.method<Il2Cpp.Object>("get_MusicData").invoke()
             musicData.method<Il2Cpp.Object>("get_Difficulty").invoke().field("musicDifficulty").value = Il2Cpp.string("master")
+        } */
+
+        // Override AudioSyncedUnityTimer
+        /* AssemblyImage.class("Sekai.SoundManager").method<number>("GetAudioSyncedUnityTimer").implementation = function()
+        {
+            return this.method<number>("GetAudioSyncedUnityTimer").invoke() * 2.0
         } */
     //
 })
