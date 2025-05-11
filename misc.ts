@@ -74,4 +74,11 @@ Il2Cpp.perform(() => {
         {
             
         } */
+
+        // Inject custom chart
+        /* AssemblyImage.class("Sekai.SUS.Converter").method<Il2Cpp.Object>("Convert").implementation = function(musicScoreData: Il2Cpp.String)
+        {
+            const scoreData = Il2Cpp.corlib.class("System.IO.File").method<Il2Cpp.String>("ReadAllText").overload("System.String").invoke(Il2Cpp.string("/sdcard/score.sus"))
+            return this.method<Il2Cpp.Object>("Convert").invoke(scoreData)
+        } */
 })
