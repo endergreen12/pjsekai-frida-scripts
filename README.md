@@ -86,7 +86,7 @@ npm install
 ```
 2. After finished, Run this command:
 ```
-frida -U -N com.sega.pjsekai -l [The file name of the script you want to use]
+frida -U -N com.sega.pjsekai -l the_script_you_want_to_use.ts
 ```
 
 ---
