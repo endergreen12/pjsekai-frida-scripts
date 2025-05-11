@@ -8,6 +8,8 @@ Il2Cpp.perform(() => {
     {
         console.log("Live finished. Setting result to Retire...")
         this.field("result").value = AssemblyImage.class("Sekai.Core.Live.LiveResult").field("Retire").value
+
+        this.method("OnExit").invoke()
     }
 
     // Supress Google Play Games authentication prompt
