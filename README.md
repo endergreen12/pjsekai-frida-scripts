@@ -25,6 +25,8 @@ Also log the loading of AssetBundle
 
   ![out](https://github.com/user-attachments/assets/4b435987-d596-419e-88d2-48367a448349)
 
+You can switch the target by pressing the back button in Android
+
 ## lib/mv-utils.ts
 Library used in fixed and character camera
 
