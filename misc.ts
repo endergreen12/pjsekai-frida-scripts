@@ -82,4 +82,15 @@ Il2Cpp.perform(() => {
             const scoreData = Il2Cpp.corlib.class("System.IO.File").method<Il2Cpp.String>("ReadAllText").overload("System.String").invoke(Il2Cpp.string("/sdcard/score.sus"))
             return this.method<Il2Cpp.Object>("Convert").invoke(scoreData)
         } */
+
+        // Override FreeLiveBootData
+        /* AssemblyImage.class("Sekai.FreeLiveBootData").method("SetLiveMode").implementation = function(liveMode: number)
+        {
+            this.method("SetLiveMode").invoke(liveMode)
+
+            this.method("set_IsAuto").invoke(true)
+            const musicData = this.method<Il2Cpp.Object>("get_MusicData").invoke()
+            musicData.method<Il2Cpp.Object>("get_Difficulty").invoke().field("musicDifficulty").value = Il2Cpp.string("master")
+        } */
+    //
 })
