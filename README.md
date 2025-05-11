@@ -25,12 +25,6 @@ Also log the loading of AssetBundle
 
   ![out](https://github.com/user-attachments/assets/4b435987-d596-419e-88d2-48367a448349)
 
-Options:
-
-- changeFOV
-
-- targetFOV
-
 ## lib/mv-utils.ts
 Library used in fixed and character camera
 
@@ -51,6 +45,14 @@ There are some options value for users:
 - ENABLE_THIRD_PERSON
 
   As the name suggests
+
+- changeFOV
+
+  As the name suggests
+
+- targetFOV
+
+  Specify the fov value that will be applied when changeFOV is true
 
 For reverseTargetJudge and removeMeshOffTrack please note that they might not work because not every track of every MV has the same name
 
