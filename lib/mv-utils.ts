@@ -67,15 +67,17 @@ import { AssemblyImage } from "./consts.js"
     const targetFOV = 70
     if(changeFOV)
     {
-        AssemblyImage.class("Sekai.Core.SekaiCameraAspect").method<number>("CalculateVerticalFov").implementation = function(currentFov: number)
-        {
-            return targetFOV
-        }
+        Il2Cpp.perform(() => {
+            AssemblyImage.class("Sekai.Core.SekaiCameraAspect").method<number>("CalculateVerticalFov").implementation = function(currentFov: number)
+            {
+                return targetFOV
+            }
 
-        AssemblyImage.class("Sekai.Core.SekaiCameraAspect").method<number>("CalculateInvertVerticalFov").implementation = function(currentFov: number)
-        {
-            return targetFOV
-        }
+            AssemblyImage.class("Sekai.Core.SekaiCameraAspect").method<number>("CalculateInvertVerticalFov").implementation = function(currentFov: number)
+            {
+                return targetFOV
+            }
+        })
     }
 //
 
