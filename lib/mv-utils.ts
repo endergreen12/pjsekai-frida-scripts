@@ -62,7 +62,6 @@ import { AssemblyImage } from "./consts.js"
         return cameraModel.field<Il2Cpp.Object>("MainCameraModel").value.field<Il2Cpp.Object>("MainCamera").value
     }
 
-    // idk why but when the value exceeds around 100, the rendering becomes abnormal, such as thicker outlines
     const changeFOV = false
     const targetFOV = 70
     if(changeFOV)
@@ -76,6 +75,12 @@ import { AssemblyImage } from "./consts.js"
             AssemblyImage.class("Sekai.Core.SekaiCameraAspect").method<number>("CalculateInvertVerticalFov").implementation = function(currentFov: number)
             {
                 return targetFOV
+            }
+
+            // Disable fov correction curve as it breaks rendering if the fov is increased
+            Il2Cpp.domain.assembly("Unity.RenderPipelines.Universal.Runtime").image.class("Sekai.Rendering.SekaiCharacterOutlineFeature").method("Create").implementation = function()
+            {
+                this.field<Il2Cpp.Object>("settings").value.field("fovCurve").value = NULL
             }
         })
     }
