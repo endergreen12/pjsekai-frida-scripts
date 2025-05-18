@@ -2,5 +2,8 @@
   "name": "pjsekai-frida-scripts",
   "dependencies": {
     "frida-il2cpp-bridge": "*"
+  },
+  "devDependencies": {
+    "@types/frida-gum": "*"
   }
 }
