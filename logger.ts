@@ -1,4 +1,4 @@
-import { AssemblyImage, DebugClass } from './lib/consts.js'
+import { AssemblyImage, DebugClass } from './lib/consts'
 
 Il2Cpp.perform(() => {
     // Enable logging
