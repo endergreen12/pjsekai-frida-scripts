@@ -1,5 +1,5 @@
-import { AssemblyImage, Vector3 } from "./lib/consts";
-import { ChangeImpl_RemoveTargetTracksFromTimeline, GetMainCamFromMVCameraModel, ChangeImpl_ForceDisableCameraDecoration } from "./lib/mv-utils";
+import { AssemblyImage, Vector3 } from "./lib/consts.js";
+import { ChangeImpl_RemoveTargetTracksFromTimeline, GetMainCamFromMVCameraModel, ChangeImpl_ForceDisableCameraDecoration } from "./lib/mv-utils.js";
 
 Il2Cpp.perform(() => {
     ChangeImpl_RemoveTargetTracksFromTimeline()

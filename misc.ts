@@ -1,4 +1,4 @@
-import { AssemblyImage, SignInInteractivity } from "./lib/consts";
+import { AssemblyImage, SignInInteractivity } from "./lib/consts.js";
 
 Il2Cpp.perform(() => {
     //console.log(`Unity version: ${Il2Cpp.unityVersion}`)

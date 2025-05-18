@@ -1,8 +1,8 @@
 import { ChangeImpl_RemoveTargetTracksFromTimeline, CharModelList_LogIndexAndCharName, 
     SetParentOfTransform, SetActiveOfDeactivateTargets, ChangeImpl_ForceDisableCameraDecoration,
     GetCharacterNameFromCharacterModel, ENABLE_THIRD_PERSON, GetCharacterModelListFromMVModel, GetMVModelInstance,
-    GetTargetTransformOfCharModelToAttach, GetMainCamFromMVCameraModel} from "./lib/mv-utils";
-import { AssemblyImage, Vector3 } from "./lib/consts";
+    GetTargetTransformOfCharModelToAttach, GetMainCamFromMVCameraModel} from "./lib/mv-utils.js";
+import { AssemblyImage, Vector3 } from "./lib/consts.js";
 let targetCharIndex = 0
 
 Il2Cpp.perform(() => {

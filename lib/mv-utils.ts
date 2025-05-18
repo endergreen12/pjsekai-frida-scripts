@@ -1,4 +1,4 @@
-import { AssemblyImage } from "./consts"
+import { AssemblyImage } from "./consts.js"
 
 // Shared //
     // For Camera timeline //
