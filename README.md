@@ -58,8 +58,8 @@ There are some options value for users:
 
 For reverseTargetJudge and removeMeshOffTrack please note that they might not work because not every track of every MV has the same name
 
-## misc.ts
-There are some features:
+## misc/
+There are some scripts in the folder:
 - Force retire to avoid sending abnormal data to the server
 
   ![out](https://github.com/user-attachments/assets/712aa0b6-f172-4413-b464-b5ae287e0d6b)
@@ -68,11 +68,7 @@ There are some features:
 
   ![Screenshot_2025 03 25_04 21 16 187](https://github.com/user-attachments/assets/05a01dbc-8b8e-45b6-9152-d9f3f767a356)
 
-- Playgrounds
-
-  It's just for fun. For example, there's code that changes all the notes into flicks
-
-  To enable, uncomment them
+There are other scripts which aren't introduced on this section, you can guess its feature from the file name
 
 # How to use
 ## Requirements
