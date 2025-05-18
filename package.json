@@ -1,9 +1,9 @@
 {
-  "name": "pjsekai-frida-scripts",
   "dependencies": {
-    "frida-il2cpp-bridge": "*"
+    "esbuild": "^0.25.4",
+    "frida-il2cpp-bridge": "^0.9.1"
   },
   "devDependencies": {
-    "@types/frida-gum": "*"
+    "@types/frida-gum": "^18.4.7"
   }
 }
