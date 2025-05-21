@@ -48,4 +48,10 @@ Il2Cpp.perform(() => {
     {
         return this.method<number>("GetAudioSyncedUnityTimer").invoke() * 2.0
     } */
+
+    // Change MusicInfoView arguments
+    /* AssemblyImage.class("Sekai.Live.MusicInfoView").method("Play").implementation = function(durationScale: number, disableOnlyJacketOnFinish: boolean, bgFadeoutDuration: number)
+    {
+        this.method("Play").invoke(durationScale * 0.5, disableOnlyJacketOnFinish, bgFadeoutDuration)
+    } */
 })
