@@ -1,7 +1,6 @@
 {
   "dependencies": {
-    "esbuild": "^0.25.4",
-    "frida-il2cpp-bridge": "^0.9.1",
-    "@types/frida-gum": "^18.4.7"
+    "@types/frida-gum": "^18.4.7",
+    "frida-il2cpp-bridge": "^0.9.1"
   }
 }
