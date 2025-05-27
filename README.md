@@ -72,7 +72,9 @@ There are some scripts in the folder:
 
   https://github.com/user-attachments/assets/966f707d-e724-4e58-a992-54a559b4f2ca
 
-There are other scripts which aren't introduced on this section, you can guess its feature from the file name
+- playground.ts
+
+There are some code snippets, for example injecting custom chart, fake gacha
 
 # How to use
 ## Requirements
