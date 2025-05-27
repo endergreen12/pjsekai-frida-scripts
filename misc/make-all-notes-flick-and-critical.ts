@@ -20,4 +20,17 @@ Il2Cpp.perform(() => {
         category.value = AssemblyImage.class("Sekai.Live.NoteCategory").field("FrictionFlick").value
         this.method("ConvertFrictionFlickNote").invoke(id, noteInfo, info, laneStart, laneEnd, category)
     }
+
+    AssemblyImage.class("Sekai.SUS.Converter").method("ConvertFrictionFlickNote").implementation = function(id, noteInfo: Il2Cpp.Reference<Il2Cpp.Object>, info, laneStart, laneEnd, category: Il2Cpp.Reference)
+    {
+        noteInfo.value.method("set_Type").invoke(1)
+        category.value = AssemblyImage.class("Sekai.Live.NoteCategory").field("FrictionFlick").value
+        this.method("ConvertFrictionFlickNote").invoke(id, noteInfo, info, laneStart, laneEnd, category)
+    }
+
+    AssemblyImage.class("Sekai.SUS.Converter").method("ConvertLongNote").implementation = function(id, noteInfo: Il2Cpp.Reference<Il2Cpp.Object>, info, laneStart, laneEnd, category: Il2Cpp.Reference)
+    {
+        noteInfo.value.method("set_Type").invoke(1)
+        this.method("ConvertLongNote").invoke(id, noteInfo, info, laneStart, laneEnd, category)
+    }
 })
