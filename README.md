@@ -68,6 +68,10 @@ There are some scripts in the folder:
 
   ![Screenshot_2025 03 25_04 21 16 187](https://github.com/user-attachments/assets/05a01dbc-8b8e-45b6-9152-d9f3f767a356)
 
+- Make all notes flick and critical
+
+  https://github.com/user-attachments/assets/966f707d-e724-4e58-a992-54a559b4f2ca
+
 There are other scripts which aren't introduced on this section, you can guess its feature from the file name
 
 # How to use
