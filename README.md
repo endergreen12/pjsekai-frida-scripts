@@ -17,13 +17,15 @@ Trace Unity log functions and loading of asset bundles
 
 - First person
 
-  ![Screenshot_2025 05 05_23 46 21 495](https://github.com/user-attachments/assets/15216d7f-bacd-4a0d-a096-4800e38f7cf7)
+  ![Screenshot_2025 05 27_22 56 52 202](https://github.com/user-attachments/assets/4176f90a-ea9f-41b9-8cfa-f9e6e4211881)
+  
+  ![Screenshot_2025 05 27_22 57 19 618](https://github.com/user-attachments/assets/7bb2363f-a69b-4e08-96e5-aa91adbe5da0)
 
 - Third person
 
   ![out](https://github.com/user-attachments/assets/4b435987-d596-419e-88d2-48367a448349)
 
-You can switch the target by pressing the back button in Android
+On Android, you can switch the target by pressing the back button
 
 ## lib/mv-utils.ts
 Library used in fixed and character camera
