@@ -5,11 +5,9 @@ You are not allowed to adapt the code of these scripts to other scripts or publi
 
 # Scripts
 ## logger.ts
-Hook Unity Log functions and display logs to console
+Trace Unity log functions and loading of asset bundles
 
-Also log the loading of AssetBundle
-
-![image](https://github.com/user-attachments/assets/86d89e18-2615-42e5-99f4-35a75a77600d)
+![image](https://github.com/user-attachments/assets/93d0e922-24d0-41ad-bfa6-3532bd9768e5)
 
 ## mv-fixed-camera.ts
 
