@@ -74,7 +74,7 @@ There are some scripts in the folder:
 
 - playground.ts
 
-There are some code snippets, for example injecting custom chart, fake gacha
+  There are some code snippets, for example injecting custom chart, fake gacha
 
 # How to use
 ## Requirements
