@@ -67,7 +67,8 @@ There are some options value for users:
 
   Specify the fov value that will be applied when changeFOV is true
 
-For reverseTargetJudge and removeMeshOffTrack please note that they might not work because not every track of every MV has the same name
+For reverseTargetJudge and removeMeshOffTrack please note that they might not work
+The script will remove tracks with a specific name, but the track supposed to remove may have a different name, so in that case it's pointless
 
 ## misc/
 There are some scripts in the folder:
@@ -99,7 +100,11 @@ There are some scripts in the folder:
 ```
 npm install
 ```
-2. After finished, Run this command:
+2. Install specific version of frida using requirements.txt
+```
+pip install -r requirements.txt
+```
+3. After finished, Run this command:
 ```
 frida -U -N com.sega.pjsekai -l the_script_you_want_to_use.ts
 ```
