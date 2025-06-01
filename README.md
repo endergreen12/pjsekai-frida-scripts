@@ -68,6 +68,7 @@ There are some options value for users:
   Specify the fov value that will be applied when changeFOV is true
 
 For reverseTargetJudge and removeMeshOffTrack please note that they might not work
+
 The script will remove tracks with a specific name, but the track supposed to remove may have a different name, so in that case it's pointless
 
 ## misc/
