@@ -4,6 +4,17 @@ If you use these scripts for a video, please give credit
 You are not allowed to adapt the code of these scripts to other scripts or publish them as your own scripts
 
 # Scripts
+## dumper.ts
+Dump MasterData, dumped data will be saved to "/sdcard/pjsekai_dumps"
+
+Press MySekai button to start dumping
+
+By default, the script will dump MasterMusicAlls, MasterGameCharacterList, MasterCardMap and MasterCharacterProfileList
+
+You can easily change the dump targets by changing targetDataNameArray in the script
+
+![image](https://github.com/user-attachments/assets/28fef10a-9dcd-4ba5-898b-5cf98fd9784c)
+
 ## logger.ts
 Trace Unity log functions and loading of asset bundles
 
