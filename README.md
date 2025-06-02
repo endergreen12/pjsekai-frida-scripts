@@ -9,7 +9,7 @@ Dump MasterData, dumped data will be saved to "/sdcard/pjsekai_dumps"
 
 Press MySekai button to start dumping
 
-By default, the script will dump MasterMusicAlls, MasterGameCharacterList, MasterCardMap and MasterCharacterProfileList
+By default, the script will dump MasterMusicAlls, MasterCardMap and MasterReleaseConditionMap
 
 You can easily change the dump targets by changing targetDataNameArray in the script
 
