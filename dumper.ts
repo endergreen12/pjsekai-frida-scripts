@@ -24,7 +24,6 @@ function dump(targetDataName: string, dumpFileName: string, masterDataManager: I
     const targetData = masterDataManager.method<Il2Cpp.Object>(`Get${targetDataName}`).invoke()
     const jsonSerializedData = AssemblyImage.class("CP.JsonSerializer").method<Il2Cpp.String>("ToJsonWithUnicodeDecode").invoke(targetData)
 
-    // Write data to a file
     console.log("Writing dumped data to a file...")
     Il2Cpp.corlib.class("System.IO.File").method("WriteAllText").overload("System.String", "System.String")
         .invoke(Il2Cpp.string(DUMP_DIR_PATH + "/" + dumpFileName), jsonSerializedData)
