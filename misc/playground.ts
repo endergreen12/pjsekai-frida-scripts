@@ -24,6 +24,10 @@ Il2Cpp.perform(() => {
     /* AssemblyImage.class("Sekai.ScreenLayerHome").method("OnClickJoinMysekai").implementation = function()
     {
         
+    // Supress communication error dialog
+    /* AssemblyImage.class("Sekai.DialogUtility").method("ShowApiError2ButtonDialog").implementation = function()
+    {
+        return NULL
     } */
 
     // Inject custom chart
