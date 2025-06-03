@@ -4,7 +4,7 @@ const DUMP_DIR_PATH = "/sdcard/pjsekai_dumps"
 Il2Cpp.perform(() => {
     AssemblyImage.class("Sekai.ScreenLayerHome").method("OnClickJoinMysekai").implementation = function()
     {
-        const masterDataManager = Il2Cpp.gc.choose(AssemblyImage.class("Sekai.MasterDataManager"))[0] // TODO: find a better way - btw how is masterdatamanager accessed when the game uses it??? i really couldnt figure out
+        const masterDataManager = AssemblyImage.class("Sekai.MasterDataManager").method<Il2Cpp.Object>("get_Instance").invoke()
 
         console.log("Creating a folder...")
         Il2Cpp.corlib.class("System.IO.Directory").method("CreateDirectory").invoke(Il2Cpp.string(DUMP_DIR_PATH))
