@@ -29,7 +29,7 @@ Il2Cpp.perform(() => {
     // Go to OutGame scene anytime with back button
     /* AssemblyImage.class("Sekai.ScreenManager").method("OnBackKey").implementation = function(results: Il2Cpp.Object)
     {
-        AssemblyImage.class("Sekai.SceneManager").method<Il2Cpp.Object>("get_Instance").invoke().method("RequestScene").invoke(1)
+        AssemblyImage.class("Sekai.SceneManager").method<Il2Cpp.Object>("get_Instance").invoke().method("RequestScene").invoke(0)
     } */
         
     // Supress communication error dialog
