@@ -23,7 +23,13 @@ Il2Cpp.perform(() => {
     // use mysekai button to execute whatever
     /* AssemblyImage.class("Sekai.ScreenLayerHome").method("OnClickJoinMysekai").implementation = function()
     {
+
+    } */
         
+    // Go back to the title screen anytime with the back button
+    /* AssemblyImage.class("Sekai.ScreenManager").method("OnBackKey").implementation = function(results: Il2Cpp.Object)
+    {
+        AssemblyImage.class("Sekai.SceneManager").method<Il2Cpp.Object>("get_Instance").invoke().method("RequestScene").invoke(0)
     } */
         
     // Supress communication error dialog
