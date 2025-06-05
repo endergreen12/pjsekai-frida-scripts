@@ -1,7 +1,7 @@
 import { AssemblyImage } from "../lib/consts.js"
 
 Il2Cpp.perform(() => {
-    AssemblyImage.class("Sekai.ScreenLayerHome").method("OnClickJoinMysekai").implementation = function()
+    AssemblyImage.class("Sekai.ScreenLayerHome").method("OnClickLive").implementation = function()
     {
         // Set Sekai.Core.EntryPoint.PlayMode
         AssemblyImage.class("Sekai.Core.EntryPoint").method("set_PlayMode").invoke(3) // 3 = SoloLive
