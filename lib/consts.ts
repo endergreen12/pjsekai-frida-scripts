@@ -6,6 +6,7 @@ export let CoreModule: Il2Cpp.Assembly = null
 export let CoreModuleImage: Il2Cpp.Image = null
 export let DebugClass: Il2Cpp.Class = null
 export let Vector3: Il2Cpp.Class = null
+export let SystemAction: Il2Cpp.Class = null
 
 // C# enums //
     // GooglePlayGames.BasicApi.SignInInteractivity
@@ -22,4 +23,5 @@ Il2Cpp.perform(() => {
     CoreModuleImage = CoreModule.image
     DebugClass = CoreModuleImage.class("UnityEngine.Debug")
     Vector3 = CoreModuleImage.class("UnityEngine.Vector3")
+    SystemAction = Il2Cpp.corlib.class("System.Action")
 })
