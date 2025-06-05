@@ -93,6 +93,18 @@ There are some scripts in the folder:
 
 ---
 
+- Play any story (play-scenario.ts, play-special-scenario.ts)
+
+  Press Story button of the home screen to play
+
+  Special stories are, for example, April Fool's Day or anniversary stories
+
+  You can change the assetbundle name or the story id in the script
+
+  You can see MasterEventStories.json, MasterSpecialStoryMap.json and MasterUnitStoryEpisodeAll.json to check assetbundle names or ids
+
+  https://github.com/user-attachments/assets/824edb56-8237-4f6b-8924-3df8d0b94d97
+
 - Automatically retires at the end of the live to prevent sending abnormal data to the server (auto-retire.ts)
 
   ![out](https://github.com/user-attachments/assets/712aa0b6-f172-4413-b464-b5ae287e0d6b)
