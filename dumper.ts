@@ -10,7 +10,7 @@ Il2Cpp.perform(() => {
         Il2Cpp.corlib.class("System.IO.Directory").method("CreateDirectory").invoke(Il2Cpp.string(DUMP_DIR_PATH))
 
         console.log("Beginning dumping...")
-        const targetDataNameArray: string[] = ["MasterMusicAlls", "MasterCardMap", "MasterReleaseConditionMap"]
+        const targetDataNameArray: string[] = ["MasterMusicAlls", "MasterEventStories", "MasterSpecialStoryMap", "MasterUnitStoryEpisodeAll"]
         targetDataNameArray.forEach((targetDataName) => dump(targetDataName, `${targetDataName}.json`, masterDataManager))
 
         console.log("All dumps are complete!")
