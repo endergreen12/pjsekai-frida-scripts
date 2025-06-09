@@ -1,13 +1,14 @@
 import { ChangeImpl_RemoveTargetTracksFromTimeline, CharModelList_LogIndexAndCharName, 
     SetParentOfTransform, SetActiveOfDeactivateTargets, ChangeImpl_ForceDisableCameraDecoration,
-    GetCharacterNameFromCharacterModel, ENABLE_THIRD_PERSON, GetCharacterModelListFromMVModel, GetMVModelInstance,
-    GetTargetTransformOfCharModelToAttach, GetMainCamFromMVCameraModel} from "./lib/mv-utils.js";
+    GetCharacterNameFromCharacterModel, isThirdPersonEnabled, GetCharacterModelListFromMVModel, GetMVModelInstance,
+    GetTargetTransformOfCharModelToAttach, GetMainCamFromMVCameraModel, ChangeImpl_CreateModeSwitchingButton} from "./lib/mv-utils.js";
 import { AssemblyImage, Vector3 } from "./lib/consts.js";
 let targetCharIndex = 0
 
 Il2Cpp.perform(() => {
     ChangeImpl_RemoveTargetTracksFromTimeline()
     ChangeImpl_ForceDisableCameraDecoration()
+    ChangeImpl_CreateModeSwitchingButton()
 
     AssemblyImage.class("Sekai.Live.Model.MusicVideoModel").method("RegisterMainCharacterModel").implementation = function(characterModel: Il2Cpp.Object)
     {
@@ -39,7 +40,7 @@ Il2Cpp.perform(() => {
         SetActiveOfDeactivateTargets(targetCharacter, false)
 
         const newAngles = Vector3.alloc()
-        if(ENABLE_THIRD_PERSON)
+        if(isThirdPersonEnabled)
         {
             newAngles.method(".ctor").invoke(180.0, 0.0, 180.0)
         } else {
@@ -48,7 +49,7 @@ Il2Cpp.perform(() => {
         mainCamTransform.method("set_localEulerAngles").invoke(newAngles.unbox())
 
         const newLocalPos = Vector3.alloc()
-        if(ENABLE_THIRD_PERSON)
+        if(isThirdPersonEnabled)
         {
             newLocalPos.method(".ctor").invoke(0.0, 0.6, 1.5)
         } else {

@@ -1,4 +1,5 @@
-import { AssemblyImage } from "./consts.js"
+import { AssemblyImage, CoreModuleImage } from "./consts.js"
+import { CreateButton } from "./lib.js"
 
 // Shared //
     // For Camera timeline //
@@ -87,7 +88,45 @@ import { AssemblyImage } from "./consts.js"
 //
 
 // For character camera //
-    export const ENABLE_THIRD_PERSON = false
+    export let isThirdPersonEnabled = false
+
+    let isButtonCreated = false
+    export function ChangeImpl_CreateModeSwitchingButton()
+    {
+        // Create a button to switch between first person and third person
+        AssemblyImage.class("Sekai.ScreenLayerMusicVideoCellPhone").method("OnInitComponent").implementation = function()
+        {
+            this.method("OnInitComponent").invoke()
+
+            if(isButtonCreated)
+                return
+
+            const parentTransform = this.method<Il2Cpp.Object>("GetComponent", 0).inflate(CoreModuleImage.class("UnityEngine.RectTransform")).invoke()
+            const onClick = (button: Il2Cpp.Object) => {
+                isThirdPersonEnabled = !isThirdPersonEnabled
+                
+                const textComponent = button.method<Il2Cpp.Object>("GetComponentInChildren", 0)
+                    .inflate(Il2Cpp.domain.assembly("Unity.TextMeshPro").image.class("TMPro.TextMeshProUGUI")).invoke()
+                textComponent.method("set_text").invoke(Il2Cpp.string(GetModeName()))
+            }
+
+            CreateButton(3, 350, 100, 300, 50, 24, parentTransform, onClick, GetModeName())
+            
+            isButtonCreated = true
+        }
+
+        AssemblyImage.class("Sekai.ScreenLayerMusicVideoCellPhone").method(".ctor").implementation = function()
+        {
+            this.method(".ctor").invoke()
+
+            isButtonCreated = false
+        }
+    }
+
+    function GetModeName(): string
+    {
+        return "Mode: " + (isThirdPersonEnabled ? "Third Person" : "First Person")
+    }
 
     export function CharModelList_LogIndexAndCharName(characterList: Il2Cpp.Array<Il2Cpp.Object>)
     {
@@ -114,7 +153,7 @@ import { AssemblyImage } from "./consts.js"
     const deactivateTargetArray = ["Face", "Hair"]
     export function SetActiveOfDeactivateTargets(characterModel: Il2Cpp.Object, value: boolean)
     {
-        if(ENABLE_THIRD_PERSON)
+        if(isThirdPersonEnabled)
         {
             return
         }
@@ -126,7 +165,7 @@ import { AssemblyImage } from "./consts.js"
 
     export function GetTargetTransformOfCharModelToAttach(characterModel: Il2Cpp.Object): Il2Cpp.Object
     {
-        return ENABLE_THIRD_PERSON ? characterModel.method<Il2Cpp.Object>("get_PositionNote").invoke() : 
+        return isThirdPersonEnabled ? characterModel.method<Il2Cpp.Object>("get_PositionNote").invoke() : 
                                     characterModel.method<Il2Cpp.Object>("get_HeadTransform").invoke()
     }
 
