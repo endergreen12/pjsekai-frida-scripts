@@ -1,4 +1,4 @@
-import { CoreModuleImage } from "./consts.js";
+import { CoreModuleImage, RectTransform } from "./consts.js";
 import { SetParentOfTransform } from "./mv-utils.js";
 
 export function CreateButton(edge: number, x: number, y: number, sizeX: number, sizeY: number, fontSize: number, parentTransform: Il2Cpp.Object, onClick: (button: Il2Cpp.Object) => void, text: string): Il2Cpp.Object
@@ -14,11 +14,11 @@ export function CreateButton(edge: number, x: number, y: number, sizeX: number, 
     const button = DefaultControls.method<Il2Cpp.Object>("CreateButton").invoke(resources.unbox())
 
     // Set text and fontSize of the button
-    const textComponent = button.method<Il2Cpp.Object>("GetComponentInChildren", 0).inflate(UnityTextMeshPro.class("TMPro.TextMeshProUGUI")).invoke()
+    const textComponent = GetComponentInChildrenFromObj(button, UnityTextMeshPro.class("TMPro.TextMeshProUGUI"))
     textComponent.method("set_text").invoke(Il2Cpp.string(text))
     textComponent.method("set_fontSize").invoke(fontSize)
 
-    const rectTransform = button.method<Il2Cpp.Object>("GetComponent", 0).inflate(CoreModuleImage.class("UnityEngine.RectTransform")).invoke()
+    const rectTransform = GetComponentInChildrenFromObj(button, RectTransform)
 
     // Set position of the button
     rectTransform.method("SetInsetAndSizeFromParentEdge").invoke(edge, 0, 0)
@@ -40,7 +40,7 @@ export function CreateButton(edge: number, x: number, y: number, sizeX: number, 
     return button
 }
 
-export function GetRectTransformFromObj(obj: Il2Cpp.Object): Il2Cpp.Object
+export function GetComponentInChildrenFromObj(obj: Il2Cpp.Object, klass: Il2Cpp.Class): Il2Cpp.Object
 {
-    return obj.method<Il2Cpp.Object>("GetComponent", 0).inflate(CoreModuleImage.class("UnityEngine.RectTransform")).invoke()
+    return obj.method<Il2Cpp.Object>("GetComponentInChildren", 0).inflate(klass).invoke()
 }
