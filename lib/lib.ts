@@ -39,3 +39,8 @@ export function CreateButton(edge: number, x: number, y: number, sizeX: number, 
 
     return button
 }
+
+export function GetRectTransformFromObj(obj: Il2Cpp.Object): Il2Cpp.Object
+{
+    return obj.method<Il2Cpp.Object>("GetComponent", 0).inflate(CoreModuleImage.class("UnityEngine.RectTransform")).invoke()
+}

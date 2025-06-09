@@ -1,5 +1,5 @@
-import { AssemblyImage, CoreModuleImage } from "./lib/consts.js";
-import { CreateButton } from "./lib/lib.js";
+import { AssemblyImage } from "./lib/consts.js";
+import { CreateButton, GetRectTransformFromObj } from "./lib/lib.js";
 const DUMP_DIR_PATH = "/sdcard/pjsekai_dumps"
 
 Il2Cpp.perform(() => {
@@ -7,8 +7,7 @@ Il2Cpp.perform(() => {
     {
         this.method("Setup").invoke(tabIndex, canAssetSetting, canBlockListSetting)
 
-        const parentTransform = this.method<Il2Cpp.Object>("GetComponent", 0).inflate(CoreModuleImage.class("UnityEngine.RectTransform")).invoke()
-        CreateButton(3, 770, 150, 300, 100, 38, parentTransform, (button: Il2Cpp.Object) => {
+        CreateButton(3, 770, 150, 300, 100, 38, GetRectTransformFromObj(this as Il2Cpp.Object), (button: Il2Cpp.Object) => {
             const masterDataManager = AssemblyImage.class("Sekai.MasterDataManager").method<Il2Cpp.Object>("get_Instance").invoke()
 
             console.log("Creating a folder...")
