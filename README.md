@@ -5,9 +5,11 @@ You are not allowed to adapt the code of these scripts to other scripts or publi
 
 # Scripts
 ## dumper.ts
-Dump MasterData, dumped data will be saved to "/sdcard/pjsekai_dumps"
+Dump MasterData and wordings, dumped data will be saved to "/sdcard/pjsekai_dumps"
 
-Press MySekai button of the home screen to start dumping
+A button to dump will be added to the option dialog
+
+![image](https://github.com/user-attachments/assets/b95c522b-9ebe-4761-8f73-721c9b37bafa)
 
 By default, the script will dump MasterMusicAlls, MasterEventStories, MasterSpecialStoryMap and MasterUnitStoryEpisodeAll
 
