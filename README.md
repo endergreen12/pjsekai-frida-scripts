@@ -42,6 +42,51 @@ Trace Unity log functions and loading of asset bundles
 
 On Android, you can switch the target by pressing the back button
 
+## Options
+Some options for fixed and character camera are provided
+
+You can change those from option dialog
+
+A button to open option dialog will be added to mv play confirm screen layer
+
+---
+
+The button:
+
+![image](https://github.com/user-attachments/assets/482c7145-bda5-44cb-8436-25df01fdb0b0)
+
+---
+
+Option dialog:
+
+![Screenshot_2025 06 11_00 45 19 925](https://github.com/user-attachments/assets/cc114b82-c50c-4995-a686-78e2b1c47934)
+
+---
+
+Here are the explanations for the options:
+
+---
+
+- Mode
+  
+  You can choose from between first person and third person
+
+- Change FOV
+
+  As the name suggests
+
+- Target FOV
+
+  Specify the fov value that will be applied when Change FOV is enabled
+
+- Remove MeshOff tracks
+
+  In some MV, characters may become disappeared due to staging
+
+  This option prevents it
+
+---
+
 ## lib/mv-utils.ts
 Library used in fixed and character camera
 
@@ -55,27 +100,9 @@ There are some options value for users:
 
   For example, if you want to keep post-processing but don't want DoF, set this true and target array to `['"Main Camera"', '"Sekai Dof Track"']`
 
-- removeMeshOffTrack
-
-  In some MV, characters may become disappeared due to staging
-
-  This option prevents it
-
-- ENABLE_THIRD_PERSON
-
-  As the name suggests
-
-- changeFOV
-
-  As the name suggests
-
-- targetFOV
-
-  Specify the fov value that will be applied when changeFOV is true
-
 ---
 
-For reverseTargetJudge and removeMeshOffTrack please note that they might not work
+For reverseTargetJudge and Remove Meshoff tracks option please note that they might not work
 
 This is because the script will remove tracks with a specific name, but the track supposed to remove may have a different name, so in that case it has no effect
 
