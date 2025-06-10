@@ -7,7 +7,7 @@ You are not allowed to adapt the code of these scripts to other scripts or publi
 ## dumper.ts
 Dump MasterData and wordings, dumped data will be saved to "/sdcard/pjsekai_dumps"
 
-A button to dump will be added to the option dialog
+A button to start dumping will be added to the option dialog
 
 ![image](https://github.com/user-attachments/assets/b95c522b-9ebe-4761-8f73-721c9b37bafa)
 
@@ -45,9 +45,9 @@ On Android, you can switch the target by pressing the back button
 ## Options
 Some options for fixed and character camera are provided
 
-You can change those from option dialog
+You can change those from the option dialog
 
-A button to open option dialog will be added to mv play confirm screen layer
+A button to open the option dialog will be added to the deck edit screen of music video
 
 ---
 
@@ -63,13 +63,13 @@ Option dialog:
 
 ---
 
-Here are the explanations for the options:
+Here are the explanations for these options:
 
 ---
 
 - Mode
   
-  You can choose from between first person and third person
+  You can choose between first person and third person
 
 - Change FOV
 
