@@ -16,8 +16,7 @@ export function CreateButton(edge: number, x: number, y: number, sizeX: number, 
 
     SetPositionAndSizeOfRectTransform(GetComponentInChildrenFromObj(button, RectTransform), edge, x, y, sizeX, sizeY)
 
-    const buttonComponent = button.method<Il2Cpp.Object>("GetComponent", 0)
-                                .inflate(Il2Cpp.domain.assembly("UnityEngine.UI").image.class("UnityEngine.UI.Button")).invoke()
+    const buttonComponent = GetComponentInChildrenFromObj(button, Il2Cpp.domain.assembly("UnityEngine.UI").image.class("UnityEngine.UI.Button"))
 
     // Set onClick callback
     buttonComponent.method<Il2Cpp.Object>("get_onClick").invoke().method("AddListener")
@@ -58,6 +57,25 @@ export function CreateInputField(edge: number, x: number, y: number, sizeX: numb
     SetParent(inputField.method<Il2Cpp.Object>("get_transform").invoke(), parentTransform)
 
     return inputField
+}
+
+export function CreateText(edge: number, x: number, y: number, sizeX: number, sizeY: number, fontSize: number, parentTransform: Il2Cpp.Object, textStr: string): Il2Cpp.Object
+{
+    // Create new text
+    const resources = DefaultControls.nested("Resources").new()
+    const text = DefaultControls.method<Il2Cpp.Object>("CreateText").invoke(resources.unbox())
+
+    // Set text and fontSize of the button
+    const textComponent = GetComponentInChildrenFromObj(text, TextMeshPro.class("TMPro.TMP_Text"))
+    textComponent.method("set_text").invoke(Il2Cpp.string(textStr))
+    textComponent.method("set_fontSize").invoke(fontSize)
+
+    SetPositionAndSizeOfRectTransform(GetComponentInChildrenFromObj(text, RectTransform), edge, x, y, sizeX, sizeY)
+
+    // Set transform of the button to parentTransform
+    SetParent(text.method<Il2Cpp.Object>("get_transform").invoke(), parentTransform)
+
+    return text
 }
 
 export function SetPositionAndSizeOfRectTransform(rectTransform: Il2Cpp.Object, edge: number, x: number, y: number, sizeX: number, sizeY: number)

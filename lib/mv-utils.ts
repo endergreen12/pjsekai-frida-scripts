@@ -1,12 +1,12 @@
-import { AssemblyImage, CoreModuleImage } from "./consts.js"
-import { CreateButton } from "./lib.js"
+import { AssemblyImage, CoreModuleImage, RectTransform } from "./consts.js"
+import { CreateButton, CreateInputField, CreateText, GetComponentInChildrenFromObj, SetParent } from "./lib.js"
 
 // Shared //
     // For Camera timeline //
         const targets = ['"SubCamera"'] /* ['"MainCamera"', '"Sekai Dof Track"'] */
         const reverseTargetJudge = false
     // For Character timeline //
-        const removeMeshOffTrack = false
+        let removeMeshOffTrack = false
     export function ChangeImpl_RemoveTargetTracksFromTimeline()
     {
         AssemblyImage.class("Sekai.Core.MVDataLoader").method<Il2Cpp.Object>("LoadTimelineAsset").implementation = function(timelineName: Il2Cpp.String, mvId: number)
@@ -63,27 +63,25 @@ import { CreateButton } from "./lib.js"
         return cameraModel.field<Il2Cpp.Object>("MainCameraModel").value.field<Il2Cpp.Object>("MainCamera").value
     }
 
-    const changeFOV = false
-    const targetFOV = 70
-    if(changeFOV)
+    let changeFOV = false
+    let targetFOV = 70
+    export function ChangeImpl_ChangeFOV()
     {
-        Il2Cpp.perform(() => {
-            AssemblyImage.class("Sekai.Core.SekaiCameraAspect").method<number>("CalculateVerticalFov").implementation = function(currentFov: number)
-            {
-                return targetFOV
-            }
+        AssemblyImage.class("Sekai.Core.SekaiCameraAspect").method<number>("CalculateVerticalFov").implementation = function(currentFov: number)
+        {
+            return changeFOV ? targetFOV : this.method<number>("CalculateVerticalFov").invoke(currentFov)
+        }
 
-            AssemblyImage.class("Sekai.Core.SekaiCameraAspect").method<number>("CalculateInvertVerticalFov").implementation = function(currentFov: number)
-            {
-                return targetFOV
-            }
+        AssemblyImage.class("Sekai.Core.SekaiCameraAspect").method<number>("CalculateInvertVerticalFov").implementation = function(currentFov: number)
+        {
+            return changeFOV ? targetFOV : this.method<number>("CalculateInvertVerticalFov").invoke(currentFov)
+        }
 
-            // Disable fov correction curve as it breaks rendering if the fov is increased
-            Il2Cpp.domain.assembly("Unity.RenderPipelines.Universal.Runtime").image.class("Sekai.Rendering.SekaiCharacterOutlineFeature").method("Create").implementation = function()
-            {
-                this.field<Il2Cpp.Object>("settings").value.field("fovCurve").value = NULL
-            }
-        })
+        // Disable fov correction curve as it breaks rendering if the fov is increased
+        Il2Cpp.domain.assembly("Unity.RenderPipelines.Universal.Runtime").image.class("Sekai.Rendering.SekaiCharacterOutlineFeature").method("Create").implementation = function()
+        {
+            this.field<Il2Cpp.Object>("settings").value.field("fovCurve").value = NULL
+        }
     }
 //
 
@@ -91,31 +89,66 @@ import { CreateButton } from "./lib.js"
     export let isThirdPersonEnabled = false
 
     let isButtonCreated = false
-    export function ChangeImpl_CreateModeSwitchingButton()
+    export function ChangeImpl_CreateOpenOptionDialogButton(isFixedCamera: boolean = false)
     {
         // Create a button to switch between first person and third person
-        AssemblyImage.class("Sekai.ScreenLayerMusicVideoCellPhone").method("OnInitComponent").implementation = function()
+        AssemblyImage.class("Sekai.ScreenLayerMusicVideoConfirm").method("OnInitComponent").implementation = function()
         {
             this.method("OnInitComponent").invoke()
 
             if(isButtonCreated)
                 return
 
-            const parentTransform = this.method<Il2Cpp.Object>("GetComponent", 0).inflate(CoreModuleImage.class("UnityEngine.RectTransform")).invoke()
-            const onClick = (button: Il2Cpp.Object) => {
-                isThirdPersonEnabled = !isThirdPersonEnabled
-                
-                const textComponent = button.method<Il2Cpp.Object>("GetComponentInChildren", 0)
-                    .inflate(Il2Cpp.domain.assembly("Unity.TextMeshPro").image.class("TMPro.TextMeshProUGUI")).invoke()
-                textComponent.method("set_text").invoke(Il2Cpp.string(GetModeName()))
-            }
+            const parentTransform = GetComponentInChildrenFromObj(this as Il2Cpp.Object, RectTransform)
 
-            CreateButton(3, 350, 100, 300, 50, 24, parentTransform, onClick, GetModeName())
+            const UnityTextMeshPro = Il2Cpp.domain.assembly("Unity.TextMeshPro").image
+            CreateButton(0, 200, -400, 300, 100, 38, parentTransform, (button: Il2Cpp.Object) => {
+                const screenManager = AssemblyImage.class("Sekai.ScreenManager").method<Il2Cpp.Object>("get_Instance").invoke()
+
+                const dialog = screenManager.method<Il2Cpp.Object>("Show1ButtonDialog", 7).inflate(AssemblyImage.class("Sekai.Common1ButtonDialog"))
+                    .invoke(0, Il2Cpp.string("empty"), Il2Cpp.string("WORD_CLOSE"), NULL, 4, 1, true)
+                const dialogTransform = GetComponentInChildrenFromObj(dialog, RectTransform)
+
+                // Mode Switch button
+                const modeButton = CreateButton(0, 700, 200, 400, 100, 28, dialogTransform, (button: Il2Cpp.Object) => {
+                    isThirdPersonEnabled = !isThirdPersonEnabled
+                    GetComponentInChildrenFromObj(button, UnityTextMeshPro.class("TMPro.TextMeshProUGUI")).method("set_text").invoke(Il2Cpp.string(GetModeName()))
+                }, GetModeName())
+
+                if(isFixedCamera) // Disable mode button for fixed camera
+                {
+                    const buttonComponent = GetComponentInChildrenFromObj(modeButton, Il2Cpp.domain.assembly("UnityEngine.UI").image.class("UnityEngine.UI.Button"))
+                    buttonComponent.method("set_interactable").invoke(false)
+                }
+
+                // Change FOV button
+                CreateButton(0, 1200, 200, 400, 100, 28, dialogTransform, (button: Il2Cpp.Object) => {
+                    changeFOV = !changeFOV
+                    GetComponentInChildrenFromObj(button, UnityTextMeshPro.class("TMPro.TextMeshProUGUI")).method("set_text").invoke(Il2Cpp.string(GetValueStateText("Change FOV", changeFOV)))
+                }, GetValueStateText("Change FOV", changeFOV))
+
+                // Target FOV inputField
+                CreateInputField(0, 1200, 0, 400, 100, 48, dialogTransform, (inputField: Il2Cpp.Object, string) => {
+                    targetFOV = parseInt(string)
+                }, String(targetFOV), 2)
+
+                // Target FOV text
+                const targetFOVtext = CreateText(0, 1200, 50, 400, 100, 34, dialogTransform, "Target FOV:")
+                const targetFOVtextComponent = GetComponentInChildrenFromObj(targetFOVtext, Il2Cpp.domain.assembly("Unity.TextMeshPro").image.class("TMPro.TMP_Text"))
+                targetFOVtextComponent.method("set_color").invoke(CoreModuleImage.class("UnityEngine.Color").method<Il2Cpp.Object>("get_black").invoke())
+
+                // Remove MeshOff tracks button
+                CreateButton(0, 700, 0, 400, 100, 28, dialogTransform, (button: Il2Cpp.Object) => {
+                    removeMeshOffTrack = !removeMeshOffTrack
+                    GetComponentInChildrenFromObj(button, UnityTextMeshPro.class("TMPro.TextMeshProUGUI")).method("set_text").invoke(Il2Cpp.string(GetValueStateText("Remove MeshOff tracks", removeMeshOffTrack)))
+                }, GetValueStateText("Remove MeshOff tracks", removeMeshOffTrack))
+
+            }, "Options")
             
             isButtonCreated = true
         }
 
-        AssemblyImage.class("Sekai.ScreenLayerMusicVideoCellPhone").method(".ctor").implementation = function()
+        AssemblyImage.class("Sekai.ScreenLayerMusicVideoConfirm").method(".ctor").implementation = function()
         {
             this.method(".ctor").invoke()
 
@@ -126,6 +159,11 @@ import { CreateButton } from "./lib.js"
     function GetModeName(): string
     {
         return "Mode: " + (isThirdPersonEnabled ? "Third Person" : "First Person")
+    }
+
+    function GetValueStateText(name: string, value: boolean): string
+    {
+        return `${name}: ${value ? "Enabled": "Disabled"}`
     }
 
     export function CharModelList_LogIndexAndCharName(characterList: Il2Cpp.Array<Il2Cpp.Object>)

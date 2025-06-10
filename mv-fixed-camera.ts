@@ -1,9 +1,11 @@
 import { AssemblyImage, Vector3 } from "./lib/consts.js";
-import { ChangeImpl_RemoveTargetTracksFromTimeline, GetMainCamFromMVCameraModel, ChangeImpl_ForceDisableCameraDecoration } from "./lib/mv-utils.js";
+import { ChangeImpl_RemoveTargetTracksFromTimeline, GetMainCamFromMVCameraModel, ChangeImpl_ForceDisableCameraDecoration, ChangeImpl_ChangeFOV, ChangeImpl_CreateOpenOptionDialogButton } from "./lib/mv-utils.js";
 
 Il2Cpp.perform(() => {
     ChangeImpl_RemoveTargetTracksFromTimeline()
     ChangeImpl_ForceDisableCameraDecoration()
+    ChangeImpl_ChangeFOV()
+    ChangeImpl_CreateOpenOptionDialogButton(true)
     
     // Set camera position and angles
     AssemblyImage.class("Sekai.Live.Model.MusicVideoModel").method("RegisterMainCameraModel").implementation = function(cameraModel: Il2Cpp.Object)

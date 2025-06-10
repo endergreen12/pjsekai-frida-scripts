@@ -1,7 +1,8 @@
 import { ChangeImpl_RemoveTargetTracksFromTimeline, CharModelList_LogIndexAndCharName, 
     SetActiveOfDeactivateTargets, ChangeImpl_ForceDisableCameraDecoration,
     GetCharacterNameFromCharacterModel, isThirdPersonEnabled, GetCharacterModelListFromMVModel, GetMVModelInstance,
-    GetTargetTransformOfCharModelToAttach, GetMainCamFromMVCameraModel, ChangeImpl_CreateModeSwitchingButton} from "./lib/mv-utils.js";
+    GetTargetTransformOfCharModelToAttach, GetMainCamFromMVCameraModel, ChangeImpl_CreateOpenOptionDialogButton,
+    ChangeImpl_ChangeFOV} from "./lib/mv-utils.js";
 import { AssemblyImage, Vector3 } from "./lib/consts.js";
 import { SetParent } from "./lib/lib.js";
 
@@ -10,7 +11,8 @@ let targetCharIndex = 0
 Il2Cpp.perform(() => {
     ChangeImpl_RemoveTargetTracksFromTimeline()
     ChangeImpl_ForceDisableCameraDecoration()
-    ChangeImpl_CreateModeSwitchingButton()
+    ChangeImpl_ChangeFOV()
+    ChangeImpl_CreateOpenOptionDialogButton()
 
     AssemblyImage.class("Sekai.Live.Model.MusicVideoModel").method("RegisterMainCharacterModel").implementation = function(characterModel: Il2Cpp.Object)
     {
