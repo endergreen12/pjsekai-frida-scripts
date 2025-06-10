@@ -42,5 +42,4 @@ function serializeAndWriteToFile(targetData: Il2Cpp.Object, dumpFileName: string
         .invoke(Il2Cpp.string(DUMP_DIR_PATH + "/" + dumpFileName), jsonSerializedData)
 
     console.log("Done")
-    console.log()
 }
