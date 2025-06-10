@@ -1,8 +1,10 @@
 import { ChangeImpl_RemoveTargetTracksFromTimeline, CharModelList_LogIndexAndCharName, 
-    SetParentOfTransform, SetActiveOfDeactivateTargets, ChangeImpl_ForceDisableCameraDecoration,
+    SetActiveOfDeactivateTargets, ChangeImpl_ForceDisableCameraDecoration,
     GetCharacterNameFromCharacterModel, isThirdPersonEnabled, GetCharacterModelListFromMVModel, GetMVModelInstance,
     GetTargetTransformOfCharModelToAttach, GetMainCamFromMVCameraModel, ChangeImpl_CreateModeSwitchingButton} from "./lib/mv-utils.js";
 import { AssemblyImage, Vector3 } from "./lib/consts.js";
+import { SetParent } from "./lib/lib.js";
+
 let targetCharIndex = 0
 
 Il2Cpp.perform(() => {
@@ -36,7 +38,7 @@ Il2Cpp.perform(() => {
         const characterModelList = GetCharacterModelListFromMVModel(mvModelInstance)
 
         const targetCharacter = characterModelList.get(targetCharIndex)
-        SetParentOfTransform(mainCamTransform, GetTargetTransformOfCharModelToAttach(targetCharacter))
+        SetParent(mainCamTransform, GetTargetTransformOfCharModelToAttach(targetCharacter))
         SetActiveOfDeactivateTargets(targetCharacter, false)
 
         const newAngles = Vector3.alloc()
@@ -76,7 +78,7 @@ Il2Cpp.perform(() => {
 
         console.log(`Set target index to ${targetCharIndex} | ${GetCharacterNameFromCharacterModel(newTargetCharacterModel)}`)
         
-        SetParentOfTransform(mainCamTransform, GetTargetTransformOfCharModelToAttach(newTargetCharacterModel))
+        SetParent(mainCamTransform, GetTargetTransformOfCharModelToAttach(newTargetCharacterModel))
         SetActiveOfDeactivateTargets(newTargetCharacterModel, false)
     }
 })

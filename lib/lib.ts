@@ -1,5 +1,4 @@
 import { CoreModuleImage, RectTransform } from "./consts.js";
-import { SetParentOfTransform } from "./mv-utils.js";
 
 export function CreateButton(edge: number, x: number, y: number, sizeX: number, sizeY: number, fontSize: number, parentTransform: Il2Cpp.Object, onClick: (button: Il2Cpp.Object) => void, text: string): Il2Cpp.Object
 {
@@ -35,7 +34,7 @@ export function CreateButton(edge: number, x: number, y: number, sizeX: number, 
     buttonComponent.method<Il2Cpp.Object>("get_onClick").invoke().method("AddListener").invoke(Il2Cpp.delegate(UnityAction, () => onClick(button)))
 
     // Set transform of the button to parentTransform
-    SetParentOfTransform(button.method<Il2Cpp.Object>("get_transform").invoke(), parentTransform)
+    SetParent(button.method<Il2Cpp.Object>("get_transform").invoke(), parentTransform)
 
     return button
 }
@@ -43,4 +42,9 @@ export function CreateButton(edge: number, x: number, y: number, sizeX: number, 
 export function GetComponentInChildrenFromObj(obj: Il2Cpp.Object, klass: Il2Cpp.Class): Il2Cpp.Object
 {
     return obj.method<Il2Cpp.Object>("GetComponentInChildren", 0).inflate(klass).invoke()
+}
+
+export function SetParent(targetTransform: Il2Cpp.Object, parentTransform: Il2Cpp.Object)
+{
+    targetTransform.method("SetParent").overload("UnityEngine.Transform", "System.Boolean").invoke(parentTransform, false)
 }

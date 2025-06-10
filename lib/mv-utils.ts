@@ -145,11 +145,6 @@ import { CreateButton } from "./lib.js"
         return `Character Name: (JP: ${gameCharacter.method<Il2Cpp.String>("get_FullName").invoke()} ENG: ${gameCharacter.method<Il2Cpp.String>("get_FullNameEnglish").invoke()})`
     }
 
-    export function SetParentOfTransform(transform: Il2Cpp.Object, targetTransform: Il2Cpp.Object)
-    {
-        transform.method("SetParent").overload("UnityEngine.Transform", "System.Boolean").invoke(targetTransform, false)
-    }
-
     const deactivateTargetArray = ["Face", "Hair"]
     export function SetActiveOfDeactivateTargets(characterModel: Il2Cpp.Object, value: boolean)
     {
