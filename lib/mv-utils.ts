@@ -91,7 +91,6 @@ import { CreateButton, CreateInputField, CreateText, GetComponentInChildrenFromO
     let isButtonCreated = false
     export function ChangeImpl_CreateOpenOptionDialogButton(isFixedCamera: boolean = false)
     {
-        // Create a button to switch between first person and third person
         AssemblyImage.class("Sekai.ScreenLayerMusicVideoConfirm").method("OnInitComponent").implementation = function()
         {
             this.method("OnInitComponent").invoke()
