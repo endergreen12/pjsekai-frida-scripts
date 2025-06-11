@@ -1,10 +1,11 @@
 import { AssemblyImage } from "../lib/consts.js"
+import { GetInstanceOfSingleton, SetProperty } from "../lib/lib.js"
 
 Il2Cpp.perform(() => {
     AssemblyImage.class("Sekai.ScreenLayerHome").method("OnClickLive").implementation = function()
     {
         // Set Sekai.Core.EntryPoint.PlayMode
-        AssemblyImage.class("Sekai.Core.EntryPoint").method("set_PlayMode").invoke(3) // 3 = SoloLive
+        SetProperty(AssemblyImage.class("Sekai.Core.EntryPoint"), "PlayMode", 3) // 3 = SoloLive
         
         // Set up liveBootData
         const liveBootData = AssemblyImage.class("Sekai.FreeLiveBootData").alloc()
@@ -17,11 +18,11 @@ Il2Cpp.perform(() => {
         liveBootData.method(".ctor", 6).invoke(musicId, difficulty, vocalId, deckId, 0, false) // Call the constructor of Sekai.LiveBootDataBase
         liveBootData.method(".ctor", 8).invoke(musicId, difficulty, vocalId, deckId, Il2Cpp.array(Il2Cpp.corlib.class("System.Int32"), 0), true, 0, 0) // Call the constructor of Sekai.FreeLiveBootData
         liveBootData.method("SetLiveMode").invoke(3) // 3 = Low
-        liveBootData.method("set_IsAuto").invoke(true)
+        SetProperty(liveBootData, "IsAuto", true)
 
-        AssemblyImage.class("Sekai.UserDataManager").method<Il2Cpp.Object>("get_Instance").invoke().method("set_FreeLiveBootData").invoke(liveBootData)
+        SetProperty(GetInstanceOfSingleton(AssemblyImage.class("Sekai.UserDataManager")), "FreeLiveBootData", liveBootData)
 
         // Start live
-        AssemblyImage.class("Sekai.ScreenManager").method<Il2Cpp.Object>("get_Instance").invoke().method("AddScreen", 1).invoke(63) // 63 = LiveLoading
+        GetInstanceOfSingleton(AssemblyImage.class("Sekai.ScreenManager")).method("AddScreen", 1).invoke(63) // 63 = LiveLoading
     }
 })

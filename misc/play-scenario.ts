@@ -1,4 +1,4 @@
-import { AssemblyImage } from "../lib/consts.js";
+import { AssemblyImage, SystemAction } from "../lib/consts.js";
 
 Il2Cpp.perform(() => {
     AssemblyImage.class("Sekai.ScreenLayerHome").method("OnClickStory").implementation = function()
@@ -11,7 +11,7 @@ Il2Cpp.perform(() => {
         const scenarioId = Il2Cpp.string("event_53_02")
         const episodeId = 1000424
 
-        const onFinished = Il2Cpp.delegate(Il2Cpp.corlib.class("System.Action"), () => console.log("Scenario finished"))
+        const onFinished = Il2Cpp.delegate(SystemAction, () => console.log("Scenario finished"))
 
         AssemblyImage.class("Sekai.ScenarioUtility").method("PlayScenario")
             .invoke(scenarioAssetBundleName, voiceAssetBundleName, scenarioId, onFinished, NULL, NULL, episodeId, 0, NULL)

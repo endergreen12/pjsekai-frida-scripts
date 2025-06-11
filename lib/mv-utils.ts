@@ -1,5 +1,5 @@
-import { AssemblyImage, CoreModuleImage, RectTransform } from "./consts.js"
-import { CreateButton, CreateInputField, CreateText, GetComponentInChildrenFromObj, SetParent } from "./lib.js"
+import { AssemblyImage, CoreModuleImage, RectTransform, TextMeshProText, TextMeshProUGUI, UnityEngineUIButton } from "./consts.js"
+import { CreateButton, CreateInputField, CreateText, GetComponentInChildrenFromObj, GetFromProperty, GetInstanceOfSingleton, SetProperty } from "./lib.js"
 
 // Shared //
     // For Camera timeline //
@@ -14,7 +14,7 @@ import { CreateButton, CreateInputField, CreateText, GetComponentInChildrenFromO
             const asset = this.method<Il2Cpp.Object>("LoadTimelineAsset").invoke(timelineName, mvId)
 
             const timelineNameStr = timelineName.toString()
-            const trackObjects = asset.method<Il2Cpp.Object>("get_trackObjects").invoke()
+            const trackObjects = GetFromProperty(asset, "trackObjects")
             switch(timelineNameStr)
             {
                 case '"Camera"':
@@ -42,7 +42,7 @@ import { CreateButton, CreateInputField, CreateText, GetComponentInChildrenFromO
             const track = arrayCopy.get(i)
             if(!track.isNull())
             {
-                if(targetTracksJudgement(track.method<Il2Cpp.String>("get_name").invoke().toString()))
+                if(targetTracksJudgement(GetFromProperty<Il2Cpp.String>(track, "name").toString()))
                 {
                     trackObjects.method("RemoveAt").invoke(i)
                 }
@@ -101,9 +101,8 @@ import { CreateButton, CreateInputField, CreateText, GetComponentInChildrenFromO
 
             const parentTransform = GetComponentInChildrenFromObj(this as Il2Cpp.Object, RectTransform)
 
-            const UnityTextMeshPro = Il2Cpp.domain.assembly("Unity.TextMeshPro").image
             CreateButton(0, 200, -400, 300, 100, 38, parentTransform, (button: Il2Cpp.Object) => {
-                const screenManager = AssemblyImage.class("Sekai.ScreenManager").method<Il2Cpp.Object>("get_Instance").invoke()
+                const screenManager = GetInstanceOfSingleton(AssemblyImage.class("Sekai.ScreenManager"))
 
                 const dialog = screenManager.method<Il2Cpp.Object>("Show1ButtonDialog", 7).inflate(AssemblyImage.class("Sekai.Common1ButtonDialog"))
                     .invoke(0, Il2Cpp.string("empty"), Il2Cpp.string("WORD_CLOSE"), NULL, 4, 1, true)
@@ -112,19 +111,19 @@ import { CreateButton, CreateInputField, CreateText, GetComponentInChildrenFromO
                 // Mode Switch button
                 const modeButton = CreateButton(0, 700, 200, 400, 100, 28, dialogTransform, (button: Il2Cpp.Object) => {
                     isThirdPersonEnabled = !isThirdPersonEnabled
-                    GetComponentInChildrenFromObj(button, UnityTextMeshPro.class("TMPro.TextMeshProUGUI")).method("set_text").invoke(Il2Cpp.string(GetModeName()))
+                    SetProperty(GetComponentInChildrenFromObj(button, TextMeshProUGUI), "text", Il2Cpp.string(GetModeName()))
                 }, GetModeName())
 
                 if(isFixedCamera) // Disable mode button for fixed camera
                 {
-                    const buttonComponent = GetComponentInChildrenFromObj(modeButton, Il2Cpp.domain.assembly("UnityEngine.UI").image.class("UnityEngine.UI.Button"))
-                    buttonComponent.method("set_interactable").invoke(false)
+                    const buttonComponent = GetComponentInChildrenFromObj(modeButton, UnityEngineUIButton)
+                    SetProperty(buttonComponent, "interactable", false)
                 }
 
                 // Change FOV button
                 CreateButton(0, 1200, 200, 400, 100, 28, dialogTransform, (button: Il2Cpp.Object) => {
                     changeFOV = !changeFOV
-                    GetComponentInChildrenFromObj(button, UnityTextMeshPro.class("TMPro.TextMeshProUGUI")).method("set_text").invoke(Il2Cpp.string(GetValueStateText("Change FOV", changeFOV)))
+                    SetProperty(GetComponentInChildrenFromObj(button, TextMeshProUGUI), "text", Il2Cpp.string(GetValueStateText("Change FOV", changeFOV)))
                 }, GetValueStateText("Change FOV", changeFOV))
 
                 // Target FOV inputField
@@ -134,13 +133,13 @@ import { CreateButton, CreateInputField, CreateText, GetComponentInChildrenFromO
 
                 // Target FOV text
                 const targetFOVtext = CreateText(0, 1200, 50, 400, 100, 34, dialogTransform, "Target FOV:")
-                const targetFOVtextComponent = GetComponentInChildrenFromObj(targetFOVtext, Il2Cpp.domain.assembly("Unity.TextMeshPro").image.class("TMPro.TMP_Text"))
-                targetFOVtextComponent.method("set_color").invoke(CoreModuleImage.class("UnityEngine.Color").method<Il2Cpp.Object>("get_black").invoke())
+                const targetFOVtextComponent = GetComponentInChildrenFromObj(targetFOVtext, TextMeshProText)
+                SetProperty(targetFOVtextComponent, "color", GetFromProperty(CoreModuleImage.class("UnityEngine.Color"), "black"))
 
                 // Remove MeshOff tracks button
                 CreateButton(0, 700, 0, 400, 100, 28, dialogTransform, (button: Il2Cpp.Object) => {
                     removeMeshOffTrack = !removeMeshOffTrack
-                    GetComponentInChildrenFromObj(button, UnityTextMeshPro.class("TMPro.TextMeshProUGUI")).method("set_text").invoke(Il2Cpp.string(GetValueStateText("Remove MeshOff tracks", removeMeshOffTrack)))
+                    SetProperty(GetComponentInChildrenFromObj(button, TextMeshProUGUI), "text", Il2Cpp.string(GetValueStateText("Remove MeshOff tracks", removeMeshOffTrack)))
                 }, GetValueStateText("Remove MeshOff tracks", removeMeshOffTrack))
 
             }, "Options")
@@ -177,10 +176,10 @@ import { CreateButton, CreateInputField, CreateText, GetComponentInChildrenFromO
 
     export function GetCharacterNameFromCharacterModel(characterModel: Il2Cpp.Object): string
     {
-        const characterId = characterModel.method<number>("get_CharacterDataId").invoke()
+        const characterId = GetFromProperty<number>(characterModel, "CharacterDataId")
         const gameCharacter = AssemblyImage.class("Sekai.CharacterUtility").method<Il2Cpp.Object>("GetMasterGameCharacter").invoke(characterId)
 
-        return `Character Name: (JP: ${gameCharacter.method<Il2Cpp.String>("get_FullName").invoke()} ENG: ${gameCharacter.method<Il2Cpp.String>("get_FullNameEnglish").invoke()})`
+        return `Character Name: (JP: ${GetFromProperty<Il2Cpp.String>(gameCharacter, "FullName")} ENG: ${GetFromProperty<Il2Cpp.String>(gameCharacter, "FullNameEnglish")})`
     }
 
     const deactivateTargetArray = ["Face", "Hair"]
@@ -192,23 +191,22 @@ import { CreateButton, CreateInputField, CreateText, GetComponentInChildrenFromO
         }
 
         deactivateTargetArray.forEach(deactivateTarget => {
-            characterModel.method<Il2Cpp.Object>(`get_${deactivateTarget}`).invoke().method("SetActive").invoke(value)
+            GetFromProperty(characterModel, deactivateTarget).method("SetActive").invoke(value)
         })
     }
 
     export function GetTargetTransformOfCharModelToAttach(characterModel: Il2Cpp.Object): Il2Cpp.Object
     {
-        return isThirdPersonEnabled ? characterModel.method<Il2Cpp.Object>("get_PositionNote").invoke() : 
-                                    characterModel.method<Il2Cpp.Object>("get_HeadTransform").invoke()
+        return GetFromProperty(characterModel, isThirdPersonEnabled ? "PositionNote" : "HeadTransform")
     }
 
     export function GetMVModelInstance(): Il2Cpp.Object
     {
-        return AssemblyImage.class("Sekai.Live.Model.MusicVideoModel").method<Il2Cpp.Object>("get_Instance").invoke()
+        return GetInstanceOfSingleton(AssemblyImage.class("Sekai.Live.Model.MusicVideoModel"))
     }
 
     export function GetCharacterModelListFromMVModel(mvModel: Il2Cpp.Object): Il2Cpp.Array<Il2Cpp.Object>
     {
-        return mvModel.method<Il2Cpp.Object>("get_MainCharacterModel").invoke().method<Il2Cpp.Array<Il2Cpp.Object>>("get_CharacterModelList").invoke()
+        return GetFromProperty(GetFromProperty<Il2Cpp.Object>(mvModel, "MainCharacterModel"), "CharacterModelList")
     }
 //

@@ -1,29 +1,24 @@
-import { CoreModuleImage, RectTransform, UnityAction, Vector2 } from "./consts.js";
-
-const DefaultControls = Il2Cpp.domain.assembly("Unity.TextMeshPro").image.class("TMPro.TMP_DefaultControls")
-const TextMeshPro = Il2Cpp.domain.assembly("Unity.TextMeshPro").image
+import { CoreModuleImage, RectTransform, UnityAction, Vector2, TextMeshProImage, TextMeshProUGUI, UnityEngineUIButton, TextMeshProText, SystemString, AssemblyImage, TextMeshProDefaultControls } from "./consts.js";
 
 export function CreateButton(edge: number, x: number, y: number, sizeX: number, sizeY: number, fontSize: number, parentTransform: Il2Cpp.Object, onClick: (button: Il2Cpp.Object) => void, text: string): Il2Cpp.Object
 {
     // Create a button
-    const resources = DefaultControls.nested("Resources").new()
-    const button = DefaultControls.method<Il2Cpp.Object>("CreateButton").invoke(resources.unbox())
+    const resources = TextMeshProDefaultControls.nested("Resources").new()
+    const button = TextMeshProDefaultControls.method<Il2Cpp.Object>("CreateButton").invoke(resources.unbox())
 
     // Set text and fontSize of the button
-    const textComponent = GetComponentInChildrenFromObj(button, TextMeshPro.class("TMPro.TextMeshProUGUI"))
-    textComponent.method("set_text").invoke(Il2Cpp.string(text))
-    textComponent.method("set_fontSize").invoke(fontSize)
+    const textComponent = GetComponentInChildrenFromObj(button, TextMeshProUGUI)
+    SetProperty(textComponent, "text", Il2Cpp.string(text))
+    SetProperty(textComponent, "fontSize", fontSize)
 
     SetPositionAndSizeOfRectTransform(GetComponentInChildrenFromObj(button, RectTransform), edge, x, y, sizeX, sizeY)
 
-    const buttonComponent = GetComponentInChildrenFromObj(button, Il2Cpp.domain.assembly("UnityEngine.UI").image.class("UnityEngine.UI.Button"))
+    const buttonComponent = GetComponentInChildrenFromObj(button, UnityEngineUIButton)
 
     // Set onClick callback
-    buttonComponent.method<Il2Cpp.Object>("get_onClick").invoke().method("AddListener")
-        .invoke(Il2Cpp.delegate(UnityAction, () => onClick(button)))
+    GetFromProperty(buttonComponent, "onClick").method("AddListener").invoke(Il2Cpp.delegate(UnityAction, () => onClick(button)))
 
-    // Set transform of the button to parentTransform
-    SetParent(button.method<Il2Cpp.Object>("get_transform").invoke(), parentTransform)
+    SetParent(GetTransform(button), parentTransform)
 
     return button
 }
@@ -31,30 +26,30 @@ export function CreateButton(edge: number, x: number, y: number, sizeX: number, 
 export function CreateInputField(edge: number, x: number, y: number, sizeX: number, sizeY: number, fontSize: number, parentTransform: Il2Cpp.Object, onSubmit: (inputField: Il2Cpp.Object, string: string) => void, text: string, contentType: number): Il2Cpp.Object
 {
     // Create new inputField
-    const resources = DefaultControls.nested("Resources").new()
-    const inputField = DefaultControls.method<Il2Cpp.Object>("CreateInputField").invoke(resources.unbox())
+    const resources = TextMeshProDefaultControls.nested("Resources").new()
+    const inputField = TextMeshProDefaultControls.method<Il2Cpp.Object>("CreateInputField").invoke(resources.unbox())
 
-    const inputFieldComponent = GetComponentInChildrenFromObj(inputField, TextMeshPro.class("TMPro.TMP_InputField"))
+    const inputFieldComponent = GetComponentInChildrenFromObj(inputField, TextMeshProImage.class("TMPro.TMP_InputField"))
 
     SetPositionAndSizeOfRectTransform(GetComponentInChildrenFromObj(inputField, RectTransform), edge, x, y, sizeX, sizeY)
 
     // Set contentType
-    inputFieldComponent.method("set_contentType").invoke(contentType)
+    SetProperty(inputFieldComponent, "contentType", contentType)
 
     // Set text
-    inputFieldComponent.method("set_text").invoke(Il2Cpp.string(text))
+    SetProperty(inputFieldComponent, "text", Il2Cpp.string(text))
 
-    const textComponent = inputFieldComponent.method<Il2Cpp.Object>("get_textComponent").invoke()
+    const textComponent = GetFromProperty(inputFieldComponent, "textComponent")
 
     // Set font size
-    textComponent.method("set_fontSize").invoke(fontSize)
+    SetProperty(textComponent, "fontSize", fontSize)
 
     // Set onSubmit callback
-    const unityActionString = CoreModuleImage.class("UnityEngine.Events.UnityAction`1").inflate(Il2Cpp.corlib.class("System.String"))
+    const unityActionString = CoreModuleImage.class("UnityEngine.Events.UnityAction`1").inflate(SystemString)
     const call = Il2Cpp.delegate(unityActionString, (string: Il2Cpp.String) => onSubmit(inputField, string.toString().substring(1, string.length + 1))) // Use substring to remove double quotations, and im not sure why it goes well with "length + 1" but anyway
-    inputFieldComponent.method<Il2Cpp.Object>("get_onSubmit").invoke().method("AddListener").invoke(call)
+    GetFromProperty(inputFieldComponent, "onSubmit").method("AddListener").invoke(call)
 
-    SetParent(inputField.method<Il2Cpp.Object>("get_transform").invoke(), parentTransform)
+    SetParent(GetTransform(inputField), parentTransform)
 
     return inputField
 }
@@ -62,18 +57,17 @@ export function CreateInputField(edge: number, x: number, y: number, sizeX: numb
 export function CreateText(edge: number, x: number, y: number, sizeX: number, sizeY: number, fontSize: number, parentTransform: Il2Cpp.Object, textStr: string): Il2Cpp.Object
 {
     // Create new text
-    const resources = DefaultControls.nested("Resources").new()
-    const text = DefaultControls.method<Il2Cpp.Object>("CreateText").invoke(resources.unbox())
+    const resources = TextMeshProDefaultControls.nested("Resources").new()
+    const text = TextMeshProDefaultControls.method<Il2Cpp.Object>("CreateText").invoke(resources.unbox())
 
     // Set text and fontSize of the button
-    const textComponent = GetComponentInChildrenFromObj(text, TextMeshPro.class("TMPro.TMP_Text"))
-    textComponent.method("set_text").invoke(Il2Cpp.string(textStr))
-    textComponent.method("set_fontSize").invoke(fontSize)
+    const textComponent = GetComponentInChildrenFromObj(text, TextMeshProText)
+    SetProperty(textComponent, "text", Il2Cpp.string(textStr))
+    SetProperty(textComponent, "fontSize", fontSize)
 
     SetPositionAndSizeOfRectTransform(GetComponentInChildrenFromObj(text, RectTransform), edge, x, y, sizeX, sizeY)
 
-    // Set transform of the button to parentTransform
-    SetParent(text.method<Il2Cpp.Object>("get_transform").invoke(), parentTransform)
+    SetParent(GetTransform(text), parentTransform)
 
     return text
 }
@@ -84,7 +78,7 @@ export function SetPositionAndSizeOfRectTransform(rectTransform: Il2Cpp.Object, 
     rectTransform.method("SetInsetAndSizeFromParentEdge").invoke(edge, 0, 0)
     const pos = Vector2.alloc()
     pos.method(".ctor").invoke(x, y)
-    rectTransform.method("set_anchoredPosition").invoke(pos.unbox())
+    SetProperty(rectTransform, "anchoredPosition", pos.unbox())
 
     // Set size
     rectTransform.method("SetSizeWithCurrentAnchors").invoke(0, sizeX)
@@ -98,5 +92,30 @@ export function GetComponentInChildrenFromObj(obj: Il2Cpp.Object, klass: Il2Cpp.
 
 export function SetParent(targetTransform: Il2Cpp.Object, parentTransform: Il2Cpp.Object)
 {
-    targetTransform.method("SetParent").overload("UnityEngine.Transform", "System.Boolean").invoke(parentTransform, false)
+    targetTransform.method("SetParent", 2).invoke(parentTransform, false)
+}
+
+export function GetFromProperty<T extends Il2Cpp.Object | Il2Cpp.Array | Il2Cpp.String | number = Il2Cpp.Object>(obj: Il2Cpp.Object | Il2Cpp.Class, propertyName: string): T
+{
+    return obj.method<T>(`get_${propertyName}`).invoke()
+}
+
+export function SetProperty(obj: Il2Cpp.Object | Il2Cpp.Class, propertyName: string, value: Il2Cpp.Parameter.Type)
+{
+    obj.method(`set_${propertyName}`).invoke(value)
+}
+
+export function GetInstanceOfSingleton(klass: Il2Cpp.Class): Il2Cpp.Object
+{
+    return GetFromProperty(klass, "Instance")
+}
+
+export function GetTransform(obj: Il2Cpp.Object): Il2Cpp.Object
+{
+    return GetFromProperty(obj, "transform")
+}
+
+export function GetMasterDataManagerInstance(): Il2Cpp.Object
+{
+    return GetInstanceOfSingleton(AssemblyImage.class("Sekai.MasterDataManager"))
 }

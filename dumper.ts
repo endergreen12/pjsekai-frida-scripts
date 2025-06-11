@@ -1,5 +1,5 @@
 import { AssemblyImage, RectTransform } from "./lib/consts.js";
-import { CreateButton, GetComponentInChildrenFromObj } from "./lib/lib.js";
+import { CreateButton, GetComponentInChildrenFromObj, GetMasterDataManagerInstance } from "./lib/lib.js";
 const DUMP_DIR_PATH = "/sdcard/pjsekai_dumps"
 
 Il2Cpp.perform(() => {
@@ -8,7 +8,7 @@ Il2Cpp.perform(() => {
         this.method("Setup").invoke(tabIndex, canAssetSetting, canBlockListSetting)
 
         CreateButton(3, 770, 150, 300, 100, 38, GetComponentInChildrenFromObj(this as Il2Cpp.Object, RectTransform), (button: Il2Cpp.Object) => {
-            const masterDataManager = AssemblyImage.class("Sekai.MasterDataManager").method<Il2Cpp.Object>("get_Instance").invoke()
+            const masterDataManager = GetMasterDataManagerInstance()
 
             console.log("Creating a folder...")
             Il2Cpp.corlib.class("System.IO.Directory").method("CreateDirectory").invoke(Il2Cpp.string(DUMP_DIR_PATH))
@@ -38,8 +38,7 @@ function serializeAndWriteToFile(targetData: Il2Cpp.Object, dumpFileName: string
     const jsonSerializedData = AssemblyImage.class("CP.JsonSerializer").method<Il2Cpp.String>("ToJsonWithUnicodeDecode").invoke(targetData)
 
     console.log("Writing dumped data to a file...")
-    Il2Cpp.corlib.class("System.IO.File").method("WriteAllText").overload("System.String", "System.String")
-        .invoke(Il2Cpp.string(DUMP_DIR_PATH + "/" + dumpFileName), jsonSerializedData)
+    Il2Cpp.corlib.class("System.IO.File").method("WriteAllText", 2).invoke(Il2Cpp.string(DUMP_DIR_PATH + "/" + dumpFileName), jsonSerializedData)
 
     console.log("Done")
 }

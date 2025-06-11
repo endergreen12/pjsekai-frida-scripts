@@ -1,4 +1,5 @@
 import { AssemblyImage, Vector3 } from "./lib/consts.js";
+import { GetTransform, SetProperty } from "./lib/lib.js";
 import { ChangeImpl_RemoveTargetTracksFromTimeline, GetMainCamFromMVCameraModel, ChangeImpl_ForceDisableCameraDecoration, ChangeImpl_ChangeFOV, ChangeImpl_CreateOpenOptionDialogButton } from "./lib/mv-utils.js";
 
 Il2Cpp.perform(() => {
@@ -17,8 +18,8 @@ Il2Cpp.perform(() => {
         const newAngles = Vector3.alloc()
         newAngles.method(".ctor").invoke(0.0, 180.0, 0.0)
     
-        const mainCamTransform = GetMainCamFromMVCameraModel(cameraModel).method<Il2Cpp.Object>("get_transform").invoke()
-        mainCamTransform.method("set_position").invoke(newPos.unbox())
-        mainCamTransform.method("set_eulerAngles").invoke(newAngles.unbox())
+        const mainCamTransform = GetTransform(GetMainCamFromMVCameraModel(cameraModel))
+        SetProperty(mainCamTransform, "position", newPos.unbox())
+        SetProperty(mainCamTransform, "eulerAngles", newAngles.unbox())
     }
 })

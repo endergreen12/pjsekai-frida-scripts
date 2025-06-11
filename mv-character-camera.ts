@@ -4,7 +4,7 @@ import { ChangeImpl_RemoveTargetTracksFromTimeline, CharModelList_LogIndexAndCha
     GetTargetTransformOfCharModelToAttach, GetMainCamFromMVCameraModel, ChangeImpl_CreateOpenOptionDialogButton,
     ChangeImpl_ChangeFOV} from "./lib/mv-utils.js";
 import { AssemblyImage, Vector3 } from "./lib/consts.js";
-import { SetParent } from "./lib/lib.js";
+import { GetFromProperty, GetTransform, SetParent, SetProperty } from "./lib/lib.js";
 
 let targetCharIndex = 0
 
@@ -18,7 +18,7 @@ Il2Cpp.perform(() => {
     {
         this.method("RegisterMainCharacterModel").invoke(characterModel)
 
-        const characterList = characterModel.method<Il2Cpp.Array<Il2Cpp.Object>>("get_CharacterModelList").invoke()
+        const characterList: Il2Cpp.Array<Il2Cpp.Object> = GetFromProperty(characterModel, "CharacterModelList")
         CharModelList_LogIndexAndCharName(characterList)
     
         if(targetCharIndex > characterList.length - 1)
@@ -35,8 +35,8 @@ Il2Cpp.perform(() => {
         this.method("Start").invoke()
 
         const mvModelInstance = GetMVModelInstance()
-        const mainCam = GetMainCamFromMVCameraModel(mvModelInstance.method<Il2Cpp.Object>("get_MainCameraModel").invoke())
-        const mainCamTransform = mainCam.method<Il2Cpp.Object>("get_transform").invoke()
+        const mainCam = GetMainCamFromMVCameraModel(GetFromProperty(mvModelInstance, "MainCameraModel"))
+        const mainCamTransform = GetTransform(mainCam)
         const characterModelList = GetCharacterModelListFromMVModel(mvModelInstance)
 
         const targetCharacter = characterModelList.get(targetCharIndex)
@@ -50,7 +50,7 @@ Il2Cpp.perform(() => {
         } else {
             newAngles.method(".ctor").invoke(0.0, 0.0, 90.0) // Fixing the camera tilt caused when changing the parent. Not sure why it tilts
         }
-        mainCamTransform.method("set_localEulerAngles").invoke(newAngles.unbox())
+        SetProperty(mainCamTransform, "localEulerAngles", newAngles.unbox())
 
         const newLocalPos = Vector3.alloc()
         if(isThirdPersonEnabled)
@@ -59,15 +59,15 @@ Il2Cpp.perform(() => {
         } else {
             newLocalPos.method(".ctor").invoke(-0.07, 0.0, 0.005)
         }
-        mainCamTransform.method("set_localPosition").invoke(newLocalPos.unbox())
+        SetProperty(mainCamTransform, "localPosition", newLocalPos.unbox())
     }
     
     // Implementation of switching target by back button in Android
     AssemblyImage.class("Sekai.Core.Live.MusicVideoController").method("OnBackKey").implementation = function()
     {
         const mvModelInstance = GetMVModelInstance()
-        const mainCam = GetMainCamFromMVCameraModel(mvModelInstance.method<Il2Cpp.Object>("get_MainCameraModel").invoke())
-        const mainCamTransform = mainCam.method<Il2Cpp.Object>("get_transform").invoke()
+        const mainCam = GetMainCamFromMVCameraModel(GetFromProperty(mvModelInstance, "MainCameraModel"))
+        const mainCamTransform = GetTransform(mainCam)
         const characterModelList = GetCharacterModelListFromMVModel(mvModelInstance)
 
         // Reactivate the elements of character deactivated before

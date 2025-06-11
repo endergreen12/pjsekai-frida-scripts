@@ -1,4 +1,5 @@
 import { AssemblyImage } from "../lib/consts.js";
+import { GetInstanceOfSingleton } from "../lib/lib.js";
 
 Il2Cpp.perform(() => {
     // Fake Gacha
@@ -29,9 +30,9 @@ Il2Cpp.perform(() => {
     // Go to OutGame scene anytime with back button
     /* AssemblyImage.class("Sekai.ScreenManager").method("OnBackKey").implementation = function(results: Il2Cpp.Object)
     {
-        AssemblyImage.class("Sekai.SceneManager").method<Il2Cpp.Object>("get_Instance").invoke().method("RequestScene").invoke(0)
+        GetInstanceOfSingleton(AssemblyImage.class("Sekai.ScreenManager")).method("RequestScene").invoke(0)
     } */
-        
+    
     // Supress communication error dialog
     /* AssemblyImage.class("Sekai.DialogUtility").method("ShowApiError2ButtonDialog").implementation = function()
     {
@@ -43,16 +44,6 @@ Il2Cpp.perform(() => {
     {
         const scoreData = Il2Cpp.corlib.class("System.IO.File").method<Il2Cpp.String>("ReadAllText").overload("System.String").invoke(Il2Cpp.string("/sdcard/score.sus"))
         return this.method<Il2Cpp.Object>("Convert").invoke(scoreData)
-    } */
-
-    // Override FreeLiveBootData
-    /* AssemblyImage.class("Sekai.FreeLiveBootData").method("SetLiveMode").implementation = function(liveMode: number)
-    {
-        this.method("SetLiveMode").invoke(liveMode)
-
-        this.method("set_IsAuto").invoke(true)
-        const musicData = this.method<Il2Cpp.Object>("get_MusicData").invoke()
-        musicData.method<Il2Cpp.Object>("get_Difficulty").invoke().field("musicDifficulty").value = Il2Cpp.string("master")
     } */
 
     // Override AudioSyncedUnityTimer
