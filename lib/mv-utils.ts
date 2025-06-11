@@ -140,7 +140,6 @@ import { CreateButton, CreateInputField, CreateText, GetComponentInChildrenFromO
                     removeMeshOffTrack = !removeMeshOffTrack
                     SetProperty(GetComponentInChildrenFromObj(button, TextMeshProUGUI), "text", Il2Cpp.string(GetValueStateText("Remove MeshOff tracks", removeMeshOffTrack)))
                 }, GetValueStateText("Remove MeshOff tracks", removeMeshOffTrack))
-
             }, "Options")
             
             isButtonCreated = true
