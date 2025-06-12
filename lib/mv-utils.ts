@@ -77,10 +77,13 @@ import { CreateButton, CreateInputField, CreateText, GetComponentInChildrenFromO
             return changeFOV ? targetFOV : this.method<number>("CalculateInvertVerticalFov").invoke(currentFov)
         }
 
-        // Disable fov correction curve as it breaks rendering if the fov is increased
-        Il2Cpp.domain.assembly("Unity.RenderPipelines.Universal.Runtime").image.class("Sekai.Rendering.SekaiCharacterOutlineFeature").method("Create").implementation = function()
+        // Disable outline as it breaks rendering when fov is increased
+        Il2Cpp.domain.assembly("Unity.RenderPipelines.Universal.Runtime").image.class("Sekai.Rendering.SekaiCharacterOutlinePass").method("UpdateOutline").implementation = function(camera: Il2Cpp.Object)
         {
-            this.field<Il2Cpp.Object>("settings").value.field("fovCurve").value = NULL
+            if(!changeFOV)
+            {
+                this.method("UpdateOutline").invoke(camera)
+            }
         }
     }
 //
