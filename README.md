@@ -184,4 +184,4 @@ frida -U -N com.sega.pjsekai -l the_script_you_want_to_use.ts
 # Notes
 I have not tested these scripts in the English version, but they will probably work
 
-Tips: If you want to use scripts with frida gadget with script interaction, you must downgrade frida-il2cpp-bridge to 0.9.1, otherwise it won't work
+Tips: If you want to use scripts on frida gadget with script interaction, you must downgrade frida-il2cpp-bridge to 0.9.1, otherwise it won't work
