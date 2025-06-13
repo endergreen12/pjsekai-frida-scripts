@@ -11,14 +11,13 @@ export function CreateButton(edge: number, x: number, y: number, sizeX: number, 
     SetProperty(textComponent, "text", Il2Cpp.string(text))
     SetProperty(textComponent, "fontSize", fontSize)
 
+    SetParent(GetTransform(button), parentTransform)
     SetPositionAndSizeOfRectTransform(GetComponentInChildrenFromObj(button, RectTransform), edge, x, y, sizeX, sizeY)
 
     const buttonComponent = GetComponentInChildrenFromObj(button, UnityEngineUIButton)
 
     // Set onClick callback
     GetFromProperty(buttonComponent, "onClick").method("AddListener").invoke(Il2Cpp.delegate(UnityAction, () => onClick(button)))
-
-    SetParent(GetTransform(button), parentTransform)
 
     return button
 }
@@ -31,6 +30,7 @@ export function CreateInputField(edge: number, x: number, y: number, sizeX: numb
 
     const inputFieldComponent = GetComponentInChildrenFromObj(inputField, TextMeshProImage.class("TMPro.TMP_InputField"))
 
+    SetParent(GetTransform(inputField), parentTransform)
     SetPositionAndSizeOfRectTransform(GetComponentInChildrenFromObj(inputField, RectTransform), edge, x, y, sizeX, sizeY)
 
     // Set contentType
@@ -49,8 +49,6 @@ export function CreateInputField(edge: number, x: number, y: number, sizeX: numb
     const call = Il2Cpp.delegate(unityActionString, (string: Il2Cpp.String) => onSubmit(inputField, string.toString().substring(1, string.length + 1))) // Use substring to remove double quotations, and im not sure why it goes well with "length + 1" but anyway
     GetFromProperty(inputFieldComponent, "onSubmit").method("AddListener").invoke(call)
 
-    SetParent(GetTransform(inputField), parentTransform)
-
     return inputField
 }
 
@@ -65,9 +63,8 @@ export function CreateText(edge: number, x: number, y: number, sizeX: number, si
     SetProperty(textComponent, "text", Il2Cpp.string(textStr))
     SetProperty(textComponent, "fontSize", fontSize)
 
-    SetPositionAndSizeOfRectTransform(GetComponentInChildrenFromObj(text, RectTransform), edge, x, y, sizeX, sizeY)
-
     SetParent(GetTransform(text), parentTransform)
+    SetPositionAndSizeOfRectTransform(GetComponentInChildrenFromObj(text, RectTransform), edge, x, y, sizeX, sizeY)
 
     return text
 }

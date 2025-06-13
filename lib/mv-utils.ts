@@ -111,7 +111,7 @@ import { CreateButton, CreateInputField, CreateText, GetComponentInChildrenFromO
                 const dialogTransform = GetComponentInChildrenFromObj(dialog, RectTransform)
 
                 // Mode Switch button
-                const modeButton = CreateButton(0, 700, 200, 400, 100, 28, dialogTransform, (button: Il2Cpp.Object) => {
+                const modeButton = CreateButton(3, -260, 700, 400, 100, 28, dialogTransform, (button: Il2Cpp.Object) => {
                     isThirdPersonEnabled = !isThirdPersonEnabled
                     SetProperty(GetComponentInChildrenFromObj(button, TextMeshProUGUI), "text", Il2Cpp.string(GetModeName()))
                 }, GetModeName())
@@ -123,23 +123,23 @@ import { CreateButton, CreateInputField, CreateText, GetComponentInChildrenFromO
                 }
 
                 // Change FOV button
-                CreateButton(0, 1200, 200, 400, 100, 28, dialogTransform, (button: Il2Cpp.Object) => {
+                CreateButton(3, 260, 700, 400, 100, 28, dialogTransform, (button: Il2Cpp.Object) => {
                     changeFOV = !changeFOV
                     SetProperty(GetComponentInChildrenFromObj(button, TextMeshProUGUI), "text", Il2Cpp.string(GetValueStateText("Change FOV", changeFOV)))
                 }, GetValueStateText("Change FOV", changeFOV))
 
                 // Target FOV inputField
-                CreateInputField(0, 1200, 0, 400, 100, 48, dialogTransform, (inputField: Il2Cpp.Object, string) => {
+                CreateInputField(3, 260, 500, 400, 100, 48, dialogTransform, (inputField: Il2Cpp.Object, string) => {
                     targetFOV = parseInt(string)
                 }, String(targetFOV), 2)
 
                 // Target FOV text
-                const targetFOVtext = CreateText(0, 1200, 50, 400, 100, 34, dialogTransform, "Target FOV:")
+                const targetFOVtext = CreateText(3, 260, 550, 400, 100, 34, dialogTransform, "Target FOV:")
                 const targetFOVtextComponent = GetComponentInChildrenFromObj(targetFOVtext, TextMeshProText)
                 SetProperty(targetFOVtextComponent, "color", GetFromProperty(CoreModuleImage.class("UnityEngine.Color"), "black"))
 
                 // Remove MeshOff tracks button
-                CreateButton(0, 700, 0, 400, 100, 28, dialogTransform, (button: Il2Cpp.Object) => {
+                CreateButton(3, -260, 500, 400, 100, 28, dialogTransform, (button: Il2Cpp.Object) => {
                     removeMeshOffTrack = !removeMeshOffTrack
                     SetProperty(GetComponentInChildrenFromObj(button, TextMeshProUGUI), "text", Il2Cpp.string(GetValueStateText("Remove MeshOff tracks", removeMeshOffTrack)))
                 }, GetValueStateText("Remove MeshOff tracks", removeMeshOffTrack))
