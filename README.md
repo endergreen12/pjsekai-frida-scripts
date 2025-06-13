@@ -57,7 +57,7 @@ The button:
 
 ---
 
-Option dialog:
+The option dialog:
 
 ![Screenshot_2025 06 11_00 45 19 925](https://github.com/user-attachments/assets/cc114b82-c50c-4995-a686-78e2b1c47934)
 
