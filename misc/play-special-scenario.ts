@@ -1,4 +1,4 @@
-import { AssemblyImage, RectTransform } from "../lib/consts.js";
+import { AssemblyImage, Edge, RectTransform } from "../lib/consts.js";
 import { CreateButton, GetComponentInChildrenFromObj, GetMasterDataManagerInstance } from "../lib/lib.js";
 
 Il2Cpp.perform(() => {
@@ -12,7 +12,7 @@ Il2Cpp.perform(() => {
             return
         }
 
-        CreateButton(2, -200, -80, 400, 100, 38, GetComponentInChildrenFromObj(this as Il2Cpp.Object, RectTransform), (button: Il2Cpp.Object) => {
+        CreateButton(Edge.Top, -200, -80, 400, 100, 38, GetComponentInChildrenFromObj(this as Il2Cpp.Object, RectTransform), (button: Il2Cpp.Object) => {
             const masterDataManager = GetMasterDataManagerInstance()
             const specialStoryEpisode = masterDataManager.method<Il2Cpp.Object>("GetMasterSpecialStoryEpisode").invoke(56) // 一周年カウントダウンムービー01
 

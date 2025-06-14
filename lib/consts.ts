@@ -33,6 +33,14 @@ export let UnityEngineUIButton: Il2Cpp.Class = null
         CanPromptOnce: 2
     } as const
 
+    // UnityEngine.RectTransform.Edge
+    export const Edge = {
+        Left: 0,
+        Right: 1,
+        Top: 2,
+        Bottom: 3
+    } as const
+
 Il2Cpp.perform(() => {
     Assembly = Il2Cpp.domain.assembly("Assembly-CSharp")
     AssemblyImage = Assembly.image
