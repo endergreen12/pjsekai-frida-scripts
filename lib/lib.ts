@@ -92,7 +92,7 @@ export function SetParent(targetTransform: Il2Cpp.Object, parentTransform: Il2Cp
     targetTransform.method("SetParent", 2).invoke(parentTransform, false)
 }
 
-export function GetFromProperty<T extends Il2Cpp.Object | Il2Cpp.Array | Il2Cpp.String | number = Il2Cpp.Object>(obj: Il2Cpp.Object | Il2Cpp.Class, propertyName: string): T
+export function GetFromProperty<T extends Il2Cpp.Method.ReturnType = Il2Cpp.Object>(obj: Il2Cpp.Object | Il2Cpp.Class, propertyName: string): T
 {
     return obj.method<T>(`get_${propertyName}`).invoke()
 }
