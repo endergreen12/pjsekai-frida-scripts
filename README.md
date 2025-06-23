@@ -160,24 +160,24 @@ There are some scripts in the folder:
 
 # How to use
 ## Requirements
-- Node.js
 - Frida
 - Basic knowledge of how to use frida
 
 ---
 
-1. Clone this repo, enter the folder and run this command:
-```
-npm install
-```
-2. Install specific version of frida using requirements.txt
+1. Clone this repo, and install specific version of frida with requirements.txt (You might want to install Frida in the virtual environment):
 ```
 pip install -r requirements.txt
+```
+2. Install dependencies with this command:
+```
+frida-pm install
 ```
 3. After finished, you can get started with this command:
 ```
 frida -U -N com.sega.pjsekai -l the_script_you_want_to_use.ts
 ```
+In the emulator, the above command must be coupled with `--realm=emulated`
 
 ---
 
