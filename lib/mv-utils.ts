@@ -1,5 +1,5 @@
-import { AssemblyImage, CoreModuleImage, Edge, RectTransform, TextMeshProText, TextMeshProUGUI, UnityEngineUIButton } from "./consts.js"
-import { CreateButton, CreateInputField, CreateText, GetComponentInChildrenFromObj, GetFromProperty, GetInstanceOfSingleton, SetProperty } from "./lib.js"
+import { AssemblyImage, CoreModuleImage, DialogSize, DisplayLayerType, Edge, RectTransform, TextMeshProText, TextMeshProUGUI, UnityEngineUIButton } from "./consts.js"
+import { CreateButton, Create1ButtonDialog, CreateInputField, CreateText, GetComponentInChildrenFromObj, GetFromProperty, GetInstanceOfSingleton, SetProperty } from "./lib.js"
 
 // Shared //
     // For Camera timeline //
@@ -104,10 +104,7 @@ import { CreateButton, CreateInputField, CreateText, GetComponentInChildrenFromO
             const parentTransform = GetComponentInChildrenFromObj(this as Il2Cpp.Object, RectTransform)
 
             CreateButton(Edge.Left, 200, -400, 300, 100, 38, parentTransform, (button: Il2Cpp.Object) => {
-                const screenManager = GetInstanceOfSingleton(AssemblyImage.class("Sekai.ScreenManager"))
-
-                const dialog = screenManager.method<Il2Cpp.Object>("Show1ButtonDialog", 7).inflate(AssemblyImage.class("Sekai.Common1ButtonDialog"))
-                    .invoke(0, Il2Cpp.string("empty"), Il2Cpp.string("WORD_CLOSE"), NULL, 4, 1, true)
+                const dialog = Create1ButtonDialog("empty", "WORD_CLOSE", NULL, DisplayLayerType.Layer_Dialog, DialogSize.Medium)
                 const dialogTransform = GetComponentInChildrenFromObj(dialog, RectTransform)
 
                 // Mode Switch button

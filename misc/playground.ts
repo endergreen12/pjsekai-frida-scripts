@@ -1,5 +1,5 @@
 import { AssemblyImage } from "../lib/consts.js";
-import { GetInstanceOfSingleton } from "../lib/lib.js";
+import { GetInstanceOfSingleton, GetScreenManagerInstance } from "../lib/lib.js";
 
 Il2Cpp.perform(() => {
     // Fake Gacha
@@ -30,7 +30,7 @@ Il2Cpp.perform(() => {
     // Go to OutGame scene anytime with back button
     /* AssemblyImage.class("Sekai.ScreenManager").method("OnBackKey").implementation = function(results: Il2Cpp.Object)
     {
-        GetInstanceOfSingleton(AssemblyImage.class("Sekai.ScreenManager")).method("RequestScene").invoke(0)
+        GetScreenManagerInstance().method("RequestScene").invoke(0)
     } */
     
     // Supress communication error dialog

@@ -1,5 +1,5 @@
 import { AssemblyImage, Edge, RectTransform } from "../lib/consts.js"
-import { CreateButton, GetComponentInChildrenFromObj, GetInstanceOfSingleton, SetProperty } from "../lib/lib.js"
+import { CreateButton, GetComponentInChildrenFromObj, GetInstanceOfSingleton, GetScreenManagerInstance, SetProperty } from "../lib/lib.js"
 
 Il2Cpp.perform(() => {
     let isButtonCreated = false
@@ -32,7 +32,7 @@ Il2Cpp.perform(() => {
             SetProperty(GetInstanceOfSingleton(AssemblyImage.class("Sekai.UserDataManager")), "FreeLiveBootData", liveBootData)
 
             // Start live
-            GetInstanceOfSingleton(AssemblyImage.class("Sekai.ScreenManager")).method("AddScreen", 1).invoke(63) // 63 = LiveLoading
+            GetScreenManagerInstance().method("AddScreen", 1).invoke(63) // 63 = LiveLoading
         }, "Start Live")
 
         isButtonCreated = true

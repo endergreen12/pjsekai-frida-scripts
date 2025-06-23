@@ -116,3 +116,15 @@ export function GetMasterDataManagerInstance(): Il2Cpp.Object
 {
     return GetInstanceOfSingleton(AssemblyImage.class("Sekai.MasterDataManager"))
 }
+
+export function GetScreenManagerInstance(): Il2Cpp.Object
+{
+    return GetInstanceOfSingleton(AssemblyImage.class("Sekai.ScreenManager"))
+}
+
+export function Create1ButtonDialog(messageBodyKey: string, okButtonLabelKey: string, onClickOK: Il2Cpp.Object | NativePointer, layerType: number, dialogSize: number, allowCloseExternal: boolean = true)
+{
+    return GetScreenManagerInstance()
+        .method<Il2Cpp.Object>("Show1ButtonDialog", 7).inflate(AssemblyImage.class("Sekai.Common1ButtonDialog"))
+        .invoke(0, Il2Cpp.string(messageBodyKey), Il2Cpp.string(okButtonLabelKey), onClickOK, layerType, dialogSize, allowCloseExternal)
+}
