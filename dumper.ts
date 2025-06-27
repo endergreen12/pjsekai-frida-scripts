@@ -36,7 +36,8 @@ function dumpMasterData(targetDataName: string, dumpFileName: string, masterData
 
 function serializeAndWriteToFile(targetData: Il2Cpp.Object, dumpFileName: string)
 {
-    const jsonSerializedData = AssemblyImage.class("CP.JsonSerializer").method<Il2Cpp.String>("ToJsonWithUnicodeDecode").invoke(targetData)
+    const jsonSerializedData = AssemblyImage.class("CP.TextUtility").method<Il2Cpp.String>("JsonFormat").invoke(
+        AssemblyImage.class("CP.JsonSerializer").method<Il2Cpp.String>("ToJsonWithUnicodeDecode").invoke(targetData))
 
     console.log("Writing dumped data to a file...")
     Il2Cpp.corlib.class("System.IO.File").method("WriteAllText", 2).invoke(Il2Cpp.string(path.join(DUMP_DIR_PATH, dumpFileName)), jsonSerializedData)
