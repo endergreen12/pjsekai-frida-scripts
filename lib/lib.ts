@@ -122,17 +122,25 @@ export function GetScreenManagerInstance(): Il2Cpp.Object
     return GetInstanceOfSingleton(AssemblyImage.class("Sekai.ScreenManager"))
 }
 
-export const COMMON_1BUTTON_DIALOG_KLASS_NAME = "Sekai.Common1ButtonDialog"
-export function Create1ButtonDialog_1(klassName: string, dialogType: number, messageBodyKey: string, okButtonLabelKey: string, onClickOK: Il2Cpp.Object | NativePointer, layerType: number = DisplayLayerType.Layer_Dialog, dialogSize: number = DialogSize.Manual, allowCloseExternal: boolean = true)
+export const COMMON_1BUTTON_DIALOG_CLASS_NAME = "Sekai.Common1ButtonDialog"
+export function Show1ButtonDialog_1(className: string, dialogType: number, messageBodyKey: string, okButtonLabelKey: string, onClickOK: Il2Cpp.Object | NativePointer, layerType: number = DisplayLayerType.Layer_Dialog, dialogSize: number = DialogSize.Manual, allowCloseExternal: boolean = true): Il2Cpp.Object
 {
     return GetScreenManagerInstance()
-        .method<Il2Cpp.Object>("Show1ButtonDialog", 7).inflate(AssemblyImage.class(klassName))
+        .method<Il2Cpp.Object>("Show1ButtonDialog", 7).inflate(AssemblyImage.class(className))
         .invoke(dialogType, Il2Cpp.string(messageBodyKey), Il2Cpp.string(okButtonLabelKey), onClickOK, layerType, dialogSize, allowCloseExternal)
 }
 
-export function CreateSubDialog(messageBody: string = null, onClose: Il2Cpp.Object | NativePointer = NULL, allowCloseExternal: boolean = true, dialogType: number = 240, layerType: number = DisplayLayerType.Layer_Dialog)
+export function ShowSubWindowDialog(messageBody: string = null, onClose: Il2Cpp.Object | NativePointer = NULL, allowCloseExternal: boolean = true, dialogType: number = 240, layerType: number = DisplayLayerType.Layer_Dialog): Il2Cpp.Object
 {
     return GetScreenManagerInstance()
         .method<Il2Cpp.Object>("ShowSubWindowDialog").inflate(AssemblyImage.class("Sekai.SubWindowDialog"))
         .invoke(Il2Cpp.string(messageBody), onClose, allowCloseExternal, dialogType, layerType)
+}
+
+export const COMMON_2BUTTON_DIALOG_CLASS_NAME = "Sekai.Common2ButtonDialog"
+export function Show2ButtonDialog_1(className: string, dialogType: number, messageBodyKey: string, okButtonLabelKey: string, cancelButtonLabelKey: string, onClickOK: Il2Cpp.Object | NativePointer, onClickCancel: Il2Cpp.Object | NativePointer, layerType: number = DisplayLayerType.Layer_Dialog, dialogSize: number = DialogSize.Manual, allowCloseExternal: boolean = true): Il2Cpp.Object
+{
+    return GetScreenManagerInstance()
+        .method<Il2Cpp.Object>("Show2ButtonDialog", 9).inflate(AssemblyImage.class(className))
+        .invoke(dialogType, Il2Cpp.string(messageBodyKey), Il2Cpp.string(okButtonLabelKey), Il2Cpp.string(cancelButtonLabelKey), onClickOK, onClickCancel, layerType, dialogSize, allowCloseExternal)
 }

@@ -1,5 +1,5 @@
 import { AssemblyImage, CoreModuleImage, DialogSize, DisplayLayerType, Edge, RectTransform, TextMeshProText, TextMeshProUGUI, UnityEngineUIButton } from "./consts.js"
-import { CreateButton, Create1ButtonDialog_1, CreateInputField, CreateText, GetComponentInChildrenFromObj, GetFromProperty, GetInstanceOfSingleton, SetProperty, COMMON_1BUTTON_DIALOG_KLASS_NAME } from "./lib.js"
+import { CreateButton, Show1ButtonDialog_1, CreateInputField, CreateText, GetComponentInChildrenFromObj, GetFromProperty, GetInstanceOfSingleton, SetProperty, COMMON_1BUTTON_DIALOG_CLASS_NAME } from "./lib.js"
 
 // Shared //
     // For Camera timeline //
@@ -104,7 +104,7 @@ import { CreateButton, Create1ButtonDialog_1, CreateInputField, CreateText, GetC
             const parentTransform = GetComponentInChildrenFromObj(this as Il2Cpp.Object, RectTransform)
 
             CreateButton(Edge.Left, 200, -400, 300, 100, 38, parentTransform, (button: Il2Cpp.Object) => {
-                const dialog = Create1ButtonDialog_1(COMMON_1BUTTON_DIALOG_KLASS_NAME, 0, "empty", "WORD_CLOSE", NULL, DisplayLayerType.Layer_Dialog, DialogSize.Medium)
+                const dialog = Show1ButtonDialog_1(COMMON_1BUTTON_DIALOG_CLASS_NAME, 0, "empty", "WORD_CLOSE", NULL, DisplayLayerType.Layer_Dialog, DialogSize.Medium)
                 const dialogTransform = GetComponentInChildrenFromObj(dialog, RectTransform)
 
                 // Mode Switch button
