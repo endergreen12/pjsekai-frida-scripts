@@ -1,6 +1,6 @@
 import path from "path";
 import { AssemblyImage, Edge, RectTransform } from "./lib/consts.js";
-import { CreateButton, GetComponentInChildrenFromObj, GetMasterDataManagerInstance } from "./lib/lib.js";
+import { CreateButton, CreateSubDialog, GetComponentInChildrenFromObj, GetMasterDataManagerInstance } from "./lib/lib.js";
 const DUMP_DIR_PATH = path.join(Il2Cpp.application.dataPath, "dumped")
 
 Il2Cpp.perform(() => {
@@ -21,7 +21,7 @@ Il2Cpp.perform(() => {
             console.log("Dumping wording...")
             serializeAndWriteToFile(AssemblyImage.class("Sekai.WordingManager").field<Il2Cpp.Object>("dictionary").value, "WordingDictionary.json")
 
-            console.log("All dumps are complete!")
+            CreateSubDialog("All dumps are complete!")
         }, "Start dumping")
     }
 })

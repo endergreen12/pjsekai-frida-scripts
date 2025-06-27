@@ -1,4 +1,4 @@
-import { CoreModuleImage, RectTransform, UnityAction, Vector2, TextMeshProImage, TextMeshProUGUI, UnityEngineUIButton, TextMeshProText, SystemString, AssemblyImage, TextMeshProDefaultControls } from "./consts.js";
+import { CoreModuleImage, RectTransform, UnityAction, Vector2, TextMeshProImage, TextMeshProUGUI, UnityEngineUIButton, TextMeshProText, SystemString, AssemblyImage, TextMeshProDefaultControls, DialogSize, DisplayLayerType } from "./consts.js";
 
 export function CreateButton(edge: number, x: number, y: number, sizeX: number, sizeY: number, fontSize: number, parentTransform: Il2Cpp.Object, onClick: (button: Il2Cpp.Object) => void, text: string): Il2Cpp.Object
 {
@@ -122,9 +122,17 @@ export function GetScreenManagerInstance(): Il2Cpp.Object
     return GetInstanceOfSingleton(AssemblyImage.class("Sekai.ScreenManager"))
 }
 
-export function Create1ButtonDialog(messageBodyKey: string, okButtonLabelKey: string, onClickOK: Il2Cpp.Object | NativePointer, layerType: number, dialogSize: number, allowCloseExternal: boolean = true)
+export const COMMON_1BUTTON_DIALOG_KLASS_NAME = "Sekai.Common1ButtonDialog"
+export function Create1ButtonDialog_1(klassName: string, dialogType: number, messageBodyKey: string, okButtonLabelKey: string, onClickOK: Il2Cpp.Object | NativePointer, layerType: number = DisplayLayerType.Layer_Dialog, dialogSize: number = DialogSize.Manual, allowCloseExternal: boolean = true)
 {
     return GetScreenManagerInstance()
-        .method<Il2Cpp.Object>("Show1ButtonDialog", 7).inflate(AssemblyImage.class("Sekai.Common1ButtonDialog"))
-        .invoke(0, Il2Cpp.string(messageBodyKey), Il2Cpp.string(okButtonLabelKey), onClickOK, layerType, dialogSize, allowCloseExternal)
+        .method<Il2Cpp.Object>("Show1ButtonDialog", 7).inflate(AssemblyImage.class(klassName))
+        .invoke(dialogType, Il2Cpp.string(messageBodyKey), Il2Cpp.string(okButtonLabelKey), onClickOK, layerType, dialogSize, allowCloseExternal)
+}
+
+export function CreateSubDialog(messageBody: string = null, onClose: Il2Cpp.Object | NativePointer = NULL, allowCloseExternal: boolean = true, dialogType: number = 240, layerType: number = DisplayLayerType.Layer_Dialog)
+{
+    return GetScreenManagerInstance()
+        .method<Il2Cpp.Object>("ShowSubWindowDialog").inflate(AssemblyImage.class("Sekai.SubWindowDialog"))
+        .invoke(Il2Cpp.string(messageBody), onClose, allowCloseExternal, dialogType, layerType)
 }
