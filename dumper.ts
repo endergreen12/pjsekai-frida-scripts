@@ -1,6 +1,7 @@
+import path from "path";
 import { AssemblyImage, Edge, RectTransform } from "./lib/consts.js";
 import { CreateButton, GetComponentInChildrenFromObj, GetMasterDataManagerInstance } from "./lib/lib.js";
-const DUMP_DIR_PATH = "/sdcard/pjsekai_dumps"
+const DUMP_DIR_PATH = path.join(Il2Cpp.application.dataPath, "dumped")
 
 Il2Cpp.perform(() => {
     AssemblyImage.class("Sekai.OptionDialog").method("Setup").implementation = function(tabIndex, canAssetSetting, canBlockListSetting)
@@ -38,7 +39,7 @@ function serializeAndWriteToFile(targetData: Il2Cpp.Object, dumpFileName: string
     const jsonSerializedData = AssemblyImage.class("CP.JsonSerializer").method<Il2Cpp.String>("ToJsonWithUnicodeDecode").invoke(targetData)
 
     console.log("Writing dumped data to a file...")
-    Il2Cpp.corlib.class("System.IO.File").method("WriteAllText", 2).invoke(Il2Cpp.string(DUMP_DIR_PATH + "/" + dumpFileName), jsonSerializedData)
+    Il2Cpp.corlib.class("System.IO.File").method("WriteAllText", 2).invoke(Il2Cpp.string(path.join(DUMP_DIR_PATH, dumpFileName)), jsonSerializedData)
 
     console.log("Done")
 }
