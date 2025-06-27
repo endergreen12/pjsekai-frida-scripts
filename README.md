@@ -5,7 +5,7 @@ You are not allowed to adapt the code of these scripts to other scripts or publi
 
 # Scripts
 ## dumper.ts
-Dump MasterData and wordings, dumped data will be saved to "/sdcard/pjsekai_dumps"
+Dump MasterData and wordings, dumped data will be saved to "/sdcard/Android/data/com.sega.pjsekai/files/dumped"
 
 A button to start dumping will be added to the option dialog
 
