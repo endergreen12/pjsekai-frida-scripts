@@ -1,37 +1,45 @@
-import { CoreModuleImage, RectTransform, UnityAction, Vector2, TextMeshProImage, TextMeshProUGUI, UnityEngineUIButton, TextMeshProText, SystemString, AssemblyImage, TextMeshProDefaultControls, DialogSize, DisplayLayerType } from "./consts.js";
+import { CoreModuleImage, UnityAction, UnityEngineUIButton, SystemString, AssemblyImage, DialogSize, DisplayLayerType } from "./consts.js";
 
-export function CreateButton(edge: number, x: number, y: number, sizeX: number, sizeY: number, fontSize: number, parentTransform: Il2Cpp.Object, onClick: (button: Il2Cpp.Object) => void, text: string): Il2Cpp.Object
+let TextMeshProImage: Il2Cpp.Image = null
+let TextMeshProUGUI: Il2Cpp.Class = null
+let TextMeshProText: Il2Cpp.Class = null
+let TextMeshProDefaultControls: Il2Cpp.Class = null
+Il2Cpp.perform(() => {
+    TextMeshProImage = Il2Cpp.domain.assembly("Unity.TextMeshPro").image
+    TextMeshProUGUI = TextMeshProImage.class("TMPro.TextMeshProUGUI")
+    TextMeshProText = TextMeshProImage.class("TMPro.TMP_Text")
+    TextMeshProDefaultControls = TextMeshProImage.class("TMPro.TMP_DefaultControls")
+})
+
+export function CreateButton(text: string, fontSize: number, localPosition: Il2Cpp.Object, sizeDelta: Il2Cpp.Object, parentTransform: Il2Cpp.Object, onClick: (button: Il2Cpp.Object) => void): Il2Cpp.Object
 {
     // Create a button
     const resources = TextMeshProDefaultControls.nested("Resources").new()
     const button = TextMeshProDefaultControls.method<Il2Cpp.Object>("CreateButton").invoke(resources.unbox())
 
+    SetupRectTransform(GetTransform(button), parentTransform, localPosition, sizeDelta)
+
     // Set text and fontSize of the button
-    const textComponent = GetComponentInChildrenFromObj(button, TextMeshProUGUI)
+    const textComponent = GetComponentInChildren(button, TextMeshProUGUI)
     SetProperty(textComponent, "text", Il2Cpp.string(text))
     SetProperty(textComponent, "fontSize", fontSize)
 
-    SetParent(GetTransform(button), parentTransform)
-    SetPositionAndSizeOfRectTransform(GetComponentInChildrenFromObj(button, RectTransform), edge, x, y, sizeX, sizeY)
-
-    const buttonComponent = GetComponentInChildrenFromObj(button, UnityEngineUIButton)
-
     // Set onClick callback
-    GetFromProperty(buttonComponent, "onClick").method("AddListener").invoke(Il2Cpp.delegate(UnityAction, () => onClick(button)))
+    GetProperty(GetComponentInChildren(button, UnityEngineUIButton), "onClick")
+        .method("AddListener").invoke(Il2Cpp.delegate(UnityAction, () => onClick(button)))
 
     return button
 }
 
-export function CreateInputField(edge: number, x: number, y: number, sizeX: number, sizeY: number, fontSize: number, parentTransform: Il2Cpp.Object, onSubmit: (inputField: Il2Cpp.Object, string: string) => void, text: string, contentType: number): Il2Cpp.Object
+export function CreateInputField(text: string, fontSize: number, localPosition: Il2Cpp.Object, sizeDelta: Il2Cpp.Object, contentType: number, parentTransform: Il2Cpp.Object, onSubmit: (inputField: Il2Cpp.Object, value: string) => void): Il2Cpp.Object
 {
     // Create new inputField
     const resources = TextMeshProDefaultControls.nested("Resources").new()
     const inputField = TextMeshProDefaultControls.method<Il2Cpp.Object>("CreateInputField").invoke(resources.unbox())
 
-    const inputFieldComponent = GetComponentInChildrenFromObj(inputField, TextMeshProImage.class("TMPro.TMP_InputField"))
+    SetupRectTransform(GetTransform(inputField), parentTransform, localPosition, sizeDelta)
 
-    SetParent(GetTransform(inputField), parentTransform)
-    SetPositionAndSizeOfRectTransform(GetComponentInChildrenFromObj(inputField, RectTransform), edge, x, y, sizeX, sizeY)
+    const inputFieldComponent = GetComponentInChildren(inputField, TextMeshProImage.class("TMPro.TMP_InputField"))
 
     // Set contentType
     SetProperty(inputFieldComponent, "contentType", contentType)
@@ -39,50 +47,53 @@ export function CreateInputField(edge: number, x: number, y: number, sizeX: numb
     // Set text
     SetProperty(inputFieldComponent, "text", Il2Cpp.string(text))
 
-    const textComponent = GetFromProperty(inputFieldComponent, "textComponent")
+    const textComponent = GetProperty(inputFieldComponent, "textComponent")
 
     // Set font size
     SetProperty(textComponent, "fontSize", fontSize)
 
     // Set onSubmit callback
     const unityActionString = CoreModuleImage.class("UnityEngine.Events.UnityAction`1").inflate(SystemString)
-    const call = Il2Cpp.delegate(unityActionString, (string: Il2Cpp.String) => onSubmit(inputField, string.toString().substring(1, string.length + 1))) // Use substring to remove double quotations, and im not sure why it goes well with "length + 1" but anyway
-    GetFromProperty(inputFieldComponent, "onSubmit").method("AddListener").invoke(call)
+    const call = Il2Cpp.delegate(unityActionString, (value: Il2Cpp.String) => onSubmit(inputField, value.toString().substring(1, value.length + 1))) // Use substring to remove double quotations, and im not sure why it goes well with "length + 1" but anyway
+    GetProperty(inputFieldComponent, "onSubmit").method("AddListener").invoke(call)
 
     return inputField
 }
 
-export function CreateText(edge: number, x: number, y: number, sizeX: number, sizeY: number, fontSize: number, parentTransform: Il2Cpp.Object, textStr: string): Il2Cpp.Object
+export function CreateText(textStr: string, fontSize: number, localPosition: Il2Cpp.Object, sizeDelta: Il2Cpp.Object, parentTransform: Il2Cpp.Object, color: string = ""): Il2Cpp.Object
 {
     // Create new text
     const resources = TextMeshProDefaultControls.nested("Resources").new()
     const text = TextMeshProDefaultControls.method<Il2Cpp.Object>("CreateText").invoke(resources.unbox())
 
+    SetupRectTransform(GetTransform(text), parentTransform, localPosition, sizeDelta)
+
     // Set text and fontSize of the button
-    const textComponent = GetComponentInChildrenFromObj(text, TextMeshProText)
+    const textComponent = GetComponentInChildren(text, TextMeshProText)
     SetProperty(textComponent, "text", Il2Cpp.string(textStr))
     SetProperty(textComponent, "fontSize", fontSize)
 
-    SetParent(GetTransform(text), parentTransform)
-    SetPositionAndSizeOfRectTransform(GetComponentInChildrenFromObj(text, RectTransform), edge, x, y, sizeX, sizeY)
+    if(color != "")
+    {
+        SetProperty(textComponent, "color", GetProperty(CoreModuleImage.class("UnityEngine.Color"), color))
+    }
 
     return text
 }
 
-export function SetPositionAndSizeOfRectTransform(rectTransform: Il2Cpp.Object, edge: number, x: number, y: number, sizeX: number, sizeY: number)
+export function UpdateTextOfDefaultControls(obj: Il2Cpp.Object, text: string)
 {
-    // Set position
-    rectTransform.method("SetInsetAndSizeFromParentEdge").invoke(edge, 0, 0)
-    const pos = Vector2.alloc()
-    pos.method(".ctor").invoke(x, y)
-    SetProperty(rectTransform, "anchoredPosition", pos.unbox())
-
-    // Set size
-    rectTransform.method("SetSizeWithCurrentAnchors").invoke(0, sizeX)
-    rectTransform.method("SetSizeWithCurrentAnchors").invoke(1, sizeY)
+    SetProperty(GetComponentInChildren(obj, TextMeshProUGUI), "text", Il2Cpp.string(text))
 }
 
-export function GetComponentInChildrenFromObj(obj: Il2Cpp.Object, klass: Il2Cpp.Class): Il2Cpp.Object
+function SetupRectTransform(rectTransform: Il2Cpp.Object, parentTransform: Il2Cpp.Object, localPos: Il2Cpp.Object, sizeDelta: Il2Cpp.Object)
+{
+    SetParent(rectTransform, parentTransform)
+    SetProperty(rectTransform, "localPosition", localPos.unbox())
+    SetProperty(rectTransform, "sizeDelta", sizeDelta.unbox())
+}
+
+export function GetComponentInChildren(obj: Il2Cpp.Object, klass: Il2Cpp.Class): Il2Cpp.Object
 {
     return obj.method<Il2Cpp.Object>("GetComponentInChildren", 0).inflate(klass).invoke()
 }
@@ -92,7 +103,22 @@ export function SetParent(targetTransform: Il2Cpp.Object, parentTransform: Il2Cp
     targetTransform.method("SetParent", 2).invoke(parentTransform, false)
 }
 
-export function GetFromProperty<T extends Il2Cpp.Method.ReturnType = Il2Cpp.Object>(obj: Il2Cpp.Object | Il2Cpp.Class, propertyName: string): T
+export function CreateVector3(x: number, y: number, z: number): Il2Cpp.Object
+{
+    const vector3 = CoreModuleImage.class("UnityEngine.Vector3").alloc()
+    vector3.method(".ctor").invoke(x, y, z)
+    return vector3
+}
+
+export function CreateVector2(x: number, y: number): Il2Cpp.Object
+{
+    const vector2 = CoreModuleImage.class("UnityEngine.Vector2").alloc()
+    vector2.method(".ctor").invoke(x, y)
+    return vector2
+}
+
+// Property
+export function GetProperty<T extends Il2Cpp.Method.ReturnType = Il2Cpp.Object>(obj: Il2Cpp.Object | Il2Cpp.Class, propertyName: string): T
 {
     return obj.method<T>(`get_${propertyName}`).invoke()
 }
@@ -104,12 +130,12 @@ export function SetProperty(obj: Il2Cpp.Object | Il2Cpp.Class, propertyName: str
 
 export function GetInstanceOfSingleton(klass: Il2Cpp.Class): Il2Cpp.Object
 {
-    return GetFromProperty(klass, "Instance")
+    return GetProperty(klass, "Instance")
 }
 
 export function GetTransform(obj: Il2Cpp.Object): Il2Cpp.Object
 {
-    return GetFromProperty(obj, "transform")
+    return GetProperty(obj, "transform")
 }
 
 export function GetMasterDataManagerInstance(): Il2Cpp.Object
@@ -122,6 +148,7 @@ export function GetScreenManagerInstance(): Il2Cpp.Object
     return GetInstanceOfSingleton(AssemblyImage.class("Sekai.ScreenManager"))
 }
 
+// Dialog
 export const COMMON_1BUTTON_DIALOG_CLASS_NAME = "Sekai.Common1ButtonDialog"
 export function Show1ButtonDialog_1(className: string, dialogType: number, messageBodyKey: string, okButtonLabelKey: string, onClickOK: Il2Cpp.Object | NativePointer, layerType: number = DisplayLayerType.Layer_Dialog, dialogSize: number = DialogSize.Manual, allowCloseExternal: boolean = true): Il2Cpp.Object
 {
@@ -143,4 +170,10 @@ export function Show2ButtonDialog_1(className: string, dialogType: number, messa
     return GetScreenManagerInstance()
         .method<Il2Cpp.Object>("Show2ButtonDialog", 9).inflate(AssemblyImage.class(className))
         .invoke(dialogType, Il2Cpp.string(messageBodyKey), Il2Cpp.string(okButtonLabelKey), Il2Cpp.string(cancelButtonLabelKey), onClickOK, onClickCancel, layerType, dialogSize, allowCloseExternal)
+}
+
+// Misc
+export function GetValueStateText(name: string, value: boolean): string
+{
+    return `${name}: ${value ? "Enabled": "Disabled"}`
 }

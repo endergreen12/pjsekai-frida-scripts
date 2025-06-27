@@ -1,5 +1,5 @@
-import { AssemblyImage, CoreModuleImage, DialogSize, DisplayLayerType, Edge, RectTransform, TextMeshProText, TextMeshProUGUI, UnityEngineUIButton } from "./consts.js"
-import { CreateButton, Show1ButtonDialog_1, CreateInputField, CreateText, GetComponentInChildrenFromObj, GetFromProperty, GetInstanceOfSingleton, SetProperty, COMMON_1BUTTON_DIALOG_CLASS_NAME } from "./lib.js"
+import { AssemblyImage, DialogSize, DisplayLayerType, UnityEngineUIButton, } from "./consts.js"
+import { CreateButton, Show1ButtonDialog_1, CreateInputField, CreateText, GetComponentInChildren, GetProperty, GetInstanceOfSingleton, SetProperty, COMMON_1BUTTON_DIALOG_CLASS_NAME, GetTransform, CreateVector2, CreateVector3, UpdateTextOfDefaultControls, GetValueStateText } from "./lib.js"
 
 // Shared //
     // For Camera timeline //
@@ -14,7 +14,7 @@ import { CreateButton, Show1ButtonDialog_1, CreateInputField, CreateText, GetCom
             const asset = this.method<Il2Cpp.Object>("LoadTimelineAsset").invoke(timelineName, mvId)
 
             const timelineNameStr = timelineName.toString()
-            const trackObjects = GetFromProperty(asset, "trackObjects")
+            const trackObjects = GetProperty(asset, "trackObjects")
             switch(timelineNameStr)
             {
                 case '"Camera"':
@@ -42,7 +42,7 @@ import { CreateButton, Show1ButtonDialog_1, CreateInputField, CreateText, GetCom
             const track = arrayCopy.get(i)
             if(!track.isNull())
             {
-                if(targetTracksJudgement(GetFromProperty<Il2Cpp.String>(track, "name").toString()))
+                if(targetTracksJudgement(GetProperty<Il2Cpp.String>(track, "name").toString()))
                 {
                     trackObjects.method("RemoveAt").invoke(i)
                 }
@@ -94,53 +94,49 @@ import { CreateButton, Show1ButtonDialog_1, CreateInputField, CreateText, GetCom
     let isButtonCreated = false
     export function ChangeImpl_CreateOpenOptionDialogButton(isFixedCamera: boolean = false)
     {
-        AssemblyImage.class("Sekai.ScreenLayerMusicVideoConfirm").method("OnInitComponent").implementation = function()
+        AssemblyImage.class("Sekai.ScreenLayerMusicVideoCellPhone").method("OnInitComponent").implementation = function()
         {
             this.method("OnInitComponent").invoke()
 
             if(isButtonCreated)
                 return
 
-            const parentTransform = GetComponentInChildrenFromObj(this as Il2Cpp.Object, RectTransform)
-
-            CreateButton(Edge.Left, 200, -400, 300, 100, 38, parentTransform, (button: Il2Cpp.Object) => {
+            CreateButton("Options", 38, CreateVector3(400, 400, 0), CreateVector2(300, 100), GetTransform(this as Il2Cpp.Object), (button: Il2Cpp.Object) => {
                 const dialog = Show1ButtonDialog_1(COMMON_1BUTTON_DIALOG_CLASS_NAME, 0, "empty", "WORD_CLOSE", NULL, DisplayLayerType.Layer_Dialog, DialogSize.Medium)
-                const dialogTransform = GetComponentInChildrenFromObj(dialog, RectTransform)
+                const dialogTransform = GetTransform(dialog)
+
+                const sizeDelta = CreateVector2(400, 100)
 
                 // Mode Switch button
-                const modeButton = CreateButton(Edge.Bottom, -260, 700, 400, 100, 28, dialogTransform, (button: Il2Cpp.Object) => {
+                const modeButton = CreateButton(GetModeName(), 28, CreateVector3(-250, 150, 0), sizeDelta, dialogTransform, (button: Il2Cpp.Object) => {
                     isThirdPersonEnabled = !isThirdPersonEnabled
-                    SetProperty(GetComponentInChildrenFromObj(button, TextMeshProUGUI), "text", Il2Cpp.string(GetModeName()))
-                }, GetModeName())
+                    UpdateTextOfDefaultControls(button, GetModeName())
+                })
 
                 if(isFixedCamera) // Disable mode button for fixed camera
                 {
-                    const buttonComponent = GetComponentInChildrenFromObj(modeButton, UnityEngineUIButton)
+                    const buttonComponent = GetComponentInChildren(modeButton, UnityEngineUIButton)
                     SetProperty(buttonComponent, "interactable", false)
                 }
 
                 // Change FOV button
-                CreateButton(Edge.Bottom, 260, 700, 400, 100, 28, dialogTransform, (button: Il2Cpp.Object) => {
+                CreateButton(GetValueStateText("Change FOV", changeFOV), 28, CreateVector3(250, 150, 0), sizeDelta, dialogTransform, (button: Il2Cpp.Object) => {
                     changeFOV = !changeFOV
-                    SetProperty(GetComponentInChildrenFromObj(button, TextMeshProUGUI), "text", Il2Cpp.string(GetValueStateText("Change FOV", changeFOV)))
-                }, GetValueStateText("Change FOV", changeFOV))
+                    UpdateTextOfDefaultControls(button, GetValueStateText("Change FOV", changeFOV))
+                })
 
                 // Target FOV inputField
-                CreateInputField(Edge.Bottom, 260, 500, 400, 100, 48, dialogTransform, (inputField: Il2Cpp.Object, string) => {
-                    targetFOV = parseInt(string)
-                }, String(targetFOV), 2)
-
-                // Target FOV text
-                const targetFOVtext = CreateText(Edge.Bottom, 260, 550, 400, 100, 34, dialogTransform, "Target FOV:")
-                const targetFOVtextComponent = GetComponentInChildrenFromObj(targetFOVtext, TextMeshProText)
-                SetProperty(targetFOVtextComponent, "color", GetFromProperty(CoreModuleImage.class("UnityEngine.Color"), "black"))
+                const targetFOVInputField = CreateInputField(String(targetFOV), 48, CreateVector3(-250, -70, 0), sizeDelta, 2, dialogTransform, (inputField: Il2Cpp.Object, value: string) => {
+                    targetFOV = parseInt(value)
+                })
+                CreateText("Target FOV:", 34, CreateVector3(0, 40, 0), sizeDelta, GetTransform(targetFOVInputField), "black")
 
                 // Remove MeshOff tracks button
-                CreateButton(Edge.Bottom, -260, 500, 400, 100, 28, dialogTransform, (button: Il2Cpp.Object) => {
+                CreateButton(GetValueStateText("Remove MeshOff tracks", removeMeshOffTrack), 28, CreateVector3(250, -70, 0), sizeDelta, dialogTransform, (button: Il2Cpp.Object) => {
                     removeMeshOffTrack = !removeMeshOffTrack
-                    SetProperty(GetComponentInChildrenFromObj(button, TextMeshProUGUI), "text", Il2Cpp.string(GetValueStateText("Remove MeshOff tracks", removeMeshOffTrack)))
-                }, GetValueStateText("Remove MeshOff tracks", removeMeshOffTrack))
-            }, "Options")
+                    UpdateTextOfDefaultControls(button, GetValueStateText("Remove MeshOff tracks", removeMeshOffTrack))
+                })
+            })
             
             isButtonCreated = true
         }
@@ -158,11 +154,6 @@ import { CreateButton, Show1ButtonDialog_1, CreateInputField, CreateText, GetCom
         return "Mode: " + (isThirdPersonEnabled ? "Third Person" : "First Person")
     }
 
-    function GetValueStateText(name: string, value: boolean): string
-    {
-        return `${name}: ${value ? "Enabled": "Disabled"}`
-    }
-
     export function CharModelList_LogIndexAndCharName(characterList: Il2Cpp.Array<Il2Cpp.Object>)
     {
         console.log("\nCharacter models of this MV:")
@@ -174,10 +165,10 @@ import { CreateButton, Show1ButtonDialog_1, CreateInputField, CreateText, GetCom
 
     export function GetCharacterNameFromCharacterModel(characterModel: Il2Cpp.Object): string
     {
-        const characterId = GetFromProperty<number>(characterModel, "CharacterDataId")
+        const characterId = GetProperty<number>(characterModel, "CharacterDataId")
         const gameCharacter = AssemblyImage.class("Sekai.CharacterUtility").method<Il2Cpp.Object>("GetMasterGameCharacter").invoke(characterId)
 
-        return `Character Name: (JP: ${GetFromProperty<Il2Cpp.String>(gameCharacter, "FullName")} ENG: ${GetFromProperty<Il2Cpp.String>(gameCharacter, "FullNameEnglish")})`
+        return `Character Name: (JP: ${GetProperty<Il2Cpp.String>(gameCharacter, "FullName")} ENG: ${GetProperty<Il2Cpp.String>(gameCharacter, "FullNameEnglish")})`
     }
 
     const deactivateTargetArray = ["Face", "Hair"]
@@ -189,13 +180,13 @@ import { CreateButton, Show1ButtonDialog_1, CreateInputField, CreateText, GetCom
         }
 
         deactivateTargetArray.forEach(deactivateTarget => {
-            GetFromProperty(characterModel, deactivateTarget).method("SetActive").invoke(value)
+            GetProperty(characterModel, deactivateTarget).method("SetActive").invoke(value)
         })
     }
 
     export function GetTargetTransformOfCharModelToAttach(characterModel: Il2Cpp.Object): Il2Cpp.Object
     {
-        return GetFromProperty(characterModel, isThirdPersonEnabled ? "PositionNote" : "HeadTransform")
+        return GetProperty(characterModel, isThirdPersonEnabled ? "PositionNote" : "HeadTransform")
     }
 
     export function GetMVModelInstance(): Il2Cpp.Object
@@ -205,6 +196,6 @@ import { CreateButton, Show1ButtonDialog_1, CreateInputField, CreateText, GetCom
 
     export function GetCharacterModelListFromMVModel(mvModel: Il2Cpp.Object): Il2Cpp.Array<Il2Cpp.Object>
     {
-        return GetFromProperty(GetFromProperty<Il2Cpp.Object>(mvModel, "MainCharacterModel"), "CharacterModelList")
+        return GetProperty(GetProperty<Il2Cpp.Object>(mvModel, "MainCharacterModel"), "CharacterModelList")
     }
 //

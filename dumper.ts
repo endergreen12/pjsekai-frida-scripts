@@ -1,6 +1,6 @@
 import path from "path";
-import { AssemblyImage, Edge, RectTransform } from "./lib/consts.js";
-import { CreateButton, ShowSubWindowDialog, GetComponentInChildrenFromObj, GetMasterDataManagerInstance } from "./lib/lib.js";
+import { AssemblyImage } from "./lib/consts.js";
+import { CreateButton, ShowSubWindowDialog, GetMasterDataManagerInstance, GetTransform, CreateVector3, CreateVector2 } from "./lib/lib.js";
 const DUMP_DIR_PATH = path.join(Il2Cpp.application.dataPath, "dumped")
 
 Il2Cpp.perform(() => {
@@ -8,7 +8,7 @@ Il2Cpp.perform(() => {
     {
         this.method("Setup").invoke(tabIndex, canAssetSetting, canBlockListSetting)
 
-        CreateButton(Edge.Bottom, 770, 150, 300, 100, 38, GetComponentInChildrenFromObj(this as Il2Cpp.Object, RectTransform), (button: Il2Cpp.Object) => {
+        CreateButton("Start dumping", 38, CreateVector3(800, -300, 0), CreateVector2(300, 100), GetTransform(this as Il2Cpp.Object), (button: Il2Cpp.Object) => {
             const masterDataManager = GetMasterDataManagerInstance()
 
             console.log("Creating a folder...")
@@ -22,7 +22,7 @@ Il2Cpp.perform(() => {
             serializeAndWriteToFile(AssemblyImage.class("Sekai.WordingManager").field<Il2Cpp.Object>("dictionary").value, "WordingDictionary.json")
 
             ShowSubWindowDialog("All dumps are complete!")
-        }, "Start dumping")
+        })
     }
 })
 
