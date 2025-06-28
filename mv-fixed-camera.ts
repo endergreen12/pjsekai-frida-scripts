@@ -1,6 +1,6 @@
-import { AssemblyImage } from "./lib/consts.js";
-import { CreateVector3, GetTransform, SetProperty } from "./lib/lib.js";
-import { ChangeImpl_RemoveTargetTracksFromTimeline, GetMainCamFromMVCameraModel, ChangeImpl_ForceDisableCameraDecoration, ChangeImpl_ChangeFOV, ChangeImpl_CreateOpenOptionDialogButton } from "./lib/mv-utils.js";
+import { AssemblyImage } from "./lib/consts";
+import { CreateVector3, GetTransform, SetProperty } from "./lib/lib";
+import { ChangeImpl_RemoveTargetTracksFromTimeline, GetMainCamFromMVCameraModel, ChangeImpl_ForceDisableCameraDecoration, ChangeImpl_ChangeFOV, ChangeImpl_CreateOpenOptionDialogButton } from "./lib/mv-utils";
 
 Il2Cpp.perform(() => {
     ChangeImpl_RemoveTargetTracksFromTimeline()

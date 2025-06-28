@@ -1,5 +1,5 @@
-import { AssemblyImage, DialogSize, DisplayLayerType, UnityEngineUIButton, } from "./consts.js"
-import { CreateButton, Show1ButtonDialog_1, CreateInputField, CreateText, GetComponentInChildren, GetProperty, GetInstanceOfSingleton, SetProperty, COMMON_1BUTTON_DIALOG_CLASS_NAME, GetTransform, CreateVector2, CreateVector3, UpdateTextOfDefaultControls, GetValueStateText } from "./lib.js"
+import { AssemblyImage, DialogSize, DisplayLayerType, UnityEngineUIButton, } from "./consts"
+import { CreateButton, Show1ButtonDialog_1, CreateInputField, CreateText, GetComponentInChildren, GetProperty, GetInstanceOfSingleton, SetProperty, COMMON_1BUTTON_DIALOG_CLASS_NAME, GetTransform, CreateVector2, CreateVector3, UpdateTextOfDefaultControls, GetValueStateText } from "./lib"
 
 // Shared //
     // For Camera timeline //

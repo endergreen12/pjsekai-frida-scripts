@@ -1,6 +1,6 @@
-import { AssemblyImage, DialogSize, DisplayLayerType, UnityAction } from "../lib/consts.js"
-import { COMMON_2BUTTON_DIALOG_CLASS_NAME, CreateButton, CreateInputField, CreateText, CreateVector2, CreateVector3, GetInstanceOfSingleton, GetScreenManagerInstance, GetTransform, GetValueStateText, SetProperty, Show2ButtonDialog_1, ShowSubWindowDialog, UpdateTextOfDefaultControls } from "../lib/lib.js"
-import * as autoRetire from './auto-retire.js'
+import { AssemblyImage, DialogSize, DisplayLayerType, UnityAction } from "../lib/consts"
+import { COMMON_2BUTTON_DIALOG_CLASS_NAME, CreateButton, CreateInputField, CreateText, CreateVector2, CreateVector3, GetInstanceOfSingleton, GetScreenManagerInstance, GetTransform, GetValueStateText, SetProperty, Show2ButtonDialog_1, ShowSubWindowDialog, UpdateTextOfDefaultControls } from "../lib/lib"
+import * as autoRetire from './auto-retire'
 
 Il2Cpp.perform(() => {
     let isButtonCreated = false

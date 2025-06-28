@@ -1,4 +1,4 @@
-import { AssemblyImage } from "../lib/consts.js";
+import { AssemblyImage } from "../lib/consts";
 
 Il2Cpp.perform(() => {
     AssemblyImage.class("Sekai.Core.Live.SoloLiveController").method("OnExit").implementation = function()

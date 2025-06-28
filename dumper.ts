@@ -1,6 +1,6 @@
 import path from "path";
-import { AssemblyImage } from "./lib/consts.js";
-import { CreateButton, ShowSubWindowDialog, GetMasterDataManagerInstance, GetTransform, CreateVector3, CreateVector2 } from "./lib/lib.js";
+import { AssemblyImage } from "./lib/consts";
+import { CreateButton, ShowSubWindowDialog, GetMasterDataManagerInstance, GetTransform, CreateVector3, CreateVector2 } from "./lib/lib";
 const DUMP_DIR_PATH = path.join(Il2Cpp.application.dataPath, "dumped")
 
 Il2Cpp.perform(() => {

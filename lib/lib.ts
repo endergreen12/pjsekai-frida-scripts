@@ -1,4 +1,4 @@
-import { CoreModuleImage, UnityAction, UnityEngineUIButton, SystemString, AssemblyImage, DialogSize, DisplayLayerType } from "./consts.js";
+import { CoreModuleImage, UnityAction, UnityEngineUIButton, SystemString, AssemblyImage, DialogSize, DisplayLayerType } from "./consts";
 
 let TextMeshProImage: Il2Cpp.Image = null
 let TextMeshProUGUI: Il2Cpp.Class = null

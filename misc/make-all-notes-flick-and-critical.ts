@@ -1,5 +1,5 @@
-import { AssemblyImage } from "../lib/consts.js";
-import { SetProperty } from "../lib/lib.js";
+import { AssemblyImage } from "../lib/consts";
+import { SetProperty } from "../lib/lib";
 
 Il2Cpp.perform(() => {
     AssemblyImage.class("Sekai.SUS.Converter").method("ConvertNormalNote").implementation = function(id, noteInfo: Il2Cpp.Reference<Il2Cpp.Object>, info, laneStart, laneEnd, category: Il2Cpp.Reference)

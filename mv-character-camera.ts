@@ -2,9 +2,9 @@ import { ChangeImpl_RemoveTargetTracksFromTimeline, CharModelList_LogIndexAndCha
     SetActiveOfDeactivateTargets, ChangeImpl_ForceDisableCameraDecoration,
     GetCharacterNameFromCharacterModel, isThirdPersonEnabled, GetCharacterModelListFromMVModel, GetMVModelInstance,
     GetTargetTransformOfCharModelToAttach, GetMainCamFromMVCameraModel, ChangeImpl_CreateOpenOptionDialogButton,
-    ChangeImpl_ChangeFOV} from "./lib/mv-utils.js";
-import { AssemblyImage } from "./lib/consts.js";
-import { CreateVector3, GetProperty, GetTransform, SetParent, SetProperty } from "./lib/lib.js";
+    ChangeImpl_ChangeFOV} from "./lib/mv-utils";
+import { AssemblyImage } from "./lib/consts";
+import { CreateVector3, GetProperty, GetTransform, SetParent, SetProperty } from "./lib/lib";
 
 let targetCharIndex = 0
 

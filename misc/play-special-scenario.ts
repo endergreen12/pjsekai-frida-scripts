@@ -1,5 +1,5 @@
-import { AssemblyImage, UnityAction } from "../lib/consts.js";
-import { COMMON_2BUTTON_DIALOG_CLASS_NAME, CreateButton, CreateInputField, CreateText, CreateVector2, CreateVector3, GetComponentInChildren, GetMasterDataManagerInstance, GetTransform, Show2ButtonDialog_1, ShowSubWindowDialog } from "../lib/lib.js";
+import { AssemblyImage, UnityAction } from "../lib/consts";
+import { COMMON_2BUTTON_DIALOG_CLASS_NAME, CreateButton, CreateInputField, CreateText, CreateVector2, CreateVector3, GetComponentInChildren, GetMasterDataManagerInstance, GetTransform, Show2ButtonDialog_1, ShowSubWindowDialog } from "../lib/lib";
 
 Il2Cpp.perform(() => {
     let isButtonCreated = false
