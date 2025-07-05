@@ -182,6 +182,18 @@ import { CreateButton, Show1ButtonDialog_1, CreateInputField, CreateText, GetCom
         deactivateTargetArray.forEach(deactivateTarget => {
             GetProperty(characterModel, deactivateTarget).method("SetActive").invoke(value)
         })
+
+        // For accessories
+        const charModelTransform = GetTransform(characterModel)
+        const accessoryObjName = AssemblyImage.class("Sekai.Core.CharacterModel").nested("GameObjectNameDefine").field<Il2Cpp.String>("Acc").value.toString()
+        for(let i = 0; i < GetProperty<number>(charModelTransform, "childCount"); i++)
+        {
+            const childTransform = charModelTransform.method<Il2Cpp.Object>("GetChild").invoke(i)
+            if(GetProperty<Il2Cpp.String>(childTransform, "name").toString() === accessoryObjName)
+            {
+                GetProperty(childTransform, "gameObject").method("SetActive").invoke(value)
+            }
+        }
     }
 
     export function GetTargetTransformOfCharModelToAttach(characterModel: Il2Cpp.Object): Il2Cpp.Object
