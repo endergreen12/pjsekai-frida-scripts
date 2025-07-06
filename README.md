@@ -47,31 +47,21 @@ You can change those from the option dialog
 
 A button to open the option dialog will be added to the MV select screen
 
-![Screenshot_20250627-231215_プロセカ](https://github.com/user-attachments/assets/2bc0443c-5d90-4ebe-a78d-149d2453c856)
+![Screenshot_20250706-171600](https://github.com/user-attachments/assets/cfd8f1f9-36a7-4d50-a533-9021151a549f)
 
-> [!NOTE]
-> What Remove MeshOff tracks option will do:
-> 
-> In some MV, characters may become disappeared due to staging
-> 
-> This option prevents it
+Here are the explanations for the options:
 
-## lib/mv-utils.ts
-Library used in fixed and character camera
-
-There is one option for users:
-
----
-
-- reverseTargetJudge
+- Remove MeshOff tracks
   
-  By default, this script removes all tracks except for the ones in the targets array, set this to true to remove the tracks in the targets array instead
+  In some MV, characters may become disappeared due to staging
 
-  For example, if you want to keep post-processing but don't want DoF, set this true and target array to `['"Main Camera"', '"Sekai Dof Track"']`
+  This option prevents it
 
----
+- Remove only MainCam and DoF tracks
 
-For reverseTargetJudge and Remove Meshoff tracks option please note that they might not work
+  Set this true if you want to keep post-processing etc.
+
+For Remove only MainCam and DoF tracks and Remove Meshoff tracks options please note that they might not work
 
 This is because the script will remove tracks with a specific name, but the track supposed to remove may have a different name, so in that case it has no effect
 
