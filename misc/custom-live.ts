@@ -1,5 +1,5 @@
 import { AssemblyImage, DialogSize, DisplayLayerType, UnityAction } from "../lib/consts"
-import { COMMON_2BUTTON_DIALOG_CLASS_NAME, CreateButton, CreateInputField, CreateText, CreateVector2, CreateVector3, GetInstanceOfSingleton, GetScreenManagerInstance, GetTransform, GetValueStateText, SetProperty, Show2ButtonDialog_1, ShowSubWindowDialog, UpdateTextOfDefaultControls } from "../lib/lib"
+import { COMMON_2BUTTON_DIALOG_CLASS_NAME, CreateButton, CreateOptionInputField, CreateOptionToggleButton, CreateVector2, CreateVector3, GetInstanceOfSingleton, GetScreenManagerInstance, GetTransform, SetProperty, Show2ButtonDialog_1, ShowSubWindowDialog } from "../lib/lib"
 import * as autoRetire from './auto-retire'
 
 Il2Cpp.perform(() => {
@@ -47,27 +47,12 @@ Il2Cpp.perform(() => {
 
             const dialogTransform = GetTransform(dialog)
 
-            const sizeDelta = CreateVector2(400, 100)
+            const sharedSizeDelta = CreateVector2(400, 100)
 
-            const musicIdInputField = CreateInputField(String(musicId), 48, CreateVector3(-250, 150, 0), sizeDelta, 2, dialogTransform, (inputField: Il2Cpp.Object, value: string) => {
-                musicId = parseInt(value)
-            })
-            CreateText("Music ID:", 34, CreateVector3(0, 40, 0), sizeDelta, GetTransform(musicIdInputField), "black")
-
-            const difficultyInputField = CreateInputField(difficulty, 48, CreateVector3(250, 150, 0), sizeDelta, 4, dialogTransform, (inputField: Il2Cpp.Object, value: string) => {
-                difficulty = value
-            })
-            CreateText("Difficulty:", 34, CreateVector3(0, 40, 0), sizeDelta, GetTransform(difficultyInputField), "black")
-
-            const vocalIdInputField = CreateInputField(String(vocalId), 48, CreateVector3(-250, -70, 0), sizeDelta, 2, dialogTransform, (inputField: Il2Cpp.Object, value: string) => {
-                vocalId = parseInt(value)
-            })
-            CreateText("Vocal ID:", 34, CreateVector3(0, 40, 0), sizeDelta, GetTransform(vocalIdInputField), "black")
-
-            CreateButton(GetValueStateText("Auto Live", isAuto), 28, CreateVector3(250, -70, 0), sizeDelta, dialogTransform, (button: Il2Cpp.Object) => {
-                isAuto = !isAuto
-                UpdateTextOfDefaultControls(button, GetValueStateText("Auto Live", isAuto))
-            })
+            CreateOptionInputField(musicId, (value: number) => musicId = value, "Music ID:", 48, 34, CreateVector3(-250, 150, 0), sharedSizeDelta, dialogTransform)
+            CreateOptionInputField(difficulty, (value: string) => difficulty = value, "Difficulty:", 48, 34, CreateVector3(250, 150, 0), sharedSizeDelta, dialogTransform)
+            CreateOptionInputField(vocalId, (value: number) => vocalId = value, "Vocal ID:", 48, 34, CreateVector3(-250, -70, 0), sharedSizeDelta, dialogTransform)
+            CreateOptionToggleButton(isAuto, () => {isAuto = !isAuto; return isAuto}, "Auto Live", 28, CreateVector3(250, -70, 0), sharedSizeDelta, dialogTransform)
         })
 
         isButtonCreated = true
@@ -80,5 +65,5 @@ Il2Cpp.perform(() => {
         isButtonCreated = false
     }
 
-    autoRetire
+    autoRetire // Run auto-retire script from this script
 })

@@ -1,5 +1,5 @@
 import { AssemblyImage, DialogSize, DisplayLayerType, SystemAction, UnityAction } from "../lib/consts";
-import { COMMON_2BUTTON_DIALOG_CLASS_NAME, CreateButton, CreateInputField, CreateText, CreateVector2, CreateVector3, GetComponentInChildren, GetTransform, Show2ButtonDialog_1 } from "../lib/lib";
+import { COMMON_2BUTTON_DIALOG_CLASS_NAME, CreateButton, CreateOptionInputField, CreateVector2, CreateVector3, GetTransform, Show2ButtonDialog_1 } from "../lib/lib";
 
 Il2Cpp.perform(() => {
     let isButtonCreated = false
@@ -31,22 +31,11 @@ Il2Cpp.perform(() => {
 
             const dialogTransform = GetTransform(dialog)
 
-            const sizeDelta = CreateVector2(400, 100)
+            const sharedSizeDelta = CreateVector2(400, 100)
             
-            const assetbundleNameInputField = CreateInputField(assetbundleName, 48, CreateVector3(-250, 150, 0), sizeDelta, 4, dialogTransform, (inputField: Il2Cpp.Object, value: string) => {
-                assetbundleName = value
-            })
-            CreateText("Asset Bundle Name:", 28, CreateVector3(0, 40, 0), sizeDelta, GetTransform(assetbundleNameInputField), "black")
-
-            const scenarioIdInputField = CreateInputField(scenarioId, 48, CreateVector3(250, 150, 0), sizeDelta, 4, dialogTransform, (inputField: Il2Cpp.Object, value: string) => {
-                scenarioId = value
-            })
-            CreateText("Scenario ID:", 28, CreateVector3(0, 40, 0), sizeDelta, GetTransform(scenarioIdInputField), "black")
-
-            const episodeIdInputField = CreateInputField(String(episodeId), 48, CreateVector3(-250, -70, 0), sizeDelta, 2, dialogTransform, (inputField: Il2Cpp.Object, value: string) => {
-                episodeId = parseInt(value)
-            })
-            CreateText("Episode ID:", 34, CreateVector3(0, 40, 0), sizeDelta, GetTransform(episodeIdInputField), "black")
+            CreateOptionInputField(assetbundleName, (value: string) => assetbundleName = value, "Asset Bundle Name:", 48, 28, CreateVector3(-250, 150, 0), sharedSizeDelta, dialogTransform)
+            CreateOptionInputField(scenarioId, (value: string) => scenarioId = value, "Scenario ID:", 48, 28, CreateVector3(250, 150, 0), sharedSizeDelta, dialogTransform)
+            CreateOptionInputField(episodeId, (value: number) => episodeId = value, "Episode ID:", 48, 28, CreateVector3(-250, -70, 0), sharedSizeDelta, dialogTransform)
         })
 
         isButtonCreated = true

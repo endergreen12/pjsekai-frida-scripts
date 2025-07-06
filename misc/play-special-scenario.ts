@@ -1,5 +1,5 @@
 import { AssemblyImage, UnityAction } from "../lib/consts";
-import { COMMON_2BUTTON_DIALOG_CLASS_NAME, CreateButton, CreateInputField, CreateText, CreateVector2, CreateVector3, GetComponentInChildren, GetMasterDataManagerInstance, GetTransform, Show2ButtonDialog_1, ShowSubWindowDialog } from "../lib/lib";
+import { COMMON_2BUTTON_DIALOG_CLASS_NAME, CreateButton, CreateOptionInputField, CreateVector2, CreateVector3, GetMasterDataManagerInstance, GetTransform, Show2ButtonDialog_1, ShowSubWindowDialog } from "../lib/lib";
 
 Il2Cpp.perform(() => {
     let isButtonCreated = false
@@ -31,10 +31,7 @@ Il2Cpp.perform(() => {
 
             const dialogTransform = GetTransform(dialog)
 
-            const episodeIdInputField = CreateInputField(String(episodeId), 48, CreateVector3(0, 15, 0), CreateVector2(400, 100), 2, dialogTransform, (inputField: Il2Cpp.Object, value: string) => {
-                episodeId = parseInt(value)
-            })
-            CreateText("Episode ID:", 34, CreateVector3(0, 40, 0), CreateVector2(400, 100), GetTransform(episodeIdInputField), "black")
+            CreateOptionInputField(episodeId, (value: number) => episodeId = value, "Episode ID:", 48, 34, CreateVector3(0, 15, 0), CreateVector2(400, 100), dialogTransform)
         })
 
         isButtonCreated = true
