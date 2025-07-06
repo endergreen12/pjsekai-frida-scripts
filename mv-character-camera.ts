@@ -44,7 +44,7 @@ Il2Cpp.perform(() => {
         SetActiveOfDeactivateTargets(targetCharacter, false)
 
         SetProperty(mainCamTransform, "localEulerAngles", (isThirdPersonEnabled ? CreateVector3(180.0, 0.0, 180.0) : CreateVector3(0.0, 0.0, 90.0)).unbox())
-        SetProperty(mainCamTransform, "localPosition", (isThirdPersonEnabled ? CreateVector3(0.0, 0.6, 1.5) : CreateVector3(-0.07, 0.0, 0.005)).unbox())
+        SetProperty(mainCamTransform, "localPosition", (isThirdPersonEnabled ? CreateVector3(0.0, 0.6, 1.5) : CreateVector3(-0.04, 0.0, 0.0)).unbox())
     }
     
     // Implementation of switching target by back button in Android
