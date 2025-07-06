@@ -1,4 +1,4 @@
-import { AssemblyImage, DialogSize, DisplayLayerType, UnityEngineUIButton, } from "./consts"
+import { AssemblyImage, DialogSize, DisplayLayerType, TMPInputField, UnityEngineUIButton, } from "./consts"
 import { CreateButton, Show1ButtonDialog_1, GetComponentInChildren, GetProperty, GetInstanceOfSingleton, SetProperty, COMMON_1BUTTON_DIALOG_CLASS_NAME, GetTransform, CreateVector2, CreateVector3, CreateOptionToggleButton, CreateOptionInputField } from "./lib"
 
 // Shared //
@@ -113,12 +113,16 @@ import { CreateButton, Show1ButtonDialog_1, GetComponentInChildren, GetProperty,
                 }, "Mode", 28, CreateVector3(-250, 250, 0), sharedSizeDelta, dialogTransform, (value: boolean): string => value ? "Third Person" : "First Person")
                 if(isFixedCamera) // Disable the mode button for fixed camera
                 {
-                    const buttonComponent = GetComponentInChildren(modeButton, UnityEngineUIButton)
-                    SetProperty(buttonComponent, "interactable", false)
+                    SetProperty(GetComponentInChildren(modeButton, UnityEngineUIButton), "interactable", false)
                 }
 
-                CreateOptionToggleButton(changeFOV, () => {changeFOV = !changeFOV; return changeFOV}, "Change FOV", 28, CreateVector3(250, 250, 0), sharedSizeDelta, dialogTransform)
-                CreateOptionInputField(targetFOV, (value: number) => {targetFOV = value}, "Target FOV:", 48, 34, CreateVector3(-250, 30, 0), sharedSizeDelta, dialogTransform)
+                const targetFOVInputField = CreateOptionInputField(targetFOV, (value: number) => {targetFOV = value}, "Target FOV:", 48, 34, CreateVector3(-250, 30, 0), sharedSizeDelta, dialogTransform, changeFOV)
+                CreateOptionToggleButton(changeFOV, () => {
+                    changeFOV = !changeFOV
+                    SetProperty(GetComponentInChildren(targetFOVInputField, TMPInputField), "interactable", changeFOV)
+                    return changeFOV
+                }, "Change FOV", 28, CreateVector3(250, 250, 0), sharedSizeDelta, dialogTransform)
+
                 CreateOptionToggleButton(removeMeshOffTrack, () => {removeMeshOffTrack = !removeMeshOffTrack; return removeMeshOffTrack}, "Remove MeshOff tracks", 28, CreateVector3(250, 30, 0), sharedSizeDelta, dialogTransform)
                 CreateOptionToggleButton(removeOnlyMainCamAndDofTrack, () => {
                     removeOnlyMainCamAndDofTrack = !removeOnlyMainCamAndDofTrack

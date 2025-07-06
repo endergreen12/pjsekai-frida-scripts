@@ -16,6 +16,8 @@ export let UnityAction: Il2Cpp.Class = null
 export let UnityEngineUIImage: Il2Cpp.Image = null
 export let UnityEngineUIButton: Il2Cpp.Class = null
 
+export let TMPInputField: Il2Cpp.Class = null
+
 // C# enums //
     // Sekai.DisplayLayerType
     export const DisplayLayerType = {
@@ -50,4 +52,6 @@ Il2Cpp.perform(() => {
 
     UnityEngineUIImage = Il2Cpp.domain.assembly("UnityEngine.UI").image
     UnityEngineUIButton = UnityEngineUIImage.class("UnityEngine.UI.Button")
+
+    TMPInputField = Il2Cpp.domain.assembly("Unity.TextMeshPro").image.class("TMPro.TMP_InputField")
 })
