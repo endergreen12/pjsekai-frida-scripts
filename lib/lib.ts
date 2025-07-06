@@ -173,7 +173,26 @@ export function Show2ButtonDialog_1(className: string, dialogType: number, messa
 }
 
 // Misc
-export function GetValueStateText(name: string, value: boolean): string
+function GetValueStateText(name: string, value: boolean, customValueText: string): string
 {
-    return `${name}: ${value ? "Enabled": "Disabled"}`
+    return `${name}: ${customValueText === "" ? (value ? "Enabled": "Disabled") : customValueText}`
+}
+
+// Primitive types require this tedious method because changing them in a function does not change their original value
+export function CreateOptionToggleButton(targetValue: boolean, valueChangeFunc: () => boolean, text: string, fontSize: number, position: Il2Cpp.Object, sizeDelta: Il2Cpp.Object, parentTransform: Il2Cpp.Object, customValueTextFunc: (value: boolean) => string = () => ""): Il2Cpp.Object
+{
+    return CreateButton(GetValueStateText(text, targetValue, customValueTextFunc(targetValue)), fontSize, position, sizeDelta, parentTransform, (button: Il2Cpp.Object) => {
+                targetValue = valueChangeFunc() // Sync the value of this function with the changed value
+                UpdateTextOfDefaultControls(button, GetValueStateText(text, targetValue, customValueTextFunc(targetValue)))
+            })
+}
+
+export function CreateOptionInputField(targetValue: string | number, valueChangeFunc: (value: string | number) => void, text: string, inputFieldFontSize: number, textFontSize: number, position: Il2Cpp.Object, sizeDelta: Il2Cpp.Object, parentTransform: Il2Cpp.Object): Il2Cpp.Object
+{
+    const inputField = CreateInputField(String(targetValue), inputFieldFontSize, position, sizeDelta, typeof targetValue === "number" ? 2 : 0, parentTransform, (inputField: Il2Cpp.Object, value: string) => {
+                valueChangeFunc(typeof targetValue === "number" ? parseInt(value) : value)
+            })
+    CreateText(text, textFontSize, CreateVector3(0, 40, 0), sizeDelta, GetTransform(inputField), "black")
+
+    return inputField
 }
