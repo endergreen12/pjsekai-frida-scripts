@@ -1,10 +1,9 @@
 import { AssemblyImage, DialogSize, DisplayLayerType, UnityEngineUIButton, } from "./consts"
-import { CreateButton, Show1ButtonDialog_1, CreateInputField, CreateText, GetComponentInChildren, GetProperty, GetInstanceOfSingleton, SetProperty, COMMON_1BUTTON_DIALOG_CLASS_NAME, GetTransform, CreateVector2, CreateVector3, UpdateTextOfDefaultControls, GetValueStateText } from "./lib"
+import { CreateButton, Show1ButtonDialog_1, GetComponentInChildren, GetProperty, GetInstanceOfSingleton, SetProperty, COMMON_1BUTTON_DIALOG_CLASS_NAME, GetTransform, CreateVector2, CreateVector3, CreateOptionToggleButton, CreateOptionInputField } from "./lib"
 
 // Shared //
     // For Camera timeline //
-        const targets = ['"SubCamera"'] /* ['"MainCamera"', '"Sekai Dof Track"'] */
-        const reverseTargetJudge = false
+        let removeOnlyMainCamAndDofTrack = false
     // For Character timeline //
         let removeMeshOffTrack = false
     export function ChangeImpl_RemoveTargetTracksFromTimeline()
@@ -18,7 +17,8 @@ import { CreateButton, Show1ButtonDialog_1, CreateInputField, CreateText, GetCom
             switch(timelineNameStr)
             {
                 case '"Camera"':
-                    RemoveTracksFromTimeLine(trackObjects, (name: string): boolean => targets.includes(name) === reverseTargetJudge)
+                    RemoveTracksFromTimeLine(trackObjects, (name: string): boolean => 
+                            (removeOnlyMainCamAndDofTrack ? ['"MainCamera"', '"Sekai Dof Track"'] : ['"SubCamera"']).includes(name) === removeOnlyMainCamAndDofTrack)
                     break
 
                 case '"Character"':
@@ -102,40 +102,28 @@ import { CreateButton, Show1ButtonDialog_1, CreateInputField, CreateText, GetCom
                 return
 
             CreateButton("Options", 38, CreateVector3(400, 400, 0), CreateVector2(300, 100), GetTransform(this as Il2Cpp.Object), (button: Il2Cpp.Object) => {
-                const dialog = Show1ButtonDialog_1(COMMON_1BUTTON_DIALOG_CLASS_NAME, 0, "empty", "WORD_CLOSE", NULL, DisplayLayerType.Layer_Dialog, DialogSize.Medium)
+                const dialog = Show1ButtonDialog_1(COMMON_1BUTTON_DIALOG_CLASS_NAME, 0, "empty", "WORD_CLOSE", NULL, DisplayLayerType.Layer_Dialog, DialogSize.Large)
                 const dialogTransform = GetTransform(dialog)
 
-                const sizeDelta = CreateVector2(400, 100)
+                const sharedSizeDelta = CreateVector2(400, 100)
 
-                // Mode Switch button
-                const modeButton = CreateButton(GetModeName(), 28, CreateVector3(-250, 150, 0), sizeDelta, dialogTransform, (button: Il2Cpp.Object) => {
+                const modeButton = CreateOptionToggleButton(isThirdPersonEnabled, () => {
                     isThirdPersonEnabled = !isThirdPersonEnabled
-                    UpdateTextOfDefaultControls(button, GetModeName())
-                })
-
-                if(isFixedCamera) // Disable mode button for fixed camera
+                    return isThirdPersonEnabled
+                }, "Mode", 28, CreateVector3(-250, 250, 0), sharedSizeDelta, dialogTransform, (value: boolean): string => value ? "Third Person" : "First Person")
+                if(isFixedCamera) // Disable the mode button for fixed camera
                 {
                     const buttonComponent = GetComponentInChildren(modeButton, UnityEngineUIButton)
                     SetProperty(buttonComponent, "interactable", false)
                 }
 
-                // Change FOV button
-                CreateButton(GetValueStateText("Change FOV", changeFOV), 28, CreateVector3(250, 150, 0), sizeDelta, dialogTransform, (button: Il2Cpp.Object) => {
-                    changeFOV = !changeFOV
-                    UpdateTextOfDefaultControls(button, GetValueStateText("Change FOV", changeFOV))
-                })
-
-                // Target FOV inputField
-                const targetFOVInputField = CreateInputField(String(targetFOV), 48, CreateVector3(-250, -70, 0), sizeDelta, 2, dialogTransform, (inputField: Il2Cpp.Object, value: string) => {
-                    targetFOV = parseInt(value)
-                })
-                CreateText("Target FOV:", 34, CreateVector3(0, 40, 0), sizeDelta, GetTransform(targetFOVInputField), "black")
-
-                // Remove MeshOff tracks button
-                CreateButton(GetValueStateText("Remove MeshOff tracks", removeMeshOffTrack), 28, CreateVector3(250, -70, 0), sizeDelta, dialogTransform, (button: Il2Cpp.Object) => {
-                    removeMeshOffTrack = !removeMeshOffTrack
-                    UpdateTextOfDefaultControls(button, GetValueStateText("Remove MeshOff tracks", removeMeshOffTrack))
-                })
+                CreateOptionToggleButton(changeFOV, () => {changeFOV = !changeFOV; return changeFOV}, "Change FOV", 28, CreateVector3(250, 250, 0), sharedSizeDelta, dialogTransform)
+                CreateOptionInputField(targetFOV, (value: number) => {targetFOV = value}, "Target FOV:", 48, 34, CreateVector3(-250, 30, 0), sharedSizeDelta, dialogTransform)
+                CreateOptionToggleButton(removeMeshOffTrack, () => {removeMeshOffTrack = !removeMeshOffTrack; return removeMeshOffTrack}, "Remove MeshOff tracks", 28, CreateVector3(250, 30, 0), sharedSizeDelta, dialogTransform)
+                CreateOptionToggleButton(removeOnlyMainCamAndDofTrack, () => {
+                    removeOnlyMainCamAndDofTrack = !removeOnlyMainCamAndDofTrack
+                    return removeOnlyMainCamAndDofTrack
+                }, "Remove only MainCam and DoF tracks", 28, CreateVector3(-250, -190, 0), sharedSizeDelta, dialogTransform)
             })
             
             isButtonCreated = true
@@ -147,11 +135,6 @@ import { CreateButton, Show1ButtonDialog_1, CreateInputField, CreateText, GetCom
 
             isButtonCreated = false
         }
-    }
-
-    function GetModeName(): string
-    {
-        return "Mode: " + (isThirdPersonEnabled ? "Third Person" : "First Person")
     }
 
     export function CharModelList_LogIndexAndCharName(characterList: Il2Cpp.Array<Il2Cpp.Object>)
