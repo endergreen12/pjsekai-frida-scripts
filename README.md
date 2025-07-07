@@ -38,7 +38,9 @@ Trace Unity log functions
 
   ![out](https://github.com/user-attachments/assets/4b435987-d596-419e-88d2-48367a448349)
 
-On Android, you can switch the target by pressing the back button
+You can switch between targets by swiping the screen
+
+Swipe left to move to the next character, and swipe right to go back to the previous character
 
 ## Options
 Some options for fixed and character camera are provided
