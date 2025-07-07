@@ -3,7 +3,7 @@ import { ChangeImpl_RemoveTargetTracksFromTimeline, CharModelList_LogIndexAndCha
     GetCharacterNameFromCharacterModel, isThirdPersonEnabled, GetCharacterModelListFromMVModel, GetMVModelInstance,
     GetTargetTransformOfCharModelToAttach, GetMainCamFromMVCameraModel, ChangeImpl_CreateOpenOptionDialogButton,
     ChangeImpl_ChangeFOV} from "./lib/mv-utils";
-import { AssemblyImage } from "./lib/consts";
+import { AssemblyImage, UnityEngineInput } from "./lib/consts";
 import { CreateVector3, GetProperty, GetTransform, SetParent, SetProperty } from "./lib/lib";
 
 let targetCharIndex = 0
@@ -48,26 +48,70 @@ Il2Cpp.perform(() => {
 
         SetProperty(mainCam, "nearClipPlane", 0.01)
     }
-    
-    // Implementation of switching target by back button in Android
-    AssemblyImage.class("Sekai.Core.Live.MusicVideoController").method("OnBackKey").implementation = function()
+
+    let hasTargetChanged = false
+    let gameStateAtTouched = ""
+    const swipeSensitivity = 30
+    AssemblyImage.class("Sekai.Core.Live.MusicVideoController").method("OnUpdate").implementation = function()
     {
-        const mvModelInstance = GetMVModelInstance()
-        const mainCam = GetMainCamFromMVCameraModel(GetProperty(mvModelInstance, "MainCameraModel"))
-        const mainCamTransform = GetTransform(mainCam)
-        const characterModelList = GetCharacterModelListFromMVModel(mvModelInstance)
+        this.method("OnUpdate").invoke()
 
-        // Reactivate the elements of character deactivated before
-        SetActiveOfDeactivateTargets(characterModelList.get(targetCharIndex), true)
-    
-        // Increment targetCharIndex, set to 0 if it exceeds the range of CharacterModelArray
-        targetCharIndex = targetCharIndex >= characterModelList.length - 1 ? 0 : targetCharIndex + 1
-    
-        const newTargetCharacterModel = characterModelList.get(targetCharIndex)
+        if(GetProperty<number>(UnityEngineInput, "touchCount") > 0)
+        {
+            const touch = UnityEngineInput.method<Il2Cpp.Object>("GetTouch").invoke(0)
+            const deltaX = GetProperty(touch, "deltaPosition").field<number>("x").value
 
-        console.log(`Set target index to ${targetCharIndex} | ${GetCharacterNameFromCharacterModel(newTargetCharacterModel)}`)
-        
-        SetParent(mainCamTransform, GetTargetTransformOfCharModelToAttach(newTargetCharacterModel))
-        SetActiveOfDeactivateTargets(newTargetCharacterModel, false)
+            if(GetProperty(touch, "phase").toString() == "Began")
+            {
+                gameStateAtTouched = this.field("state").value.toString()
+            }
+
+            if(!hasTargetChanged && Math.abs(deltaX) >= swipeSensitivity)
+            {
+                hasTargetChanged = true
+
+                const mvModelInstance = GetMVModelInstance()
+                const mainCam = GetMainCamFromMVCameraModel(GetProperty(mvModelInstance, "MainCameraModel"))
+                const mainCamTransform = GetTransform(mainCam)
+                const characterModelList = GetCharacterModelListFromMVModel(mvModelInstance)
+
+                // Reactivate the elements of character deactivated before
+                SetActiveOfDeactivateTargets(characterModelList.get(targetCharIndex), true)
+            
+                if(deltaX >= swipeSensitivity) // Decrease the index
+                {
+                    targetCharIndex = targetCharIndex - 1 < 0 ? characterModelList.length - 1 : targetCharIndex - 1
+                } else if(deltaX <= -swipeSensitivity) // Increase the index
+                {
+                    targetCharIndex = targetCharIndex + 1 > characterModelList.length - 1 ? 0 : targetCharIndex + 1
+                }
+            
+                const newTargetCharacterModel = characterModelList.get(targetCharIndex)
+
+                console.log(`Set target index to ${targetCharIndex} | ${GetCharacterNameFromCharacterModel(newTargetCharacterModel)}`)
+                
+                SetParent(mainCamTransform, GetTargetTransformOfCharModelToAttach(newTargetCharacterModel))
+                SetActiveOfDeactivateTargets(newTargetCharacterModel, false)
+            }
+
+            if(GetProperty(touch, "phase").toString() == "Ended")
+            {
+                if(!hasTargetChanged)
+                {
+                    if(gameStateAtTouched != "Pause")
+                    {
+                        this.method("OnPause").invoke()
+                    }
+                } else {
+                    hasTargetChanged = false
+                }
+            }
+        }
+    }
+
+    // Disable pausing by touching the screen
+    AssemblyImage.class("Sekai.Core.Live.MusicVideoController").method("Pause").implementation = function()
+    {
+
     }
 })
