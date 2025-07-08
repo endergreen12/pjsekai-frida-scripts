@@ -49,23 +49,15 @@ You can change those from the option dialog
 
 A button to open the option dialog will be added to the MV select screen
 
-![Screenshot_20250706-171600](https://github.com/user-attachments/assets/cfd8f1f9-36a7-4d50-a533-9021151a549f)
+![Screenshot_20250708-220128](https://github.com/user-attachments/assets/f8bfc461-797e-4ea4-9b35-7d94060bc0d4)
 
-Here are the explanations for the options:
+Here are the explanation(s) for the options:
 
 - Remove MeshOff tracks
   
   In some MV, characters may become disappeared due to staging
 
   This option prevents it
-
-- Remove only MainCam and DoF tracks
-
-  Set this true if you want to keep post-processing etc.
-
-For Remove only MainCam and DoF tracks and Remove Meshoff tracks options please note that they might not work
-
-This is because the script will remove tracks with a specific name, but the track supposed to remove may have a different name, so in that case it has no effect
 
 ## misc/
 There are some scripts in the folder:
