@@ -4,22 +4,6 @@ If you use these scripts for a video, please give credit
 You are not allowed to adapt the code of these scripts to other scripts or publish them as your own scripts
 
 # Scripts
-## dumper.ts
-Dump MasterData and wordings, dumped data will be saved to "/sdcard/Android/data/com.sega.pjsekai/files/dumped"
-
-A button to start dumping will be added to the option dialog
-
-![image](https://github.com/user-attachments/assets/b95c522b-9ebe-4761-8f73-721c9b37bafa)
-
-By default, the script will dump MasterMusicAlls, MasterEventStories, MasterSpecialStoryMap and MasterUnitStoryEpisodeAll
-
-You can easily change the dump targets by changing targetDataNameArray in the script
-
-![image](https://github.com/user-attachments/assets/28fef10a-9dcd-4ba5-898b-5cf98fd9784c)
-
-## logger.ts
-Trace Unity log functions
-
 ## mv-free-camera.ts
 
 The left half of the screen is for moving the position and the right half is for moving the viewpoint
@@ -44,7 +28,7 @@ You can switch between targets by swiping the screen
 
 Swipe left to move to the next character, and swipe right to go back to the previous character
 
-## Options
+### Options
 Some options for fixed and character camera are provided
 
 You can change those from the option dialog
@@ -60,6 +44,22 @@ Here are the explanation(s) for the options:
   In some MV, characters may become disappeared due to staging
 
   This option prevents it
+
+## dumper.ts
+Dump MasterData and wordings, dumped data will be saved to "/sdcard/Android/data/com.sega.pjsekai/files/dumped"
+
+A button to start dumping will be added to the option dialog
+
+![image](https://github.com/user-attachments/assets/b95c522b-9ebe-4761-8f73-721c9b37bafa)
+
+By default, the script will dump MasterMusicAlls, MasterEventStories, MasterSpecialStoryMap and MasterUnitStoryEpisodeAll
+
+You can easily change the dump targets by changing targetDataNameArray in the script
+
+![image](https://github.com/user-attachments/assets/28fef10a-9dcd-4ba5-898b-5cf98fd9784c)
+
+## logger.ts
+Trace Unity log functions
 
 ## misc/
 There are some scripts in the folder:
