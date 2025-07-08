@@ -23,11 +23,11 @@ Il2Cpp.perform(() => {
     
         if(targetCharIndex > characterList.length - 1)
         {
-            console.log("targetCharIndex exceeds the range of characterList, setting to 0")
+            console.log("The target index exceeds the range of characterList, setting to 0")
             targetCharIndex = 0
         }
 
-        console.log(`Currently the target index is set to ${targetCharIndex} | ${GetCharacterNameFromCharacterModel(characterList.get(targetCharIndex))}`)
+        console.log(`Current target index: ${targetCharIndex} | ${GetCharacterNameFromCharacterModel(characterList.get(targetCharIndex))}`)
     }
 
     AssemblyImage.class("Sekai.Core.Live.MusicVideoController").method("Start").implementation = function()
@@ -49,8 +49,8 @@ Il2Cpp.perform(() => {
         SetProperty(mainCam, "nearClipPlane", 0.01)
     }
 
-    let hasTargetChanged = false
-    let gameStateAtTouched = ""
+    let hasTargetBeenChanged = false
+    let liveStateAtTouchBegan = "" // Used to prevent the music video from being immediately paused when it is resumed
     const swipeSensitivity = 30
     AssemblyImage.class("Sekai.Core.Live.MusicVideoController").method("OnUpdate").implementation = function()
     {
@@ -61,14 +61,25 @@ Il2Cpp.perform(() => {
             const touch = UnityEngineInput.method<Il2Cpp.Object>("GetTouch").invoke(0)
             const deltaX = GetProperty(touch, "deltaPosition").field<number>("x").value
 
-            if(GetProperty(touch, "phase").toString() == "Began")
+            switch(GetProperty(touch, "phase").toString())
             {
-                gameStateAtTouched = this.field("state").value.toString()
+                case "Began":
+                    liveStateAtTouchBegan = this.field("state").value.toString()
+                    return
+
+                case "Ended":
+                    if(!hasTargetBeenChanged && liveStateAtTouchBegan != "Pause")
+                    {
+                        this.method("OnPause").invoke()
+                    } else {
+                        hasTargetBeenChanged = false
+                    }
+                    return
             }
 
-            if(!hasTargetChanged && Math.abs(deltaX) >= swipeSensitivity)
+            if(!hasTargetBeenChanged && Math.abs(deltaX) >= swipeSensitivity)
             {
-                hasTargetChanged = true
+                hasTargetBeenChanged = true
 
                 const mvModelInstance = GetMVModelInstance()
                 const mainCam = GetMainCamFromMVCameraModel(GetProperty(mvModelInstance, "MainCameraModel"))
@@ -78,10 +89,10 @@ Il2Cpp.perform(() => {
                 // Reactivate the elements of character deactivated before
                 SetActiveOfDeactivateTargets(characterModelList.get(targetCharIndex), true)
             
-                if(deltaX >= swipeSensitivity) // Decrease the index
+                if(deltaX >= swipeSensitivity) // Right Swipe
                 {
                     targetCharIndex = targetCharIndex - 1 < 0 ? characterModelList.length - 1 : targetCharIndex - 1
-                } else if(deltaX <= -swipeSensitivity) // Increase the index
+                } else if(deltaX <= -swipeSensitivity) // Left Swipe
                 {
                     targetCharIndex = targetCharIndex + 1 > characterModelList.length - 1 ? 0 : targetCharIndex + 1
                 }
@@ -92,19 +103,6 @@ Il2Cpp.perform(() => {
                 
                 SetParent(mainCamTransform, GetTargetTransformOfCharModelToAttach(newTargetCharacterModel))
                 SetActiveOfDeactivateTargets(newTargetCharacterModel, false)
-            }
-
-            if(GetProperty(touch, "phase").toString() == "Ended")
-            {
-                if(!hasTargetChanged)
-                {
-                    if(gameStateAtTouched != "Pause")
-                    {
-                        this.method("OnPause").invoke()
-                    }
-                } else {
-                    hasTargetChanged = false
-                }
             }
         }
     }
