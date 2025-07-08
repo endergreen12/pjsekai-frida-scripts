@@ -3,7 +3,7 @@ import { CreateButton, Show1ButtonDialog_1, GetComponentInChildren, GetProperty,
 
 // Shared //
     // For Camera timeline //
-        let removeOnlyMainCamAndDofTrack = false
+        let tryToLeavePostProcessing = false
     // For Character timeline //
         let removeMeshOffTrack = false
     export function ChangeImpl_RemoveTargetTracksFromTimeline()
@@ -17,8 +17,24 @@ import { CreateButton, Show1ButtonDialog_1, GetComponentInChildren, GetProperty,
             switch(timelineNameStr)
             {
                 case '"Camera"':
-                    RemoveTracksFromTimeLine(trackObjects, (name: string): boolean => 
-                            (removeOnlyMainCamAndDofTrack ? ['"MainCamera"', '"Sekai Dof Track"'] : ['"SubCamera"']).includes(name) === removeOnlyMainCamAndDofTrack)
+                    RemoveTracksFromTimeLine(trackObjects, (name: string): boolean => {
+                        if(tryToLeavePostProcessing)
+                        {
+                            const searchStrArray = ["maincamera", "dof", "effect"]
+                            const lowerCasedName = name.toLowerCase()
+                            for(let i = 0; i < searchStrArray.length; i++) // forEach is gay
+                            {
+                                if(lowerCasedName.includes(searchStrArray[i]))
+                                {
+                                    return true
+                                }
+                            }
+
+                            return false
+                        } else {
+                            return name != '"SubCamera"'
+                        }
+                    })
                     break
 
                 case '"Character"':
@@ -124,10 +140,10 @@ import { CreateButton, Show1ButtonDialog_1, GetComponentInChildren, GetProperty,
                 }, "Change FOV", 28, CreateVector3(250, 250, 0), sharedSizeDelta, dialogTransform)
 
                 CreateOptionToggleButton(removeMeshOffTrack, () => {removeMeshOffTrack = !removeMeshOffTrack; return removeMeshOffTrack}, "Remove MeshOff tracks", 28, CreateVector3(250, 30, 0), sharedSizeDelta, dialogTransform)
-                CreateOptionToggleButton(removeOnlyMainCamAndDofTrack, () => {
-                    removeOnlyMainCamAndDofTrack = !removeOnlyMainCamAndDofTrack
-                    return removeOnlyMainCamAndDofTrack
-                }, "Remove only MainCam and DoF tracks", 28, CreateVector3(-250, -190, 0), sharedSizeDelta, dialogTransform)
+                CreateOptionToggleButton(tryToLeavePostProcessing, () => {
+                    tryToLeavePostProcessing = !tryToLeavePostProcessing
+                    return tryToLeavePostProcessing
+                }, "Try to leave post-processing", 28, CreateVector3(-250, -190, 0), sharedSizeDelta, dialogTransform)
             })
             
             isButtonCreated = true
