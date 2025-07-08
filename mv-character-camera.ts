@@ -2,7 +2,8 @@ import { ChangeImpl_RemoveTargetTracksFromTimeline, CharModelList_LogIndexAndCha
     SetActiveOfDeactivateTargets, ChangeImpl_ForceDisableCameraDecoration,
     GetCharacterNameFromCharacterModel, isThirdPersonEnabled, GetCharacterModelListFromMVModel, GetMVModelInstance,
     GetTargetTransformOfCharModelToAttach, GetMainCamFromMVCameraModel, ChangeImpl_CreateOpenOptionDialogButton,
-    ChangeImpl_ChangeFOV} from "./lib/mv-utils";
+    ChangeImpl_ChangeFOV,
+    ChangeImpl_DisablePausingByTouchingScreen} from "./lib/mv-utils";
 import { AssemblyImage, UnityEngineInput } from "./lib/consts";
 import { CreateVector3, GetProperty, GetTransform, SetParent, SetProperty } from "./lib/lib";
 
@@ -13,6 +14,7 @@ Il2Cpp.perform(() => {
     ChangeImpl_ForceDisableCameraDecoration()
     ChangeImpl_ChangeFOV()
     ChangeImpl_CreateOpenOptionDialogButton()
+    ChangeImpl_DisablePausingByTouchingScreen()
 
     AssemblyImage.class("Sekai.Live.Model.MusicVideoModel").method("RegisterMainCharacterModel").implementation = function(characterModel: Il2Cpp.Object)
     {
@@ -55,6 +57,11 @@ Il2Cpp.perform(() => {
     AssemblyImage.class("Sekai.Core.Live.MusicVideoController").method("OnUpdate").implementation = function()
     {
         this.method("OnUpdate").invoke()
+
+        if(this.field("state").value.toString() == "Exit")
+        {
+            return
+        }
 
         if(GetProperty<number>(UnityEngineInput, "touchCount") > 0)
         {
@@ -105,11 +112,5 @@ Il2Cpp.perform(() => {
                 SetActiveOfDeactivateTargets(newTargetCharacterModel, false)
             }
         }
-    }
-
-    // Disable pausing by touching the screen
-    AssemblyImage.class("Sekai.Core.Live.MusicVideoController").method("Pause").implementation = function()
-    {
-
     }
 })

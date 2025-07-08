@@ -102,6 +102,14 @@ import { CreateButton, Show1ButtonDialog_1, GetComponentInChildren, GetProperty,
             }
         }
     }
+
+    export function ChangeImpl_DisablePausingByTouchingScreen()
+    {
+        AssemblyImage.class("Sekai.Core.Live.MusicVideoController").method("Pause").implementation = function()
+        {
+
+        }
+    }
 //
 
 // For character camera //
