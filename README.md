@@ -4,25 +4,11 @@ If you use these scripts for a video, please give credit
 You are not allowed to adapt the code of these scripts to other scripts or publish them as your own scripts
 
 # Scripts
-## dumper.ts
-Dump MasterData and wordings, dumped data will be saved to "/sdcard/Android/data/com.sega.pjsekai/files/dumped"
+## mv-free-camera.ts
 
-A button to start dumping will be added to the option dialog
+Use the left half of the screen to move, and the right half to look around
 
-![image](https://github.com/user-attachments/assets/b95c522b-9ebe-4761-8f73-721c9b37bafa)
-
-By default, the script will dump MasterMusicAlls, MasterEventStories, MasterSpecialStoryMap and MasterUnitStoryEpisodeAll
-
-You can easily change the dump targets by changing targetDataNameArray in the script
-
-![image](https://github.com/user-attachments/assets/28fef10a-9dcd-4ba5-898b-5cf98fd9784c)
-
-## logger.ts
-Trace Unity log functions
-
-## mv-fixed-camera.ts
-
-![Screenshot_2025 03 25_04 07 30 921](https://github.com/user-attachments/assets/e34d21c3-00f4-458e-abc0-852615ea54e4)
+https://github.com/user-attachments/assets/a8406dd8-b1c2-4d40-a2f6-6733dd3fda58
 
 ## mv-character-camera.ts
 
@@ -42,7 +28,7 @@ You can switch between targets by swiping the screen
 
 Swipe left to move to the next character, and swipe right to go back to the previous character
 
-## Options
+### Options
 Some options for fixed and character camera are provided
 
 You can change those from the option dialog
@@ -58,6 +44,22 @@ Here are the explanation(s) for the options:
   In some MV, characters may become disappeared due to staging
 
   This option prevents it
+
+## dumper.ts
+Dump MasterData and wordings, dumped data will be saved to "/sdcard/Android/data/com.sega.pjsekai/files/dumped"
+
+A button to start dumping will be added to the option dialog
+
+![image](https://github.com/user-attachments/assets/b95c522b-9ebe-4761-8f73-721c9b37bafa)
+
+By default, the script will dump MasterMusicAlls, MasterEventStories, MasterSpecialStoryMap and MasterUnitStoryEpisodeAll
+
+You can easily change the dump targets by changing targetDataNameArray in the script
+
+![image](https://github.com/user-attachments/assets/28fef10a-9dcd-4ba5-898b-5cf98fd9784c)
+
+## logger.ts
+Trace Unity log functions
 
 ## misc/
 There are some scripts in the folder:
