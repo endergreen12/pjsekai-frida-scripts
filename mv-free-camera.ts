@@ -28,11 +28,12 @@ Il2Cpp.perform(() => {
         mvModelInstance = GetMVModelInstance()
         mainCam = GetMainCamFromMVCameraModel(GetProperty(mvModelInstance, "MainCameraModel"))
         mainCamTransform = GetTransform(mainCam)
+        screenWidth = GetProperty<number>(CoreModuleImage.class("UnityEngine.Screen"), "width")
     }
 
     const speed = 0.001
     const angleSpeed = 0.02
-    const screenWidth = GetProperty<number>(CoreModuleImage.class("UnityEngine.Screen"), "width")
+    let screenWidth = 0
     let storedLeftTouchPos: Il2Cpp.Object = null
     let storedRightTouchPos: Il2Cpp.Object = null
     AssemblyImage.class("Sekai.Core.Live.MusicVideoController").method("OnUpdate").implementation = function()
