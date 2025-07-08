@@ -29,7 +29,7 @@ You can switch between targets by swiping the screen
 Swipe left to move to the next character, and swipe right to go back to the previous character
 
 ### Options
-Some options for fixed and character camera are provided
+Some options for free camera and character camera are provided
 
 You can change those from the option dialog
 
