@@ -134,11 +134,7 @@ import { CreateButton, Show1ButtonDialog_1, GetComponentInChildren, GetProperty,
                 const modeButton = CreateOptionToggleButton(isThirdPersonEnabled, () => {
                     isThirdPersonEnabled = !isThirdPersonEnabled
                     return isThirdPersonEnabled
-                }, "Mode", 28, CreateVector3(-250, 250, 0), sharedSizeDelta, dialogTransform, (value: boolean): string => value ? "Third Person" : "First Person")
-                if(isFixedCamera) // Disable the mode button for fixed camera
-                {
-                    SetProperty(GetComponentInChildren(modeButton, UnityEngineUIButton), "interactable", false)
-                }
+                }, "Mode", 28, CreateVector3(-250, 250, 0), sharedSizeDelta, dialogTransform, (value: boolean): string => value ? "Third Person" : "First Person", !isFixedCamera)
 
                 const targetFOVInputField = CreateOptionInputField(targetFOV, (value: number) => {targetFOV = value}, "Target FOV:", 48, 34, CreateVector3(-250, 30, 0), sharedSizeDelta, dialogTransform, changeFOV)
                 CreateOptionToggleButton(changeFOV, () => {
