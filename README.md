@@ -6,7 +6,7 @@ You are not allowed to adapt the code of these scripts to other scripts or publi
 # Scripts
 ## mv-free-camera.ts
 
-The left half of the screen is for moving the position and the right half is for moving the viewpoint
+Use the left half of the screen to move, and the right half to look around
 
 https://github.com/user-attachments/assets/a8406dd8-b1c2-4d40-a2f6-6733dd3fda58
 
