@@ -20,9 +20,11 @@ You can easily change the dump targets by changing targetDataNameArray in the sc
 ## logger.ts
 Trace Unity log functions
 
-## mv-fixed-camera.ts
+## mv-free-camera.ts
 
-![Screenshot_2025 03 25_04 07 30 921](https://github.com/user-attachments/assets/e34d21c3-00f4-458e-abc0-852615ea54e4)
+The left half of the screen is for moving the position and the right half is for moving the viewpoint
+
+https://github.com/user-attachments/assets/a8406dd8-b1c2-4d40-a2f6-6733dd3fda58
 
 ## mv-character-camera.ts
 
