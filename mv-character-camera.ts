@@ -5,7 +5,7 @@ import { ChangeImpl_RemoveTargetTracksFromTimeline, CharModelList_LogIndexAndCha
     ChangeImpl_ChangeFOV,
     ChangeImpl_DisablePausingByTouchingScreen} from "./lib/mv-utils";
 import { AssemblyImage, UnityEngineInput } from "./lib/consts";
-import { CreateVector3, GetProperty, GetTransform, SetParent, SetProperty } from "./lib/lib";
+import { CreateVector3, GetField, GetProperty, GetTransform, SetParent, SetProperty } from "./lib/lib";
 
 let targetCharIndex = 0
 
@@ -58,7 +58,8 @@ Il2Cpp.perform(() => {
     {
         this.method("OnUpdate").invoke()
 
-        if(this.field("state").value.toString() == "Exit")
+        const liveStateStr = GetField(this as Il2Cpp.Object, "state").toString()
+        if(liveStateStr == "Exit")
         {
             return
         }
@@ -66,12 +67,12 @@ Il2Cpp.perform(() => {
         if(GetProperty<number>(UnityEngineInput, "touchCount") > 0)
         {
             const touch = UnityEngineInput.method<Il2Cpp.Object>("GetTouch").invoke(0)
-            const deltaX = GetProperty(touch, "deltaPosition").field<number>("x").value
+            const deltaX = GetField<number>(GetProperty<Il2Cpp.Object>(touch, "deltaPosition"), "x")
 
             switch(GetProperty(touch, "phase").toString())
             {
                 case "Began":
-                    liveStateAtTouchBegan = this.field("state").value.toString()
+                    liveStateAtTouchBegan = liveStateStr
                     return
 
                 case "Ended":

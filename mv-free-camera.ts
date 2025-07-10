@@ -1,5 +1,5 @@
 import { AssemblyImage, CoreModuleImage, UnityEngineInput } from "./lib/consts";
-import { AddTwoVector3, CreateVector3, GetProperty, GetTransform, MultiplyVector3, SetProperty } from "./lib/lib";
+import { AddTwoVector3, CreateVector3, GetField, GetProperty, GetTransform, MultiplyVector3, SetProperty } from "./lib/lib";
 import { ChangeImpl_RemoveTargetTracksFromTimeline, GetMainCamFromMVCameraModel, ChangeImpl_ForceDisableCameraDecoration, ChangeImpl_ChangeFOV, 
     ChangeImpl_CreateOpenOptionDialogButton, ChangeImpl_DisablePausingByTouchingScreen, GetMVModelInstance } from "./lib/mv-utils";
 
@@ -40,7 +40,7 @@ Il2Cpp.perform(() => {
     {
         this.method("OnUpdate").invoke()
 
-        if(this.field("state").value.toString() == "Exit")
+        if(GetField(this as Il2Cpp.Object, "state").toString() == "Exit")
         {
             return
         }
@@ -55,7 +55,7 @@ Il2Cpp.perform(() => {
                 const touchPos = GetProperty(touch, "position")
                 const touchPhaseStr = GetProperty(touch, "phase").toString()
 
-                if(touchPos.field<number>("x").value <= screenWidth / 2) // Left
+                if(GetField<number>(touchPos, "x") <= screenWidth / 2) // Left
                 {
                     if(touchPhaseStr == "Began")
                     {
@@ -72,9 +72,9 @@ Il2Cpp.perform(() => {
                     SetProperty(mainCamTransform, "position", AddTwoVector3(
                         AddTwoVector3(
                             GetProperty(mainCamTransform, "position"), 
-                            MultiplyVector3(GetProperty(mainCamTransform, "right"), (touchPos.field<number>("x").value - storedLeftTouchPos.field<number>("x").value) * speed)),
+                            MultiplyVector3(GetProperty(mainCamTransform, "right"), (GetField<number>(touchPos, "x") - GetField<number>(storedLeftTouchPos, "x")) * speed)),
                         MultiplyVector3(
-                            GetProperty(mainCamTransform, "forward"), (touchPos.field<number>("y").value - storedLeftTouchPos.field<number>("y").value) * speed)))
+                            GetProperty(mainCamTransform, "forward"), (GetField<number>(touchPos, "y") - GetField<number>(storedLeftTouchPos, "y")) * speed)))
                 } else { // Right
                     if(touchPhaseStr == "Began")
                     {
@@ -90,7 +90,7 @@ Il2Cpp.perform(() => {
                     SetProperty(mainCamTransform, "eulerAngles", 
                         AddTwoVector3(
                             GetProperty(mainCamTransform, "eulerAngles"), 
-                            CreateVector3((touchPos.field<number>("y").value - storedRightTouchPos.field<number>("y").value) * -1 * angleSpeed, (touchPos.field<number>("x").value - storedRightTouchPos.field<number>("x").value) * angleSpeed, 0)))
+                            CreateVector3((GetField<number>(touchPos, "y") - GetField<number>(storedRightTouchPos, "y")) * -1 * angleSpeed, (GetField<number>(touchPos, "x") - GetField<number>(storedRightTouchPos, "x")) * angleSpeed, 0)))
                 }
             }
         }

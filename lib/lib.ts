@@ -148,6 +148,17 @@ export function GetScreenManagerInstance(): Il2Cpp.Object
     return GetInstanceOfSingleton(AssemblyImage.class("Sekai.ScreenManager"))
 }
 
+// Field
+export function GetField<T extends Il2Cpp.Field.Type = Il2Cpp.Object>(obj: Il2Cpp.Object | Il2Cpp.Class, fieldName: string): T
+{
+    return obj.field<T>(fieldName).value
+}
+
+export function SetField(obj: Il2Cpp.Object | Il2Cpp.Class, fieldName: string, value: Il2Cpp.Field.Type)
+{
+    obj.field(fieldName).value = value
+}
+
 // Dialog
 export const COMMON_1BUTTON_DIALOG_CLASS_NAME = "Sekai.Common1ButtonDialog"
 export function Show1ButtonDialog_1(className: string, dialogType: number, messageBodyKey: string, okButtonLabelKey: string, onClickOK: Il2Cpp.Object | NativePointer, layerType: number = DisplayLayerType.Layer_Dialog, dialogSize: number = DialogSize.Manual, allowCloseExternal: boolean = true): Il2Cpp.Object

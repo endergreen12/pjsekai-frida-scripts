@@ -1,6 +1,6 @@
 import path from "path";
 import { AssemblyImage } from "./lib/consts";
-import { CreateButton, ShowSubWindowDialog, GetMasterDataManagerInstance, GetTransform, CreateVector3, CreateVector2 } from "./lib/lib";
+import { CreateButton, ShowSubWindowDialog, GetMasterDataManagerInstance, GetTransform, CreateVector3, CreateVector2, GetField } from "./lib/lib";
 const DUMP_DIR_PATH = path.join(Il2Cpp.application.dataPath, "dumped")
 
 Il2Cpp.perform(() => {
@@ -19,7 +19,7 @@ Il2Cpp.perform(() => {
             targetDataNameArray.forEach((targetDataName) => dumpMasterData(targetDataName, `${targetDataName}.json`, masterDataManager))
 
             console.log("Dumping wording...")
-            serializeAndWriteToFile(AssemblyImage.class("Sekai.WordingManager").field<Il2Cpp.Object>("dictionary").value, "WordingDictionary.json")
+            serializeAndWriteToFile(GetField(AssemblyImage.class("Sekai.WordingManager"), "dictionary"), "WordingDictionary.json")
 
             ShowSubWindowDialog("All dumps are complete!")
         })

@@ -1,5 +1,5 @@
-import { AssemblyImage, DialogSize, DisplayLayerType, TMPInputField, UnityEngineUIButton, } from "./consts"
-import { CreateButton, Show1ButtonDialog_1, GetComponentInChildren, GetProperty, GetInstanceOfSingleton, SetProperty, COMMON_1BUTTON_DIALOG_CLASS_NAME, GetTransform, CreateVector2, CreateVector3, CreateOptionToggleButton, CreateOptionInputField } from "./lib"
+import { AssemblyImage, DialogSize, DisplayLayerType, TMPInputField } from "./consts"
+import { CreateButton, Show1ButtonDialog_1, GetComponentInChildren, GetProperty, GetInstanceOfSingleton, SetProperty, COMMON_1BUTTON_DIALOG_CLASS_NAME, GetTransform, CreateVector2, CreateVector3, CreateOptionToggleButton, CreateOptionInputField, GetField } from "./lib"
 
 // Shared //
     // For Camera timeline //
@@ -76,7 +76,7 @@ import { CreateButton, Show1ButtonDialog_1, GetComponentInChildren, GetProperty,
 
     export function GetMainCamFromMVCameraModel(cameraModel: Il2Cpp.Object): Il2Cpp.Object
     {
-        return cameraModel.field<Il2Cpp.Object>("MainCameraModel").value.field<Il2Cpp.Object>("MainCamera").value
+        return GetField(GetField<Il2Cpp.Object>(cameraModel, "MainCameraModel"), "MainCamera")
     }
 
     let changeFOV = false
@@ -192,7 +192,7 @@ import { CreateButton, Show1ButtonDialog_1, GetComponentInChildren, GetProperty,
 
         // For accessories
         const charModelTransform = GetTransform(characterModel)
-        const accessoryObjName = AssemblyImage.class("Sekai.Core.CharacterModel").nested("GameObjectNameDefine").field<Il2Cpp.String>("Acc").value.toString()
+        const accessoryObjName = GetField<Il2Cpp.String>(AssemblyImage.class("Sekai.Core.CharacterModel").nested("GameObjectNameDefine"), "Acc").toString()
         for(let i = 0; i < GetProperty<number>(charModelTransform, "childCount"); i++)
         {
             const childTransform = charModelTransform.method<Il2Cpp.Object>("GetChild").invoke(i)
