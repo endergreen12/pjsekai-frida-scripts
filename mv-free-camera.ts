@@ -90,7 +90,7 @@ Il2Cpp.perform(() => {
                     SetProperty(mainCamTransform, "eulerAngles", 
                         AddTwoVector3(
                             GetProperty(mainCamTransform, "eulerAngles"), 
-                            CreateVector3( ( (touchPos.field<number>("y").value * -1) - (storedRightTouchPos.field<number>("y").value * -1) ) * angleSpeed, (touchPos.field<number>("x").value - storedRightTouchPos.field<number>("x").value) * angleSpeed, 0)))
+                            CreateVector3((touchPos.field<number>("y").value - storedRightTouchPos.field<number>("y").value) * -1 * angleSpeed, (touchPos.field<number>("x").value - storedRightTouchPos.field<number>("x").value) * angleSpeed, 0)))
                 }
             }
         }
