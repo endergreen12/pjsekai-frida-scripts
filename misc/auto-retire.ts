@@ -1,6 +1,11 @@
 import { AssemblyImage } from "../lib/consts";
 import { GetField, SetField } from "../lib/lib";
 
+export function ChangeImpl_AutoRetire()
+{
+    console.log("Auto Retire installed")
+}
+
 Il2Cpp.perform(() => {
     AssemblyImage.class("Sekai.Core.Live.SoloLiveController").method("OnExit").implementation = function()
     {

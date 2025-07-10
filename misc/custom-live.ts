@@ -1,8 +1,10 @@
 import { AssemblyImage, DialogSize, DisplayLayerType, UnityAction } from "../lib/consts"
 import { COMMON_2BUTTON_DIALOG_CLASS_NAME, CreateButton, CreateOptionInputField, CreateOptionToggleButton, CreateVector2, CreateVector3, GetInstanceOfSingleton, GetScreenManagerInstance, GetTransform, SetProperty, Show2ButtonDialog_1, ShowSubWindowDialog } from "../lib/lib"
-import * as autoRetire from './auto-retire'
+import { ChangeImpl_AutoRetire } from "./auto-retire"
 
 Il2Cpp.perform(() => {
+    ChangeImpl_AutoRetire()
+    
     let isButtonCreated = false
 
     let musicId = 578 // ハローセカイ (Hello Sekai)
@@ -64,6 +66,4 @@ Il2Cpp.perform(() => {
 
         isButtonCreated = false
     }
-
-    autoRetire // Run auto-retire script from this script
 })
