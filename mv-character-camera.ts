@@ -16,22 +16,6 @@ Il2Cpp.perform(() => {
     ChangeImpl_CreateOpenOptionDialogButton()
     ChangeImpl_DisablePausingByTouchingScreen()
 
-    AssemblyImage.class("Sekai.Live.Model.MusicVideoModel").method("RegisterMainCharacterModel").implementation = function(characterModel: Il2Cpp.Object)
-    {
-        this.method("RegisterMainCharacterModel").invoke(characterModel)
-
-        const characterList: Il2Cpp.Array<Il2Cpp.Object> = GetProperty(characterModel, "CharacterModelList")
-        CharModelList_LogIndexAndCharName(characterList)
-    
-        if(targetCharIndex > characterList.length - 1)
-        {
-            console.log("The target index exceeds the range of characterList, setting to 0")
-            targetCharIndex = 0
-        }
-
-        console.log(`Current target index: ${targetCharIndex} | ${GetCharacterNameFromCharacterModel(characterList.get(targetCharIndex))}`)
-    }
-
     AssemblyImage.class("Sekai.Core.Live.MusicVideoController").method("Start").implementation = function()
     {
         this.method("Start").invoke()
@@ -40,6 +24,16 @@ Il2Cpp.perform(() => {
         const mainCam = GetMainCamFromMVCameraModel(GetProperty(mvModelInstance, "MainCameraModel"))
         const mainCamTransform = GetTransform(mainCam)
         const characterModelList = GetCharacterModelListFromMVModel(mvModelInstance)
+
+        CharModelList_LogIndexAndCharName(characterModelList)
+    
+        if(targetCharIndex > characterModelList.length - 1)
+        {
+            console.log("The target index exceeds the range of characterList, setting to 0")
+            targetCharIndex = 0
+        }
+
+        console.log(`Current target index: ${targetCharIndex} | ${GetCharacterNameFromCharacterModel(characterModelList.get(targetCharIndex))}`)
 
         const targetCharacter = characterModelList.get(targetCharIndex)
         SetParent(mainCamTransform, GetTargetTransformOfCharModelToAttach(targetCharacter))

@@ -161,12 +161,12 @@ import { CreateButton, Show1ButtonDialog_1, GetComponentInChildren, GetProperty,
         }
     }
 
-    export function CharModelList_LogIndexAndCharName(characterList: Il2Cpp.Array<Il2Cpp.Object>)
+    export function CharModelList_LogIndexAndCharName(characterModelList: Il2Cpp.Array<Il2Cpp.Object>)
     {
         console.log("\nCharacter models of this MV:")
-        for(let i = 0; i < characterList.length; i++)
+        for(let i = 0; i < characterModelList.length; i++)
         {
-            console.log(`Index: ${i} | ${GetCharacterNameFromCharacterModel(characterList.get(i))}`)
+            console.log(`Index: ${i} | ${GetCharacterNameFromCharacterModel(characterModelList.get(i))}`)
         }
     }
 

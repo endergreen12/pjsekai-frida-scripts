@@ -9,16 +9,6 @@ Il2Cpp.perform(() => {
     ChangeImpl_ChangeFOV()
     ChangeImpl_CreateOpenOptionDialogButton(true)
     ChangeImpl_DisablePausingByTouchingScreen()
-    
-    // Set camera position and angles
-    AssemblyImage.class("Sekai.Live.Model.MusicVideoModel").method("RegisterMainCameraModel").implementation = function(cameraModel: Il2Cpp.Object)
-    {
-        this.method("RegisterMainCameraModel").invoke(cameraModel)
-
-        const mainCamTransform = GetTransform(GetMainCamFromMVCameraModel(cameraModel))
-        SetProperty(mainCamTransform, "position", CreateVector3(0.0, 1.5, 7.0).unbox())
-        SetProperty(mainCamTransform, "eulerAngles", CreateVector3(0.0, 180.0, 0.0).unbox())
-    }
 
     let mvModelInstance: Il2Cpp.Object = null
     let mainCam: Il2Cpp.Object = null
@@ -29,6 +19,10 @@ Il2Cpp.perform(() => {
         mainCam = GetMainCamFromMVCameraModel(GetProperty(mvModelInstance, "MainCameraModel"))
         mainCamTransform = GetTransform(mainCam)
         screenWidth = GetProperty<number>(CoreModuleImage.class("UnityEngine.Screen"), "width")
+
+        // Set camera position and angles
+        SetProperty(mainCamTransform, "position", CreateVector3(0.0, 1.5, 7.0).unbox())
+        SetProperty(mainCamTransform, "eulerAngles", CreateVector3(0.0, 180.0, 0.0).unbox())
     }
 
     const speed = 0.001
