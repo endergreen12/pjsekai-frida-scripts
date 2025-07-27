@@ -21,7 +21,7 @@ Il2Cpp.perform(() => {
             console.log("Dumping wording...")
             serializeAndWriteToFile(GetField(AssemblyImage.class("Sekai.WordingManager"), "dictionary"), "WordingDictionary.json")
 
-            ShowSubWindowDialog("All dumps are complete!")
+            ShowSubWindowDialog("Dump completed!")
         })
     }
 })
