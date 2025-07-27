@@ -1,8 +1,7 @@
 {
   "dependencies": {
-    "@types/frida-gum": "^19.0.0",
-    "@types/node": "^24.0.4",
-    "frida-compile": "^19.0.4",
+    "@types/frida-gum": "^19.0.1",
+    "@types/node": "^24.1.0",
     "frida-il2cpp-bridge": "^0.12.0"
   }
 }
