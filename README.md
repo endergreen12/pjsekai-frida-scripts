@@ -87,6 +87,7 @@ There are some scripts in the folder:
 
 # How to use
 ## Requirements
+- Node.js
 - Frida
 - Basic knowledge of how to use frida
 
@@ -98,7 +99,7 @@ pip install -r requirements.txt
 ```
 2. Install dependencies with this command:
 ```
-frida-pm install
+npm install
 ```
 3. After finished, you can get started with this command:
 ```
