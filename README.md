@@ -1,5 +1,5 @@
 # This repository is deprecated
-The code had become overly complex, so I decided to rewrite it from scratch
+The code had become overly complex and messy, so I decided to rewrite it from scratch
 
 The new repository is here: https://github.com/endergreen12/project-sekai-mod
 
