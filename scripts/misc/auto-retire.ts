@@ -1,5 +1,6 @@
-import { AssemblyImage } from "../lib/consts";
-import { GetField, SetField } from "../lib/lib";
+import "frida-il2cpp-bridge"
+import { GetAssemblyCSharpImage } from "../lib/exports/get/assembly"
+import { SetField, GetField } from "../lib/utils/unity/get-set"
 
 export function ChangeImpl_AutoRetire()
 {
@@ -7,10 +8,12 @@ export function ChangeImpl_AutoRetire()
 }
 
 Il2Cpp.perform(() => {
-    AssemblyImage.class("Sekai.Core.Live.SoloLiveController").method("OnExit").implementation = function()
+    const AssemblyCSharpImage = GetAssemblyCSharpImage()
+    
+    AssemblyCSharpImage.class("Sekai.Core.Live.SoloLiveController").method("OnExit").implementation = function()
     {
         console.log("Live finished. Setting result to Retire...")
-        SetField(this as Il2Cpp.Object, "result", GetField(AssemblyImage.class("Sekai.Core.Live.LiveResult"), "Retire"))
+        SetField(this as Il2Cpp.Object, "result", GetField(AssemblyCSharpImage.class("Sekai.Core.Live.LiveResult"), "Retire"))
 
         this.method("OnExit").invoke()
     }

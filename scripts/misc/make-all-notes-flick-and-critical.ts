@@ -1,35 +1,38 @@
-import { AssemblyImage } from "../lib/consts";
-import { GetField, SetProperty } from "../lib/lib";
+import "frida-il2cpp-bridge"
+import { GetAssemblyCSharpImage } from "../lib/exports/get/assembly"
+import { SetProperty, GetField } from "../lib/utils/unity/get-set"
 
 Il2Cpp.perform(() => {
-    AssemblyImage.class("Sekai.SUS.Converter").method("ConvertNormalNote").implementation = function(id, noteInfo: Il2Cpp.Reference<Il2Cpp.Object>, info, laneStart, laneEnd, category: Il2Cpp.Reference)
+    const AssemblyCSharpImage = GetAssemblyCSharpImage()
+
+    AssemblyCSharpImage.class("Sekai.SUS.Converter").method("ConvertNormalNote").implementation = function(id, noteInfo: Il2Cpp.Reference<Il2Cpp.Object>, info, laneStart, laneEnd, category: Il2Cpp.Reference)
     {
         SetProperty(noteInfo.value, "Type", 1)
-        category.value = GetField(AssemblyImage.class("Sekai.Live.NoteCategory"), "Flick")
+        category.value = GetField(AssemblyCSharpImage.class("Sekai.Live.NoteCategory"), "Flick")
         this.method("ConvertFlickNote").invoke(id, noteInfo, info, laneStart, laneEnd, category)
     }
 
-    AssemblyImage.class("Sekai.SUS.Converter").method("ConvertFlickNote").implementation = function(id, noteInfo: Il2Cpp.Reference<Il2Cpp.Object>, info, laneStart, laneEnd, category: Il2Cpp.Reference)
+    AssemblyCSharpImage.class("Sekai.SUS.Converter").method("ConvertFlickNote").implementation = function(id, noteInfo: Il2Cpp.Reference<Il2Cpp.Object>, info, laneStart, laneEnd, category: Il2Cpp.Reference)
     {
         SetProperty(noteInfo.value, "Type", 1)
         this.method("ConvertFlickNote").invoke(id, noteInfo, info, laneStart, laneEnd, category)
     }
 
-    AssemblyImage.class("Sekai.SUS.Converter").method("ConvertFrictionNote").implementation = function(id, noteInfo: Il2Cpp.Reference<Il2Cpp.Object>, info, laneStart, laneEnd, category: Il2Cpp.Reference)
+    AssemblyCSharpImage.class("Sekai.SUS.Converter").method("ConvertFrictionNote").implementation = function(id, noteInfo: Il2Cpp.Reference<Il2Cpp.Object>, info, laneStart, laneEnd, category: Il2Cpp.Reference)
     {
         SetProperty(noteInfo.value, "Type", 1)
-        category.value = GetField(AssemblyImage.class("Sekai.Live.NoteCategory"), "FrictionFlick")
+        category.value = GetField(AssemblyCSharpImage.class("Sekai.Live.NoteCategory"), "FrictionFlick")
         this.method("ConvertFrictionFlickNote").invoke(id, noteInfo, info, laneStart, laneEnd, category)
     }
 
-    AssemblyImage.class("Sekai.SUS.Converter").method("ConvertFrictionFlickNote").implementation = function(id, noteInfo: Il2Cpp.Reference<Il2Cpp.Object>, info, laneStart, laneEnd, category: Il2Cpp.Reference)
+    AssemblyCSharpImage.class("Sekai.SUS.Converter").method("ConvertFrictionFlickNote").implementation = function(id, noteInfo: Il2Cpp.Reference<Il2Cpp.Object>, info, laneStart, laneEnd, category: Il2Cpp.Reference)
     {
         SetProperty(noteInfo.value, "Type", 1)
-        category.value = GetField(AssemblyImage.class("Sekai.Live.NoteCategory"), "FrictionFlick")
+        category.value = GetField(AssemblyCSharpImage.class("Sekai.Live.NoteCategory"), "FrictionFlick")
         this.method("ConvertFrictionFlickNote").invoke(id, noteInfo, info, laneStart, laneEnd, category)
     }
 
-    AssemblyImage.class("Sekai.SUS.Converter").method("ConvertLongNote").implementation = function(id, noteInfo: Il2Cpp.Reference<Il2Cpp.Object>, info, laneStart, laneEnd, category: Il2Cpp.Reference)
+    AssemblyCSharpImage.class("Sekai.SUS.Converter").method("ConvertLongNote").implementation = function(id, noteInfo: Il2Cpp.Reference<Il2Cpp.Object>, info, laneStart, laneEnd, category: Il2Cpp.Reference)
     {
         SetProperty(noteInfo.value, "Type", 1)
         this.method("ConvertLongNote").invoke(id, noteInfo, info, laneStart, laneEnd, category)

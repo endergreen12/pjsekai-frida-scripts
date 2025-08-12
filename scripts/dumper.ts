@@ -1,10 +1,19 @@
+import "frida-il2cpp-bridge"
 import path from "path";
-import { AssemblyImage } from "./lib/consts";
-import { CreateButton, ShowSubWindowDialog, GetMasterDataManagerInstance, GetTransform, CreateVector3, CreateVector2, GetField } from "./lib/lib";
+import { GetAssemblyCSharpImage } from "./lib/exports/get/assembly";
+import { ShowSubWindowDialog } from "./lib/utils/game/dialog";
+import { GetMasterDataManagerInstance } from "./lib/utils/game/instance";
+import { GetField } from "./lib/utils/unity/get-set";
+import { CreateButton } from "./lib/utils/unity/tmpro";
+import { GetTransform } from "./lib/utils/unity/transform";
+import { CreateVector3, CreateVector2 } from "./lib/utils/unity/vector";
+
 const DUMP_DIR_PATH = path.join(Il2Cpp.application.dataPath, "dumped")
 
 Il2Cpp.perform(() => {
-    AssemblyImage.class("Sekai.OptionDialog").method("Setup").implementation = function(tabIndex, canAssetSetting, canBlockListSetting)
+    const AssemblyCSharpImage = GetAssemblyCSharpImage()
+
+    AssemblyCSharpImage.class("Sekai.OptionDialog").method("Setup").implementation = function(tabIndex, canAssetSetting, canBlockListSetting)
     {
         this.method("Setup").invoke(tabIndex, canAssetSetting, canBlockListSetting)
 
@@ -19,7 +28,7 @@ Il2Cpp.perform(() => {
             targetDataNameArray.forEach((targetDataName) => dumpMasterData(targetDataName, `${targetDataName}.json`, masterDataManager))
 
             console.log("Dumping wording...")
-            serializeAndWriteToFile(GetField(AssemblyImage.class("Sekai.WordingManager"), "dictionary"), "WordingDictionary.json")
+            serializeAndWriteToFile(GetField(AssemblyCSharpImage.class("Sekai.WordingManager"), "dictionary"), "WordingDictionary.json")
 
             ShowSubWindowDialog("Dump completed!")
         })
@@ -36,8 +45,10 @@ function dumpMasterData(targetDataName: string, dumpFileName: string, masterData
 
 function serializeAndWriteToFile(targetData: Il2Cpp.Object, dumpFileName: string)
 {
-    const jsonSerializedData = AssemblyImage.class("CP.TextUtility").method<Il2Cpp.String>("JsonFormat").invoke(
-        AssemblyImage.class("CP.JsonSerializer").method<Il2Cpp.String>("ToJsonWithUnicodeDecode").invoke(targetData))
+    const AssemblyCSharpImage = GetAssemblyCSharpImage()
+
+    const jsonSerializedData = AssemblyCSharpImage.class("CP.TextUtility").method<Il2Cpp.String>("JsonFormat").invoke(
+        AssemblyCSharpImage.class("CP.JsonSerializer").method<Il2Cpp.String>("ToJsonWithUnicodeDecode").invoke(targetData))
 
     console.log("Writing dumped data to a file...")
     Il2Cpp.corlib.class("System.IO.File").method("WriteAllText", 2).invoke(Il2Cpp.string(path.join(DUMP_DIR_PATH, dumpFileName)), jsonSerializedData)
