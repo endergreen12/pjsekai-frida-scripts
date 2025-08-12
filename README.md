@@ -1,9 +1,6 @@
-# This repository is deprecated
-The code had become overly complex and messy, so I decided to rewrite it from scratch
+# pjsekai-frida-scripts
 
-The new repository is here: https://github.com/endergreen12/project-sekai-mod
-
-In the new repository, I'm focusing on keeping the code as simple as possible and including only the minimum necessary features
+Rewritten version: https://github.com/endergreen12/project-sekai-mod
 
 # Disclaimer
 If you use these scripts for a video, please give credit
