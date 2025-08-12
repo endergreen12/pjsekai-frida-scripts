@@ -3,9 +3,12 @@ import { GetAssemblyCSharpImage } from "../../lib/exports/get/assembly"
 import { AttachCameraToCharacterModel, SetActiveOfCharModelPartsForFirstPerson } from "../lib/process"
 import { GetField } from "../../lib/utils/unity/get-set"
 import { GetTransform, SetParent } from "../../lib/utils/unity/transform"
+import { CameraType, ChangeImpl_CreateOpenOptionDialogButton } from "../lib/option-dialog"
 
 let storedTargetDesc: Il2Cpp.Object = null
 Il2Cpp.perform(() => {
+    ChangeImpl_CreateOpenOptionDialogButton(CameraType.CharacterCamera, true)
+    
     const AssemblyCSharpImage = GetAssemblyCSharpImage()
 
     let isLockingOn = false

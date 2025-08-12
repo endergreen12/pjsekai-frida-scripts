@@ -17,7 +17,7 @@ export const CameraType = {
 } as const
 
 let isButtonCreated = false
-export function ChangeImpl_CreateOpenOptionDialogButton(cameraType: number)
+export function ChangeImpl_CreateOpenOptionDialogButton(cameraType: number, isVirtualLive: boolean = false)
 {
     const AssemblyCSharpImage = GetAssemblyCSharpImage()
 
@@ -44,7 +44,7 @@ export function ChangeImpl_CreateOpenOptionDialogButton(cameraType: number)
                 SetChangeFOVEnable(!changeFOV)
                 SetProperty(GetComponentInChildren(targetFOVInputField, GetTMProInputFieldClass()), "interactable", changeFOV)
                 return changeFOV
-            }, "Change FOV", 28, CreateVector3(250, 250, 0), sharedSizeDelta, dialogTransform)
+            }, "Change FOV", 28, CreateVector3(250, 250, 0), sharedSizeDelta, dialogTransform, () => "", !isVirtualLive)
         })
         
         isButtonCreated = true
