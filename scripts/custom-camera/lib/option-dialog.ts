@@ -50,7 +50,7 @@ export function ChangeImpl_CreateOpenOptionDialogButton(cameraType: number, isVi
         isButtonCreated = true
     }
 
-    AssemblyCSharpImage.class("Sekai.ScreenLayerMusicVideoConfirm").method(".ctor").implementation = function()
+    AssemblyCSharpImage.class("Sekai.ScreenLayerMusicVideoCellPhone").method(".ctor").implementation = function()
     {
         this.method(".ctor").invoke()
 
