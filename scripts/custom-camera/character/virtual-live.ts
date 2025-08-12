@@ -20,6 +20,14 @@ Il2Cpp.perform(() => {
         }
     }
 
+    AssemblyCSharpImage.class("Sekai.SuperVirtualLive.SuperVirtualLiveController").method(".ctor").implementation = function()
+    {
+        this.method(".ctor").invoke()
+
+        storedTargetDesc = null
+        isLockingOn = false
+    }
+
     AssemblyCSharpImage.class("Sekai.Core.VirtualLive.LockOnModule").method("SetupNewTarget").implementation = function(desc: Il2Cpp.Object)
     {
         this.method("SetupNewTarget").invoke(desc)
@@ -45,7 +53,7 @@ function RestoreCharacterModelParts()
     if(storedTargetDesc !== null && !storedTargetDesc.isNull())
     {
         const characterModel = GetField(storedTargetDesc, "characterModel")
-        if(!characterModel.isNull())
+        if(!characterModel.isNull() && characterModel.class === GetAssemblyCSharpImage().class("Sekai.Core.CharacterModel"))
         {
             SetActiveOfCharModelPartsForFirstPerson(characterModel, true)
         }
