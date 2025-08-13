@@ -4,8 +4,7 @@ If you use these scripts for a video, please give credit
 
 You are not allowed to adapt the code of these scripts to other scripts or publish them as your own scripts
 ## Scripts
-Use the script that matches the name of the game mode you want to apply the character camera to
-
+If the folder contains multiple scripts, use the one whose file name matches the game mode you want to apply
 ### Character Camera (scripts/custom-camera/character/)
 On MV, you can switch the target by swiping the screen, swipe left to the next character, and right to the previous character
 
