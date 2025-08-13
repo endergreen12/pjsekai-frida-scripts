@@ -1,6 +1,6 @@
 import "frida-il2cpp-bridge"
 import { GetAssemblyCSharpImage } from "../../lib/exports/get/assembly"
-import { GetField, GetProperty, SetProperty } from "../../lib/utils/unity/get-set"
+import { GetField, GetProperty, SetField, SetProperty } from "../../lib/utils/unity/get-set"
 import { GetTransform, SetParent } from "../../lib/utils/unity/transform"
 import { CreateVector3 } from "../../lib/utils/unity/vector"
 import { GetCharacterModelPartToAttach } from "./get"
@@ -64,7 +64,7 @@ export function ChangeImpl_DisableCameraDecoration()
 {
     GetAssemblyCSharpImage().class("Sekai.Live.Background3DPlayer").method("Setup").implementation = function(isCreateNode: boolean, mvData: Il2Cpp.Object)
     {
-        mvData.field<Il2Cpp.Object>("cameraInfo").value.field<boolean>("hasCameraDecoration").value = false
+        SetField(GetField<Il2Cpp.Object>(mvData, "cameraInfo"), "hasCameraDecoration", false)
         this.method("Setup").invoke(isCreateNode, mvData)
     }
 }
@@ -94,7 +94,7 @@ export function SetActiveOfCharModelPartsForFirstPerson(characterModel: Il2Cpp.O
 
     // For accessories
     const characterTransform = GetTransform(characterModel)
-    const accessoryGameObjName = GetAssemblyCSharpImage().class("Sekai.Core.CharacterModel").nested("GameObjectNameDefine").field<Il2Cpp.String>("Acc").value
+    const accessoryGameObjName = GetField<Il2Cpp.String>(GetAssemblyCSharpImage().class("Sekai.Core.CharacterModel").nested("GameObjectNameDefine"), "Acc")
     const accessoryTransform = characterTransform.method<Il2Cpp.Object>("Find").invoke(accessoryGameObjName)
     if(!accessoryTransform.isNull())
     {

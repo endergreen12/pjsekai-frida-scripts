@@ -1,5 +1,6 @@
 import "frida-il2cpp-bridge"
 import { GetCoreModuleImage } from "../../exports/get/unity"
+import { GetField } from "./get-set"
 
 export function CreateVector3(x: number, y: number, z: number): Il2Cpp.Object
 {
@@ -19,17 +20,17 @@ export function CreateVector2(x: number, y: number): Il2Cpp.Object
 export function AddTwoVector3(value1: Il2Cpp.Object, value2: Il2Cpp.Object): Il2Cpp.Object
 {
     return CreateVector3(
-        value1.field<number>("x").value + value2.field<number>("x").value,
-        value1.field<number>("y").value + value2.field<number>("y").value,
-        value1.field<number>("z").value + value2.field<number>("z").value
+        GetField<number>(value1, "x") + GetField<number>(value2, "x"),
+        GetField<number>(value1, "y") + GetField<number>(value2, "y"),
+        GetField<number>(value1, "z") + GetField<number>(value2, "z")
     )
 }
 
 export function MultiplyVector3(value: Il2Cpp.Object, ratio: number)
 {
     return CreateVector3(
-        value.field<number>("x").value * ratio,
-        value.field<number>("y").value * ratio,
-        value.field<number>("z").value * ratio
+        GetField<number>(value, "x") * ratio,
+        GetField<number>(value, "y") * ratio,
+        GetField<number>(value, "z") * ratio
     )
 }
