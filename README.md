@@ -41,7 +41,7 @@ You can easily change the dump targets by changing targetDataNameArray in the sc
 ![image](https://github.com/user-attachments/assets/28fef10a-9dcd-4ba5-898b-5cf98fd9784c)
 
 ### Logger (scripts/logger.ts)
-Trace Unity log functions
+Trace Unity and game log functions
 
 ### Misc (scripts/misc/)
 There are some scripts in the folder:
