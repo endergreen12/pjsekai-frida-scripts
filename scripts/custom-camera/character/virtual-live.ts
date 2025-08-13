@@ -45,6 +45,7 @@ Il2Cpp.perform(() => {
         RestoreCharacterModelParts()
         SetParent(GetTransform(GetField(this as Il2Cpp.Object, "camera")), NULL, false)
         isLockingOn = false
+        storedTargetDesc = null
     }
 })
 
