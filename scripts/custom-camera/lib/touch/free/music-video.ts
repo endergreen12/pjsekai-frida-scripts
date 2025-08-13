@@ -63,8 +63,8 @@ export function ChangeImpl_FreeCameraLogic()
                     )
 
                     let newMainCamPos = AddTwoVector3(mainCamPos, rightIncrease)
-                    newMainCamPos = AddTwoVector3(mainCamPos, forwardIncrease)
-                    SetProperty(mainCamTransform, "position", newMainCamPos)
+                    newMainCamPos = AddTwoVector3(newMainCamPos, forwardIncrease)
+                    SetProperty(mainCamTransform, "position", newMainCamPos.unbox())
                 } else { // Right
                     if(touchPhaseStr === "Began")
                     {
@@ -81,7 +81,7 @@ export function ChangeImpl_FreeCameraLogic()
                     const YIncrease = (GetField<number>(touchPos, "y") - GetField<number>(storedRightTouchPos, "y")) * -1 * angleSpeed * deltaTime
                     const XIncrease = (GetField<number>(touchPos, "x") - GetField<number>(storedRightTouchPos, "x")) * angleSpeed * deltaTime
                     const newMainCamEulerAngles = AddTwoVector3(mainCamEulerAngles, CreateVector3(YIncrease, XIncrease, 0))
-                    SetProperty(mainCamTransform, "eulerAngles", newMainCamEulerAngles)
+                    SetProperty(mainCamTransform, "eulerAngles", newMainCamEulerAngles.unbox())
                 }
             }
         }
