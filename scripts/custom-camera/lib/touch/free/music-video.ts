@@ -7,8 +7,8 @@ import { GetTransform } from "../../../../lib/utils/unity/transform"
 import { GetMainCamFromMVModel, GetMVModelInstance } from "../../get"
 import { ChangeImpl_DisablePausingByTouchingScreen } from "../../process"
 
-const speed = 0.001
-const angleSpeed = 0.02
+const speed = 0.05
+const angleSpeed = 0.5
 let storedLeftTouchPos: Il2Cpp.Object = null
 let storedRightTouchPos: Il2Cpp.Object = null
 export function ChangeImpl_FreeCameraLogic()
@@ -37,6 +37,7 @@ export function ChangeImpl_FreeCameraLogic()
                 const touchPhaseStr = GetProperty(touch, "phase").toString()
 
                 const mainCamTransform = GetTransform(GetMainCamFromMVModel(GetMVModelInstance()))
+                const deltaTime = GetProperty<number>(GetCoreModuleImage().class("UnityEngine.Time"), "deltaTime")
 
                 if(GetField<number>(touchPos, "x") <= GetProperty<number>(GetCoreModuleImage().class("UnityEngine.Screen"), "width") / 2) // Left
                 {
@@ -51,13 +52,19 @@ export function ChangeImpl_FreeCameraLogic()
                         return
                     }
 
-                    // Throwing readability away for performance
-                    SetProperty(mainCamTransform, "position", AddTwoVector3(
-                        AddTwoVector3(
-                            GetProperty(mainCamTransform, "position"), 
-                            MultiplyVector3(GetProperty(mainCamTransform, "right"), (GetField<number>(touchPos, "x") - GetField<number>(storedLeftTouchPos, "x")) * speed)),
-                        MultiplyVector3(
-                            GetProperty(mainCamTransform, "forward"), (GetField<number>(touchPos, "y") - GetField<number>(storedLeftTouchPos, "y")) * speed)))
+                    const mainCamPos = GetProperty(mainCamTransform, "position")
+                    const rightIncrease = MultiplyVector3(
+                        GetProperty(mainCamTransform, "right"),
+                        (GetField<number>(touchPos, "x") - GetField<number>(storedLeftTouchPos, "x")) * speed * deltaTime
+                    )
+                    const forwardIncrease = MultiplyVector3(
+                        GetProperty(mainCamTransform, "forward"),
+                        (GetField<number>(touchPos, "y") - GetField<number>(storedLeftTouchPos, "y")) * speed * deltaTime
+                    )
+
+                    let newMainCamPos = AddTwoVector3(mainCamPos, rightIncrease)
+                    newMainCamPos = AddTwoVector3(mainCamPos, forwardIncrease)
+                    SetProperty(mainCamTransform, "position", newMainCamPos)
                 } else { // Right
                     if(touchPhaseStr === "Began")
                     {
@@ -70,10 +77,11 @@ export function ChangeImpl_FreeCameraLogic()
                         return
                     }
 
-                    SetProperty(mainCamTransform, "eulerAngles", 
-                        AddTwoVector3(
-                            GetProperty(mainCamTransform, "eulerAngles"), 
-                            CreateVector3((GetField<number>(touchPos, "y") - GetField<number>(storedRightTouchPos, "y")) * -1 * angleSpeed, (GetField<number>(touchPos, "x") - GetField<number>(storedRightTouchPos, "x")) * angleSpeed, 0)))
+                    const mainCamEulerAngles = GetProperty(mainCamTransform, "eulerAngles")
+                    const YIncrease = (GetField<number>(touchPos, "y") - GetField<number>(storedRightTouchPos, "y")) * -1 * angleSpeed * deltaTime
+                    const XIncrease = (GetField<number>(touchPos, "x") - GetField<number>(storedRightTouchPos, "x")) * angleSpeed * deltaTime
+                    const newMainCamEulerAngles = AddTwoVector3(mainCamEulerAngles, CreateVector3(YIncrease, XIncrease, 0))
+                    SetProperty(mainCamTransform, "eulerAngles", newMainCamEulerAngles)
                 }
             }
         }
