@@ -69,7 +69,7 @@ There are some scripts in the folder:
 - Node.js
 - Frida
 - Basic knowledge of how to use frida
----
+### Steps
 1. Clone this repo, and install specific version of frida with requirements.txt (You might want to install Frida in the virtual environment):
 ```
 pip install -r requirements.txt
@@ -83,7 +83,5 @@ npm install
 frida -U -N com.sega.pjsekai -l the_script_you_want_to_use.ts
 ```
 In the emulator, the above command must be coupled with `--realm=emulated`
-
----
 ## Notes
 I have not tested these scripts in the English version, but they will probably work
