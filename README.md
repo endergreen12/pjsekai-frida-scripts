@@ -54,17 +54,14 @@ There are some scripts in the folder:
   https://github.com/user-attachments/assets/0a59201a-459a-4804-a70d-13bd91df3584
 
 #### Play scenario (play-scenario.ts, play-special-scenario.ts)
-
-  Play any scenario you want to see
+  Play any scenario
 
   https://github.com/user-attachments/assets/c9e95fcb-0467-4ca3-bd28-6a96bbe6a650
 
 #### Make all notes flick and critical (make-all-notes-flick-and-critical.ts)
-
   https://github.com/user-attachments/assets/966f707d-e724-4e58-a992-54a559b4f2ca
 
 #### Automatically retires at the end of the live to prevent sending abnormal data to the server (auto-retire.ts)
-
   ![out](https://github.com/user-attachments/assets/712aa0b6-f172-4413-b464-b5ae287e0d6b)
 
 ## How to use
