@@ -1,5 +1,13 @@
-import { AssemblyImage, DialogSize, DisplayLayerType, SystemAction, UnityAction } from "../lib/consts";
-import { COMMON_2BUTTON_DIALOG_CLASS_NAME, CreateButton, CreateOptionInputField, CreateVector2, CreateVector3, GetTransform, Show2ButtonDialog_1 } from "../lib/lib";
+import "frida-il2cpp-bridge"
+import { DisplayLayerType, DialogSize } from "../lib/exports/enum"
+import { GetAssemblyCSharpImage } from "../lib/exports/get/assembly"
+import { GetSystemActionClass } from "../lib/exports/get/corlib"
+import { GetUnityActionClass } from "../lib/exports/get/unity"
+import { Show2ButtonDialog_1, COMMON_2BUTTON_DIALOG_CLASS_NAME } from "../lib/utils/game/dialog"
+import { CreateOptionInputField } from "../lib/utils/option-utils/create"
+import { CreateButton } from "../lib/utils/unity/tmpro"
+import { GetTransform } from "../lib/utils/unity/transform"
+import { CreateVector3, CreateVector2 } from "../lib/utils/unity/vector"
 
 Il2Cpp.perform(() => {
     let isButtonCreated = false
@@ -7,7 +15,10 @@ Il2Cpp.perform(() => {
     let assetbundleName = "event_canvas_2022" // poor Ena
     let scenarioId = "event_53_02"
     let episodeId = 1000424
-    AssemblyImage.class("Sekai.ScreenLayerStoryCategorySelect").method("OnInitComponent").implementation = function()
+
+    const AssemblyCSharpImage = GetAssemblyCSharpImage()
+
+    AssemblyCSharpImage.class("Sekai.ScreenLayerStoryCategorySelect").method("OnInitComponent").implementation = function()
     {
         this.method("OnInitComponent").invoke()
 
@@ -17,15 +28,15 @@ Il2Cpp.perform(() => {
         }
 
         CreateButton("Play Scenario", 38, CreateVector3(-300, 450, 0), CreateVector2(400, 100), GetTransform(this as Il2Cpp.Object), (button: Il2Cpp.Object) => {
-            const dialog = Show2ButtonDialog_1(COMMON_2BUTTON_DIALOG_CLASS_NAME, 2, "empty", "WORD_OK", "WORD_CANCEL", Il2Cpp.delegate(UnityAction, () => {
-                const assetBundleNamesClass = AssemblyImage.class("Sekai.AssetBundleNames")
+            const dialog = Show2ButtonDialog_1(COMMON_2BUTTON_DIALOG_CLASS_NAME, 2, "empty", "WORD_OK", "WORD_CANCEL", Il2Cpp.delegate(GetUnityActionClass(), () => {
+                const assetBundleNamesClass = AssemblyCSharpImage.class("Sekai.AssetBundleNames")
 
                 const scenarioAssetBundleName = assetBundleNamesClass.method<Il2Cpp.String>("GetEventStoryScenarioName").invoke(Il2Cpp.string(assetbundleName))
                 const voiceAssetBundleName = assetBundleNamesClass.method<Il2Cpp.String>("GetEventStoryVoiceBundleName").invoke(Il2Cpp.string(assetbundleName))
 
-                const onFinished = Il2Cpp.delegate(SystemAction, () => console.log("Scenario finished"))
+                const onFinished = Il2Cpp.delegate(GetSystemActionClass(), () => console.log("Scenario finished"))
 
-                AssemblyImage.class("Sekai.ScenarioUtility").method("PlayScenario")
+                AssemblyCSharpImage.class("Sekai.ScenarioUtility").method("PlayScenario")
                     .invoke(scenarioAssetBundleName, voiceAssetBundleName, Il2Cpp.string(scenarioId), onFinished, NULL, NULL, episodeId, 0, NULL)
             }), NULL, DisplayLayerType.Layer_Dialog, DialogSize.Medium)
 
@@ -41,7 +52,7 @@ Il2Cpp.perform(() => {
         isButtonCreated = true
     }
 
-    AssemblyImage.class("Sekai.ScreenLayerStoryCategorySelect").method(".ctor").implementation = function()
+    AssemblyCSharpImage.class("Sekai.ScreenLayerStoryCategorySelect").method(".ctor").implementation = function()
     {
         this.method(".ctor").invoke()
 

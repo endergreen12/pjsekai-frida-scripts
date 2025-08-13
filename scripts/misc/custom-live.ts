@@ -1,5 +1,14 @@
-import { AssemblyImage, DialogSize, DisplayLayerType, UnityAction } from "../lib/consts"
-import { COMMON_2BUTTON_DIALOG_CLASS_NAME, CreateButton, CreateOptionInputField, CreateOptionToggleButton, CreateVector2, CreateVector3, GetInstanceOfSingleton, GetScreenManagerInstance, GetTransform, SetProperty, Show2ButtonDialog_1, ShowSubWindowDialog } from "../lib/lib"
+import "frida-il2cpp-bridge"
+import { DisplayLayerType, DialogSize } from "../lib/exports/enum"
+import { GetAssemblyCSharpImage } from "../lib/exports/get/assembly"
+import { GetUnityActionClass } from "../lib/exports/get/unity"
+import { Show2ButtonDialog_1, COMMON_2BUTTON_DIALOG_CLASS_NAME, ShowSubWindowDialog } from "../lib/utils/game/dialog"
+import { GetInstanceOfSingleton, GetScreenManagerInstance } from "../lib/utils/game/instance"
+import { CreateOptionInputField, CreateOptionToggleButton } from "../lib/utils/option-utils/create"
+import { SetProperty } from "../lib/utils/unity/get-set"
+import { CreateButton } from "../lib/utils/unity/tmpro"
+import { GetTransform } from "../lib/utils/unity/transform"
+import { CreateVector3, CreateVector2 } from "../lib/utils/unity/vector"
 import { ChangeImpl_AutoRetire } from "./auto-retire"
 
 Il2Cpp.perform(() => {
@@ -13,7 +22,9 @@ Il2Cpp.perform(() => {
     const deckId = 1
     let isAuto: boolean = false
 
-    AssemblyImage.class("Sekai.ScreenLayerLiveTop").method("OnInitComponent").implementation = function()
+    const AssemblyCSharpImage = GetAssemblyCSharpImage()
+
+    AssemblyCSharpImage.class("Sekai.ScreenLayerLiveTop").method("OnInitComponent").implementation = function()
     {
         this.method("OnInitComponent").invoke()
 
@@ -23,25 +34,25 @@ Il2Cpp.perform(() => {
         }
 
         CreateButton("Custom Live", 38, CreateVector3(-150, 400, 0), CreateVector2(400, 100), GetTransform(this as Il2Cpp.Object), (button: Il2Cpp.Object) => {
-            const dialog = Show2ButtonDialog_1(COMMON_2BUTTON_DIALOG_CLASS_NAME, 2, "empty", "WORD_OK", "WORD_CANCEL", Il2Cpp.delegate(UnityAction, () => {
-                if(AssemblyImage.class("Sekai.MusicUtility").method<Il2Cpp.Object>("GetMasterMusicAllAt").invoke(musicId).isNull()) // Check whether the music the user specified exists
+            const dialog = Show2ButtonDialog_1(COMMON_2BUTTON_DIALOG_CLASS_NAME, 2, "empty", "WORD_OK", "WORD_CANCEL", Il2Cpp.delegate(GetUnityActionClass(), () => {
+                if(AssemblyCSharpImage.class("Sekai.MusicUtility").method<Il2Cpp.Object>("GetMasterMusicAllAt").invoke(musicId).isNull()) // Check whether the music the user specified exists
                 {
                     ShowSubWindowDialog("The specified music could not be found.")
                     return
                 }
 
                 // Set Sekai.Core.EntryPoint.PlayMode
-                SetProperty(AssemblyImage.class("Sekai.Core.EntryPoint"), "PlayMode", 3) // 3 = SoloLive
+                SetProperty(AssemblyCSharpImage.class("Sekai.Core.EntryPoint"), "PlayMode", 3) // 3 = SoloLive
                 
                 // Set up liveBootData
-                const liveBootData = AssemblyImage.class("Sekai.FreeLiveBootData").alloc()
+                const liveBootData = AssemblyCSharpImage.class("Sekai.FreeLiveBootData").alloc()
 
                 liveBootData.method(".ctor", 6).invoke(musicId, Il2Cpp.string(difficulty), vocalId, deckId, 0, false) // Call the constructor of Sekai.LiveBootDataBase
                 liveBootData.method(".ctor", 8).invoke(musicId, Il2Cpp.string(difficulty), vocalId, deckId, Il2Cpp.array(Il2Cpp.corlib.class("System.Int32"), 0), true, 0, 0) // Call the constructor of Sekai.FreeLiveBootData
                 liveBootData.method("SetLiveMode").invoke(3) // 3 = Low
                 SetProperty(liveBootData, "IsAuto", isAuto)
 
-                SetProperty(GetInstanceOfSingleton(AssemblyImage.class("Sekai.UserDataManager")), "FreeLiveBootData", liveBootData)
+                SetProperty(GetInstanceOfSingleton(AssemblyCSharpImage.class("Sekai.UserDataManager")), "FreeLiveBootData", liveBootData)
 
                 // Start live
                 GetScreenManagerInstance().method("AddScreen", 1).invoke(63) // 63 = LiveLoading
@@ -60,7 +71,7 @@ Il2Cpp.perform(() => {
         isButtonCreated = true
     }
 
-    AssemblyImage.class("Sekai.ScreenLayerLiveTop").method(".ctor").implementation = function()
+    AssemblyCSharpImage.class("Sekai.ScreenLayerLiveTop").method(".ctor").implementation = function()
     {
         this.method(".ctor").invoke()
 
