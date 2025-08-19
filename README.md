@@ -34,7 +34,7 @@ A button to start dumping is added to the option dialog
 
 ![image](https://github.com/user-attachments/assets/b95c522b-9ebe-4761-8f73-721c9b37bafa)
 
-By default, the script will dump MasterMusicAlls, MasterEventStories, MasterSpecialStoryMap and MasterUnitStoryEpisodeAll
+By default, the script will dump MasterMusicAllMap, MasterEventStories, MasterSpecialStoryMap and MasterUnitStoryEpisodeAll
 
 You can easily change the dump targets by changing targetDataNameArray in the script
 
