@@ -3,6 +3,8 @@
 If you use these scripts for a video, please give credit
 
 You are not allowed to adapt the code of these scripts to other scripts or publish them as your own scripts
+
+These scripts also work in the English version, but the dialog size may be incorrect
 ## Scripts
 If the folder contains multiple scripts, use the one whose file name matches the game mode you want to apply
 ### Character Camera (scripts/custom-camera/character/)
@@ -82,5 +84,3 @@ npm install
 frida -U -N com.sega.pjsekai -l the_script_you_want_to_use.ts
 ```
 In the emulator, the above command must be coupled with `--realm=emulated`
-## Notes
-I have not tested these scripts in the English version, but they will probably work
