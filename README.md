@@ -81,6 +81,10 @@ npm install
 ```
 3. After finished, you can get started with this command:
 ```
-frida -U -N com.sega.pjsekai -l the_script_you_want_to_use.ts
+frida -U -N {package name} -l the_script_you_want_to_use.ts
 ```
+For package name:
+- JP: com.sega.pjsekai
+- EN: com.sega.ColorfulStage.en
+
 In the emulator, the above command must be coupled with `--realm=emulated`
