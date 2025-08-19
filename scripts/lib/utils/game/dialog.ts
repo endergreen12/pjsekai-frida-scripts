@@ -2,6 +2,7 @@ import "frida-il2cpp-bridge"
 import { DisplayLayerType, DialogSize } from "../../exports/enum"
 import { GetScreenManagerInstance } from "./instance"
 import { GetAssemblyCSharpImage } from "../../exports/get/assembly"
+import { IsEnglishVersion } from "./utils"
 
 export const COMMON_1BUTTON_DIALOG_CLASS_NAME = "Sekai.Common1ButtonDialog"
 export function Show1ButtonDialog_1(className: string, dialogType: number, messageBodyKey: string, okButtonLabelKey: string, onClickOK: Il2Cpp.Object | NativePointer, layerType: number = DisplayLayerType.Layer_Dialog, dialogSize: number = DialogSize.Manual, allowCloseExternal: boolean = true): Il2Cpp.Object
@@ -13,6 +14,11 @@ export function Show1ButtonDialog_1(className: string, dialogType: number, messa
 
 export function ShowSubWindowDialog(messageBody: string = null, onClose: Il2Cpp.Object | NativePointer = NULL, allowCloseExternal: boolean = true, dialogType: number = 240, layerType: number = DisplayLayerType.Layer_Dialog): Il2Cpp.Object
 {
+    if(IsEnglishVersion() && dialogType === 240)
+    {
+        dialogType = 287
+    }
+    
     return GetScreenManagerInstance()
         .method<Il2Cpp.Object>("ShowSubWindowDialog").inflate(GetAssemblyCSharpImage().class("Sekai.SubWindowDialog"))
         .invoke(Il2Cpp.string(messageBody), onClose, allowCloseExternal, dialogType, layerType)
