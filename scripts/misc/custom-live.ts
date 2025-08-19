@@ -16,7 +16,7 @@ Il2Cpp.perform(() => {
     
     let isButtonCreated = false
 
-    let musicId = 578 // ハローセカイ (Hello Sekai)
+    let musicId = 578 // ハローセカイ (Hello, SEKAI)
     let difficulty = "master"
     let vocalId = 1572 // バーチャル・シンガーver (Virtual Singer ver.)
     const deckId = 1
@@ -34,7 +34,7 @@ Il2Cpp.perform(() => {
         }
 
         CreateButton("Custom Live", 38, CreateVector3(-150, 400, 0), CreateVector2(400, 100), GetTransform(this as Il2Cpp.Object), (button: Il2Cpp.Object) => {
-            const dialog = Show2ButtonDialog_1(COMMON_2BUTTON_DIALOG_CLASS_NAME, 2, "empty", "WORD_OK", "WORD_CANCEL", Il2Cpp.delegate(GetUnityActionClass(), () => {
+            const dialog = Show2ButtonDialog_1(COMMON_2BUTTON_DIALOG_CLASS_NAME, 3, "empty", "WORD_OK", "WORD_CANCEL", Il2Cpp.delegate(GetUnityActionClass(), () => {
                 if(AssemblyCSharpImage.class("Sekai.MusicUtility").method<Il2Cpp.Object>("GetMasterMusicAllAt").invoke(musicId).isNull()) // Check whether the music the user specified exists
                 {
                     ShowSubWindowDialog("The specified music could not be found.")
