@@ -1,5 +1,5 @@
 import "frida-il2cpp-bridge"
-import { DisplayLayerType, DialogSize } from "../lib/exports/enum"
+import { DisplayLayerType, DialogSize, DialogType } from "../lib/exports/enum"
 import { GetAssemblyCSharpImage } from "../lib/exports/get/assembly"
 import { GetSystemActionClass } from "../lib/exports/get/corlib"
 import { GetUnityActionClass } from "../lib/exports/get/unity"
@@ -28,7 +28,7 @@ Il2Cpp.perform(() => {
         }
 
         CreateButton("Play Scenario", 38, CreateVector3(-300, 450, 0), CreateVector2(400, 100), GetTransform(this as Il2Cpp.Object), (button: Il2Cpp.Object) => {
-            const dialog = Show2ButtonDialog_1(COMMON_2BUTTON_DIALOG_CLASS_NAME, 3, "empty", "WORD_OK", "WORD_CANCEL", Il2Cpp.delegate(GetUnityActionClass(), () => {
+            const dialog = Show2ButtonDialog_1(COMMON_2BUTTON_DIALOG_CLASS_NAME, DialogType.Common2ButtonMediumDialog, "empty", "WORD_OK", "WORD_CANCEL", Il2Cpp.delegate(GetUnityActionClass(), () => {
                 const assetBundleNamesClass = AssemblyCSharpImage.class("Sekai.AssetBundleNames")
 
                 const scenarioAssetBundleName = assetBundleNamesClass.method<Il2Cpp.String>("GetEventStoryScenarioName").invoke(Il2Cpp.string(assetbundleName))

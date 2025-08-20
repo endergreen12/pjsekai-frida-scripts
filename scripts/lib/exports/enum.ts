@@ -1,3 +1,4 @@
+/* Japanese version */
 // Sekai.DisplayLayerType
 export const DisplayLayerType = {
     Layer_BG: 0,
@@ -16,4 +17,19 @@ export const DialogSize = {
     Medium: 1,
     Large: 2,
     Manual: 3
+} as const
+
+// Sekai.DialogType
+export const DialogType = {
+    Common1ButtonDialog: 0,
+    Common1ButtonMediumDialog: 1,
+    Common2ButtonDialog: 2,
+    Common2ButtonMediumDialog: 3,
+    SubWindowDialog: 240
+} as const
+
+/* English version */
+// Sekai.DialogType
+export const DialogType_en = {
+    SubWindowDialog: 287
 } as const

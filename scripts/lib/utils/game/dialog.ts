@@ -1,5 +1,5 @@
 import "frida-il2cpp-bridge"
-import { DisplayLayerType, DialogSize } from "../../exports/enum"
+import { DisplayLayerType, DialogSize, DialogType, DialogType_en } from "../../exports/enum"
 import { GetScreenManagerInstance } from "./instance"
 import { GetAssemblyCSharpImage } from "../../exports/get/assembly"
 import { IsEnglishVersion } from "./utils"
@@ -16,11 +16,11 @@ export function Show1ButtonDialog_1(className: string, dialogType: number, messa
         .invoke(dialogType, Il2Cpp.string(messageBodyKey), Il2Cpp.string(okButtonLabelKey), onClickOK, IsEnglishVersion() ? dialogSize : layerType, IsEnglishVersion() ? layerType : dialogSize, allowCloseExternal)
 }
 
-export function ShowSubWindowDialog(messageBody: string = null, onClose: Il2Cpp.Object | NativePointer = NULL, allowCloseExternal: boolean = true, dialogType: number = 240, layerType: number = DisplayLayerType.Layer_Dialog): Il2Cpp.Object
+export function ShowSubWindowDialog(messageBody: string = null, onClose: Il2Cpp.Object | NativePointer = NULL, allowCloseExternal: boolean = true, dialogType: number = DialogType.SubWindowDialog, layerType: number = DisplayLayerType.Layer_Dialog): Il2Cpp.Object
 {
-    if(IsEnglishVersion() && dialogType === 240)
+    if(IsEnglishVersion() && dialogType === DialogType.SubWindowDialog)
     {
-        dialogType = 287
+        dialogType = DialogType_en.SubWindowDialog
     }
     
     return GetScreenManagerInstance()
