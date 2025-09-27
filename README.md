@@ -32,7 +32,7 @@ Dump MasterData and wordings, dumped data will be saved to Application.persisten
 
 For example, it will be saved to "/sdcard/Android/data/com.sega.pjsekai/files/dumped" on Android
 
-A button to start dumping is added to the option dialog
+A button to start dump is added to the option dialog
 
 ![image](https://github.com/user-attachments/assets/b95c522b-9ebe-4761-8f73-721c9b37bafa)
 
@@ -87,4 +87,4 @@ For package name:
 - JP: com.sega.pjsekai
 - EN: com.sega.ColorfulStage.en
 
-In the emulator, the above command must be coupled with `--realm=emulated`
+In emulators, the above command must be coupled with `--realm=emulated`
