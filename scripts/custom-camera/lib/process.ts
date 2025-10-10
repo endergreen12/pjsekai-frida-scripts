@@ -4,7 +4,7 @@ import { GetField, GetProperty, SetField, SetProperty } from "../../lib/utils/un
 import { GetTransform, SetParent } from "../../lib/utils/unity/transform"
 import { CreateVector3 } from "../../lib/utils/unity/vector"
 import { GetCharacterModelPartToAttach } from "./get"
-import { isThirdPersonEnabled, changeFOV, targetFOV } from "./options"
+import { isThirdPersonEnabled, changeFOV, targetFOV } from "./options/value"
 
 export function ChangeImpl_RemoveTracksFromTimeLineAsset()
 {

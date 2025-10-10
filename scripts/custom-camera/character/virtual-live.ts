@@ -3,7 +3,7 @@ import { GetAssemblyCSharpImage } from "../../lib/exports/get/assembly"
 import { AttachCameraToCharacterModel, SetActiveOfCharModelPartsForFirstPerson } from "../lib/process"
 import { GetField } from "../../lib/utils/unity/get-set"
 import { GetTransform, SetParent } from "../../lib/utils/unity/transform"
-import { CameraType, ChangeImpl_CreateOpenOptionDialogButton } from "../lib/option-dialog"
+import { CameraType, ChangeImpl_CreateOpenOptionDialogButton } from "../lib/options/dialog"
 
 let storedTargetDesc: Il2Cpp.Object = null
 Il2Cpp.perform(() => {

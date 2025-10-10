@@ -1,6 +1,6 @@
 import "frida-il2cpp-bridge"
 import { GetField, GetProperty } from "../../lib/utils/unity/get-set"
-import { isThirdPersonEnabled } from "./options"
+import { isThirdPersonEnabled } from "./options/value"
 import { GetAssemblyCSharpImage } from "../../lib/exports/get/assembly"
 import { GetInstanceOfSingleton } from "../../lib/utils/game/instance"
 import { IsEnglishVersion } from "../../lib/utils/game/utils"

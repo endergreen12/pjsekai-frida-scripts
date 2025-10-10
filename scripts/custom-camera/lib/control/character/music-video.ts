@@ -4,7 +4,7 @@ import { GetAssemblyCSharpImage } from "../../../../lib/exports/get/assembly"
 import { GetUnityEngineInputClass } from "../../../../lib/exports/get/unity"
 import { GetCharacterModelListFromMVModel, GetCharacterNameFromCharacterModel, GetMainCamFromMVModel, GetMVModelInstance } from "../../get"
 import { GetField, GetProperty } from "../../../../lib/utils/unity/get-set"
-import { SetTargetCharIndex, targetCharIndex } from "../../options"
+import { SetTargetCharIndex, targetCharIndex } from "../../options/value"
 
 let hasTargetBeenChanged = false
 let liveStateAtTouchBegan = "" // Used to prevent the music video from being immediately paused when it is resumed

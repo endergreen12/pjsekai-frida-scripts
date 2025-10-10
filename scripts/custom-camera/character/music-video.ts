@@ -1,10 +1,10 @@
 import "frida-il2cpp-bridge"
 import { GetAssemblyCSharpImage } from "../../lib/exports/get/assembly"
 import { GetCharacterModelListFromMVModel, GetCharacterNameFromCharacterModel, GetMainCamFromMVModel, GetMVModelInstance } from "../lib/get"
-import { CameraType, ChangeImpl_CreateOpenOptionDialogButton } from "../lib/option-dialog"
-import { SetTargetCharIndex, targetCharIndex } from "../lib/options"
+import { CameraType, ChangeImpl_CreateOpenOptionDialogButton } from "../lib/options/dialog"
+import { SetTargetCharIndex, targetCharIndex } from "../lib/options/value"
 import { AttachCameraToCharacterModel, ChangeImpl_ChangeFOV, ChangeImpl_DisableCameraDecoration, ChangeImpl_RemoveTracksFromTimeLineAsset } from "../lib/process"
-import { ChangeImpl_ChangeTargetCharBySwiping } from "../lib/touch/character/music-video"
+import { ChangeImpl_ChangeTargetCharBySwiping } from "../lib/control/character/music-video"
 import { CharModelList_LogIndexAndCharName } from "../lib/utils"
 
 Il2Cpp.perform(() => {
