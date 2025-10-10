@@ -12,8 +12,8 @@ export const COMMON_1BUTTON_DIALOG_CLASS_NAME = "Sekai.Common1ButtonDialog"
 export function Show1ButtonDialog_1(className: string, dialogType: number, messageBodyKey: string, okButtonLabelKey: string, onClickOK: Il2Cpp.Object | NativePointer, layerType: number = DisplayLayerType.Layer_Dialog, dialogSize: number = DialogSize.Manual, allowCloseExternal: boolean = true): Il2Cpp.Object
 {
     return GetScreenManagerInstance()
-        .method<Il2Cpp.Object>("Show1ButtonDialog", 7).inflate(GetAssemblyCSharpImage().class(className))
-        .invoke(dialogType, Il2Cpp.string(messageBodyKey), Il2Cpp.string(okButtonLabelKey), onClickOK, IsEnglishVersion() ? dialogSize : layerType, IsEnglishVersion() ? layerType : dialogSize, allowCloseExternal)
+        .method<Il2Cpp.Object>(IsEnglishVersion() ? "Show1ButtonDialog_GL" : "Show1ButtonDialog", 7).inflate(GetAssemblyCSharpImage().class(className))
+        .invoke(dialogType, Il2Cpp.string(messageBodyKey), Il2Cpp.string(okButtonLabelKey), onClickOK, layerType, dialogSize, allowCloseExternal)
 }
 
 export function ShowSubWindowDialog(messageBody: string = null, onClose: Il2Cpp.Object | NativePointer = NULL, allowCloseExternal: boolean = true, dialogType: number = DialogType.SubWindowDialog, layerType: number = DisplayLayerType.Layer_Dialog): Il2Cpp.Object

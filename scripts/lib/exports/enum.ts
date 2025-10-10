@@ -31,5 +31,5 @@ export const DialogType = {
 /* English version */
 // Sekai.DialogType
 export const DialogType_en = {
-    SubWindowDialog: 287
+    SubWindowDialog: 262
 } as const
