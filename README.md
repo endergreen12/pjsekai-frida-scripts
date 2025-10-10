@@ -36,7 +36,7 @@ A button to start dump will be added to the game's options dialog
 ![image](https://github.com/user-attachments/assets/28fef10a-9dcd-4ba5-898b-5cf98fd9784c)
 
 ### Logger (scripts/logger.ts)
-Trace Unity and game's log functions
+Trace Unity and the game's log functions
 
 ### Misc (scripts/misc/)
 #### Custom Live (custom-live.ts)
