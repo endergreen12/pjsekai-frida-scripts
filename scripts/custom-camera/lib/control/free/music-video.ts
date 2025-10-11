@@ -19,7 +19,7 @@ export function ChangeImpl_FreeCameraLogic()
     {
         this.method("OnUpdate").invoke()
 
-        if(GetField(this as Il2Cpp.Object, "state").toString() == "Exit")
+        if(GetField(this, "state").toString() == "Exit")
         {
             return
         }

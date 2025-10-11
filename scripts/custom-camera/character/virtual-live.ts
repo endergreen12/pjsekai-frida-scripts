@@ -35,7 +35,7 @@ Il2Cpp.perform(() => {
         isLockingOn = true
         RestoreCharacterModelParts()
         storedTargetDesc = desc
-        AttachCameraToCharacterModel(GetField(this as Il2Cpp.Object, "camera"), GetField(desc, "characterModel"))
+        AttachCameraToCharacterModel(GetField(this, "camera"), GetField(desc, "characterModel"))
     }
 
     AssemblyCSharpImage.class("Sekai.Core.VirtualLive.LockOnModule").method("ClearTargetImpl").implementation = function(type: Il2Cpp.Object)
@@ -43,7 +43,7 @@ Il2Cpp.perform(() => {
         this.method("ClearTargetImpl").invoke(type)
 
         RestoreCharacterModelParts()
-        SetParent(GetTransform(GetField(this as Il2Cpp.Object, "camera")), NULL, false)
+        SetParent(GetTransform(GetField(this, "camera")), NULL, false)
         isLockingOn = false
         storedTargetDesc = null
     }

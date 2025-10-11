@@ -19,7 +19,7 @@ export function ChangeImpl_ChangeTargetCharBySwiping()
     {
         this.method("OnUpdate").invoke()
 
-        const liveStateStr = GetField(this as Il2Cpp.Object, "state").toString()
+        const liveStateStr = GetField(this, "state").toString()
         if(liveStateStr == "Exit")
         {
             return

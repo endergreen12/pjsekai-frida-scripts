@@ -13,7 +13,7 @@ Il2Cpp.perform(() => {
     AssemblyCSharpImage.class("Sekai.Core.Live.SoloLiveController").method("OnExit").implementation = function()
     {
         console.log("Live finished. Setting result to Retire...")
-        SetField(this as Il2Cpp.Object, "result", GetField(AssemblyCSharpImage.class("Sekai.Core.Live.LiveResult"), "Retire"))
+        SetField(this, "result", GetField(AssemblyCSharpImage.class("Sekai.Core.Live.LiveResult"), "Retire"))
 
         this.method("OnExit").invoke()
     }
