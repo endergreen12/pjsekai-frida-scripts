@@ -78,7 +78,7 @@ npm install
 ```
 3. Once complete, you can get started with this command:
 ```
-frida -U -N {package name} -l the_script_you_want_to_use.ts
+frida -U -N {package name} -l script.ts
 ```
 For package name:
 - JP: com.sega.pjsekai
