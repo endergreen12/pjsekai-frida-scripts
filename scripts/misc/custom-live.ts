@@ -10,6 +10,7 @@ import { CreateButton } from "../lib/utils/unity/tmpro"
 import { GetTransform } from "../lib/utils/unity/transform"
 import { CreateVector3, CreateVector2 } from "../lib/utils/unity/vector"
 import { ChangeImpl_AutoRetire } from "./auto-retire"
+import { WORDINGS } from "../lib/exports/wordings"
 
 Il2Cpp.perform(() => {
     ChangeImpl_AutoRetire()
@@ -34,7 +35,7 @@ Il2Cpp.perform(() => {
         }
 
         CreateButton("Custom Live", 38, CreateVector3(-150, 400, 0), CreateVector2(400, 100), GetTransform(this as Il2Cpp.Object), (button: Il2Cpp.Object) => {
-            const dialog = Show2ButtonDialog_1(COMMON_2BUTTON_DIALOG_CLASS_NAME, DialogType.Common2ButtonMediumDialog, "empty", "WORD_OK", "WORD_CANCEL", Il2Cpp.delegate(GetUnityActionClass(), () => {
+            const dialog = Show2ButtonDialog_1(COMMON_2BUTTON_DIALOG_CLASS_NAME, DialogType.Common2ButtonMediumDialog, "empty", WORDINGS.OK, WORDINGS.CANCEL, Il2Cpp.delegate(GetUnityActionClass(), () => {
                 if(AssemblyCSharpImage.class("Sekai.MusicUtility").method<Il2Cpp.Object>("GetMasterMusicAllAt").invoke(musicId).isNull()) // Check whether the music the user specified exists
                 {
                     ShowSubWindowDialog("The specified music could not be found.")

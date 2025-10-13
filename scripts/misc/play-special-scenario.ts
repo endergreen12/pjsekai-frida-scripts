@@ -8,6 +8,7 @@ import { CreateButton } from "../lib/utils/unity/tmpro"
 import { GetTransform } from "../lib/utils/unity/transform"
 import { CreateVector3, CreateVector2 } from "../lib/utils/unity/vector"
 import { DialogType } from "../lib/exports/enum"
+import { WORDINGS } from "../lib/exports/wordings"
 
 Il2Cpp.perform(() => {
     let isButtonCreated = false
@@ -26,7 +27,7 @@ Il2Cpp.perform(() => {
         }
 
         CreateButton("Play Special Scenario", 38, CreateVector3(-300, 450, 0), CreateVector2(400, 100), GetTransform(this as Il2Cpp.Object), (button: Il2Cpp.Object) => {
-            const dialog = Show2ButtonDialog_1(COMMON_2BUTTON_DIALOG_CLASS_NAME, DialogType.Common2ButtonDialog, "empty", "WORD_OK", "WORD_CANCEL", Il2Cpp.delegate(GetUnityActionClass(), () => {
+            const dialog = Show2ButtonDialog_1(COMMON_2BUTTON_DIALOG_CLASS_NAME, DialogType.Common2ButtonDialog, "empty", WORDINGS.OK, WORDINGS.CANCEL, Il2Cpp.delegate(GetUnityActionClass(), () => {
                 const masterDataManager = GetMasterDataManagerInstance()
                 const specialStoryEpisode = masterDataManager.method<Il2Cpp.Object>("GetMasterSpecialStoryEpisode").invoke(episodeId)
 
