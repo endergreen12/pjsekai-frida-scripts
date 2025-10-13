@@ -29,7 +29,7 @@ Il2Cpp.perform(() => {
         }
 
         CreateButton("Play Scenario", 38, CreateVector3(-300, 450, 0), CreateVector2(400, 100), GetTransform(this as Il2Cpp.Object), (button: Il2Cpp.Object) => {
-            const dialog = Show2ButtonDialog_1(COMMON_2BUTTON_DIALOG_CLASS_NAME, DialogType.Common2ButtonMediumDialog, "empty", WORDINGS.OK, WORDINGS.CANCEL, Il2Cpp.delegate(GetUnityActionClass(), () => {
+            const dialog = Show2ButtonDialog_1(COMMON_2BUTTON_DIALOG_CLASS_NAME, DialogType.Common2ButtonMediumDialog, WORDINGS.EMPTY, WORDINGS.OK, WORDINGS.CANCEL, Il2Cpp.delegate(GetUnityActionClass(), () => {
                 const assetBundleNamesClass = AssemblyCSharpImage.class("Sekai.AssetBundleNames")
 
                 const scenarioAssetBundleName = assetBundleNamesClass.method<Il2Cpp.String>("GetEventStoryScenarioName").invoke(Il2Cpp.string(assetbundleName))

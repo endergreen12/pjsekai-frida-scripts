@@ -30,7 +30,7 @@ export function ChangeImpl_CreateOpenOptionDialogButton(cameraType: number, isVi
             return
 
         CreateButton("Options", 38, CreateVector3(400, 400, 0), CreateVector2(300, 100), GetTransform(this as Il2Cpp.Object), (button: Il2Cpp.Object) => {
-            const dialog = Show1ButtonDialog_1(COMMON_1BUTTON_DIALOG_CLASS_NAME, DialogType.Common1ButtonDialog, "empty", WORDINGS.CLOSE, NULL, DisplayLayerType.Layer_Dialog, DialogSize.Large)
+            const dialog = Show1ButtonDialog_1(COMMON_1BUTTON_DIALOG_CLASS_NAME, DialogType.Common1ButtonDialog, WORDINGS.EMPTY, WORDINGS.CLOSE, NULL, DisplayLayerType.Layer_Dialog, DialogSize.Large)
             const dialogTransform = GetTransform(dialog)
 
             const sharedSizeDelta = CreateVector2(400, 100)
