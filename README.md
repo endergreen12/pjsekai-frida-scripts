@@ -54,7 +54,8 @@ Trace Unity and the game's log functions
   https://github.com/user-attachments/assets/c9e95fcb-0467-4ca3-bd28-6a96bbe6a650
 
 #### Make all notes flick and critical (make-all-notes-flick-and-critical.ts)
-  https://github.com/user-attachments/assets/966f707d-e724-4e58-a992-54a559b4f2ca
+  https://github.com/user-attachments/assets/14336d99-b92a-47c5-b5ba-0ee700bdd125
+  > lol
 
 #### Automatically retires at the end of the live to prevent sending abnormal data to the server (auto-retire.ts)
   ![out](https://github.com/user-attachments/assets/712aa0b6-f172-4413-b464-b5ae287e0d6b)
