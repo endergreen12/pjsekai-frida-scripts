@@ -56,13 +56,6 @@ Trace Unity and the game's log functions
 #### Automatically retires at the end of the live to prevent sending abnormal data to the server (auto-retire.ts)
   ![out](https://github.com/user-attachments/assets/712aa0b6-f172-4413-b464-b5ae287e0d6b)
 
-#### Make all notes perfect in auto live (make-all-notes-perfect-in-autolive.ts)
-  You can use this script for like showcasing a custom chart
-
-  Auto-Retire will be automatically installed
-  
-  https://github.com/user-attachments/assets/303cc4c1-1837-4933-9454-a30bd6b8b353
-
 ## How to Use
 ### Requirements
 - Node.js
