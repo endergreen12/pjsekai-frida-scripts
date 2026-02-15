@@ -1,8 +1,4 @@
 # pjsekai-frida-scripts
-## This repository is no longer maintained
-New repo: https://github.com/endergreen12/pjsekai-frida-mod
-
-The code in this repository has become too complicated and difficult to read, so I decided to rewrite it
 ## Disclaimer
 If you use these scripts for a video, please give credit
 
