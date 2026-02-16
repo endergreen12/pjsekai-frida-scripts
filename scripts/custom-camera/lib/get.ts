@@ -3,7 +3,6 @@ import { GetField, GetProperty } from "../../lib/utils/unity/get-set"
 import { isThirdPersonEnabled } from "./options/value"
 import { GetAssemblyCSharpImage } from "../../lib/exports/get/assembly"
 import { GetInstanceOfSingleton } from "../../lib/utils/game/instance"
-import { IsEnglishVersion } from "../../lib/utils/game/utils"
 
 export function GetMainCamFromMVModel(mvModel: Il2Cpp.Object): Il2Cpp.Object
 {
@@ -30,6 +29,5 @@ export function GetCharacterNameFromCharacterModel(characterModel: Il2Cpp.Object
     const characterId = GetProperty<number>(characterModel, "CharacterDataId")
     const gameCharacter = GetAssemblyCSharpImage().class("Sekai.CharacterUtility").method<Il2Cpp.Object>("GetMasterGameCharacter").invoke(characterId)
 
-    return IsEnglishVersion() ? `Character Name: ${GetProperty<Il2Cpp.String>(gameCharacter, "FullName")}` : 
-                                `Character Name: (JP: ${GetProperty<Il2Cpp.String>(gameCharacter, "FullName")} ENG: ${GetProperty<Il2Cpp.String>(gameCharacter, "FullNameEnglish")})`
+    return `Character Name: (JP: ${GetProperty<Il2Cpp.String>(gameCharacter, "FullName")} | ENG: ${GetProperty<Il2Cpp.String>(gameCharacter, "FullNameEnglish")})`
 }

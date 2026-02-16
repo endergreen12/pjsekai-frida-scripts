@@ -7,7 +7,6 @@ import { GetField } from "./lib/utils/unity/get-set";
 import { CreateButton } from "./lib/utils/unity/tmpro";
 import { GetTransform } from "./lib/utils/unity/transform";
 import { CreateVector3, CreateVector2 } from "./lib/utils/unity/vector";
-import { IsEnglishVersion } from "./lib/utils/game/utils";
 
 const DUMP_DIR_PATH = path.join(Il2Cpp.application.dataPath, "dumped")
 
@@ -50,8 +49,7 @@ function serializeAndWriteToFile(targetData: Il2Cpp.Object, dumpFileName: string
     const AssemblyCSharpImage = GetAssemblyCSharpImage()
 
     console.log("Serializing dumped data to JSON...")
-    // The English version does not have ToJsonWithUnicodeDecode function
-    const jsonSerializedData = AssemblyCSharpImage.class("CP.JsonSerializer").method<Il2Cpp.String>(IsEnglishVersion() ? "ToJson" : "ToJsonWithUnicodeDecode").invoke(targetData)
+    const jsonSerializedData = AssemblyCSharpImage.class("CP.JsonSerializer").method<Il2Cpp.String>("ToJsonWithUnicodeDecode").invoke(targetData)
     const formattedJson = AssemblyCSharpImage.class("CP.TextUtility").method<Il2Cpp.String>("JsonFormat").invoke(jsonSerializedData)
 
     console.log("Writing dumped data to a file...")
