@@ -3,8 +3,6 @@
 If you use these scripts for a video, please give credit
 
 You are not allowed to adapt the code of these scripts to other scripts or publish them as your own scripts
-
-These scripts also work in the English version, but the dialog size may be incorrect
 ## Scripts
 ### Character Camera (scripts/custom-camera/character/)
 In MV, you can switch a target by swiping the screen, swipe left for the next character, and right for the previous character
