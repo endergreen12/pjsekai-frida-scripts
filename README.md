@@ -47,10 +47,6 @@ Trace Unity and the game's log functions
 #### Play Scenario (play-scenario.ts, play-special-scenario.ts)
   https://github.com/user-attachments/assets/c9e95fcb-0467-4ca3-bd28-6a96bbe6a650
 
-#### Make all notes flick and critical (make-all-notes-flick-and-critical.ts)
-  https://github.com/user-attachments/assets/14336d99-b92a-47c5-b5ba-0ee700bdd125
-  > lol
-
 #### Automatically retires at the end of the live to prevent sending abnormal data to the server (auto-retire.ts)
   ![out](https://github.com/user-attachments/assets/712aa0b6-f172-4413-b464-b5ae287e0d6b)
 
@@ -70,10 +66,7 @@ npm install
 ```
 3. Once complete, you can get started with this command:
 ```
-frida -U -N {package name} -l script.ts
+frida -U -N com.sega.pjsekai -l script.ts
 ```
-For package name:
-- JP: com.sega.pjsekai
-- EN: com.sega.ColorfulStage.en
 
 In emulators, the above command must be coupled with `--realm=emulated`
