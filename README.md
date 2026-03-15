@@ -1,4 +1,6 @@
 # pjsekai-frida-scripts
+> [!WARNING]
+> **Disclaimer**: This tool is for educational purposes only. Using this script on third-party software may violate their Terms of Service (e.g., prohibitions on reverse engineering or modding). I do not encourage or condone the violation of any EULA, and I am not responsible for any consequences (such as account bans) arising from the use of this code. Use at your own risk.
 ## License & Credits
 
 This project is for **personal use only**.
