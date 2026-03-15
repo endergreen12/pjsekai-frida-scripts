@@ -1,8 +1,17 @@
 # pjsekai-frida-scripts
-## Disclaimer
-If you use these scripts for a video, please give credit
+## License & Credits
 
-You are not allowed to adapt the code of these scripts to other scripts or publish them as your own scripts
+This project is for **personal use only**.
+
+- ✅ **Allowed**: Personal use, local modification, and featuring in videos/blogs (with credit).
+- ❌ **Prohibited**: Redistribution of the code and integrating it into your own projects for distribution.
+
+### 📢 Credit Requirement
+If you use this script in a YouTube video or any public demonstration, you **must** provide credit by:
+1. Mentioning the author name: **endergreen12**
+2. Providing a link to this repository: **https://github.com/endergreen12/pjsekai-frida-scripts**
+
+For more details, please see the full [LICENSE](LICENSE) file.
 ## Scripts
 ### Character Camera (scripts/custom-camera/character/)
 In MV, you can switch a target by swiping the screen, swipe left for the next character, and right for the previous character
